@@ -1,3 +1,5 @@
 page-user-list {
-
+    .unavailable {
+        filter: grayscale(1);
+    }
 }
