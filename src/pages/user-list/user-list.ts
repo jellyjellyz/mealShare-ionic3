@@ -23,7 +23,7 @@ export class UserListPage {
     console.log('ionViewDidLoad UserListPage');
   }
 
-  private jump() {
+  public jump() {
   	this.navCtrl.push(UserProfilePage); 
   }
 
