@@ -66,56 +66,49 @@
 
 
 
-  <div>
+  <ion-card>
     <form>
-      <section>
-        <ion-item>
-          <ion-input type="text" placeholder="Title: e.g. Chinese Food"></ion-input>
-        </ion-item>
 
-        <ion-item>
-          <ion-textarea rows="3" placeholder="Write a description or something..."></ion-textarea>
-        </ion-item>
-        <button ion-item>
-          SELECT RESTAURANT
-        </button>
-        <button ion-item>
-          INVITE FRIENDS
-        </button>
+      <ion-item>
+        <ion-input type="text" placeholder="Title: e.g. Chinese Food"></ion-input>
+      </ion-item>
 
-        <ion-item no-lines>Meeting Time</ion-item>
-        <ion-row no-padding class="multi-input-row">
-          <ion-col no-padding>
-            <ion-item class="multi-input time-item">
-              <ion-label stack>FROM</ion-label>
-              <ion-datetime displayFormat="MM/DD/YY" pickerFormat="MM-DD-YYYY"></ion-datetime>
-            </ion-item>
-          </ion-col>
-          <ion-col no-padding>
-            <ion-item class="multi-input time-item">
-              <ion-datetime displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row no-padding class="multi-input-row">
-          <ion-col no-padding>
-            <ion-item class="multi-input time-item">
-              <ion-label stack>TO</ion-label>
-              <ion-datetime displayFormat="MM/DD/YY" pickerFormat="MM-DD-YYYY"></ion-datetime>
-            </ion-item>
-          </ion-col>
-          <ion-col no-padding>
-            <ion-item class="multi-input time-item">
-              <ion-datetime displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </section>
-      <ion-item no-lines></ion-item>
-      <section class="form-section">
-        <button ion-button block type="submit">Post!</button>
-      </section>
+      <button color="light" ion-button block large class="upload-image-button">
+        <ion-icon name="camera"></ion-icon>
+        <h3 class="button-title">select an image or use default image</h3>
+      </button>
+
+      <ion-item>
+        <ion-textarea rows="3" placeholder="Write a description or something..."></ion-textarea>
+      </ion-item>
+      <button ion-item>
+        Select Restaurant
+      </button>
+      <button ion-item>
+        Invite Friends
+        <ion-badge item-end>0</ion-badge>
+      </button>
+
+      <ion-item>
+        <ion-label>Meeting date:</ion-label>
+        <ion-datetime placeholder="01/01/2018" displayFormat="MM/DD/YY" pickerFormat="MM-DD-YYYY"></ion-datetime>
+      </ion-item>
+
+      <ion-item>Meeting hour:</ion-item>
+
+      <ion-item class="time-select">
+        <ion-label>FROM</ion-label>
+        <ion-datetime placeholder="6 00 pm" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
+      </ion-item>
+
+      <ion-item class="time-select">
+        <ion-label>TO</ion-label>
+        <ion-datetime placeholder="9 00 pm" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
+      </ion-item>
+
+      <button ion-button block class="form-action-button" type="submit">Post!</button>
+
     </form>
-  </div>
+  </ion-card>
 
 </ion-content>
