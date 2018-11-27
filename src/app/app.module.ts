@@ -12,6 +12,8 @@ import { AllEventsPage } from '../pages/all-events/all-events';
 import { UserListPage } from '../pages/user-list/user-list';
 import { MessagePage } from '../pages/message/message';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
+import { EventDetailPage } from '../pages/event-detail/event-detail';
+import { CreateEventPage } from '../pages/create-event/create-event';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { UserProfilePage } from '../pages/user-profile/user-profile';
     UserListPage,
     MessagePage,
     UserProfilePage,
+    EventDetailPage,
+    CreateEventPage,
     TabsPage
   ],
   imports: [
@@ -41,6 +45,8 @@ import { UserProfilePage } from '../pages/user-profile/user-profile';
     UserListPage,
     MessagePage,
     UserProfilePage,
+    EventDetailPage,
+    CreateEventPage,
     TabsPage
   ],
   providers: [

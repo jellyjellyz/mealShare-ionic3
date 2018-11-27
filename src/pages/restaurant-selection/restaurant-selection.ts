@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { CreateEventPage } from '../create-event/create-event';
 
 /**
- * Generated class for the MyEventsPage page.
+ * Generated class for the RestaurantSelectionPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,20 +10,16 @@ import { CreateEventPage } from '../create-event/create-event';
 
 @IonicPage()
 @Component({
-  selector: 'page-my-events',
-  templateUrl: 'my-events.html',
+  selector: 'page-restaurant-selection',
+  templateUrl: 'restaurant-selection.html',
 })
-export class MyEventsPage {
+export class RestaurantSelectionPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MyEventsPage');
-  }
-
-  private createEvent() {
-    this.navCtrl.push(CreateEventPage);
+    console.log('ionViewDidLoad RestaurantSelectionPage');
   }
 
 }
