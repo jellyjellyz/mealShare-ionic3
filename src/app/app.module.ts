@@ -10,6 +10,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyEventsPage } from '../pages/my-events/my-events';
 import { AllEventsPage } from '../pages/all-events/all-events';
 import { UserListPage } from '../pages/user-list/user-list';
+import { MessagePage } from '../pages/message/message';
+import { UserProfilePage } from '../pages/user-profile/user-profile';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { UserListPage } from '../pages/user-list/user-list';
     MyEventsPage,
     AllEventsPage,
     UserListPage,
+    MessagePage,
+    UserProfilePage,
     TabsPage
   ],
   imports: [
@@ -35,6 +39,8 @@ import { UserListPage } from '../pages/user-list/user-list';
     MyEventsPage,
     AllEventsPage,
     UserListPage,
+    MessagePage,
+    UserProfilePage,
     TabsPage
   ],
   providers: [

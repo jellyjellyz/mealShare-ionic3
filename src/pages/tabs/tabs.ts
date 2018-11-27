@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { AllEventsPage } from '../all-events/all-events';
 import { MyEventsPage } from '../my-events/my-events';
 import { UserListPage } from '../user-list/user-list';
+import { UserProfilePage } from '../user-profile/user-profile';
+import { MessagePage } from '../message/message';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -11,8 +13,9 @@ export class TabsPage {
 
   tab1Root = MyEventsPage;
   tab2Root = AllEventsPage;
-  tab3Root = UserListPage;
-
+  tab3Root = UserProfilePage;
+  tab4Root = MessagePage;
+  tab5Root = UserListPage;
   constructor() {
 
   }
