@@ -4,23 +4,303 @@
     <ion-title>
       My Events
     </ion-title>
-    <ion-buttons start>
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="contact"></ion-icon>
-      </button>
-    </ion-buttons>
-
-    <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="add" class="add"></ion-icon>
-      </button>
-    </ion-buttons>
-
   </ion-navbar>
+  <ion-header>
+
+  </ion-header>
+
 
 </ion-header>
 
 
 <ion-content padding>
 
+  <ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="friends">
+      ALL
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      GOING
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      SAVED
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      PAST
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-list>
+    <ion-item>
+
+
+      <ion-list-header no-lines class="list_header"> Tomorrow, Tus, Nov 26 </ion-list-header>
+
+      <ion-item no-lines>
+
+        <h2 class="event_title">Pizza at Pizza House, Join Me!</h2>
+        <p>11h ago</p>
+        <p>16:30, 1456 Main Street, Ann Arbor</p>
+
+      </ion-item>
+
+
+      <ion-item no-lines>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
+        </ion-avatar>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
+        </ion-avatar>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
+        </ion-avatar>
+
+        <p style="display: inline-block; padding-top: 20px">+5</p>
+
+
+        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px; padding-left: 60px;">
+          <ion-icon name="star-outline"></ion-icon>
+          <div>STAR</div>
+        </button>
+
+        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px">
+          <ion-icon name="ice-cream-outline"></ion-icon>
+          <div>JOIN</div>
+        </button>
+
+      </ion-item>
+
+
+
+
+
+
+
+
+    </ion-item>
+
+
+
+    <ion-item>
+
+      <ion-item no-lines>
+
+        <h2 class="event_title">Pizza at Pizza House, Join Me!</h2>
+        <p>11h ago</p>
+        <p>16:30, 1456 Main Street, Ann Arbor</p>
+
+      </ion-item>
+
+
+      <ion-item no-lines>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
+        </ion-avatar>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
+        </ion-avatar>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
+        </ion-avatar>
+
+        <p style="display: inline-block; padding-top: 20px">+5</p>
+
+
+        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px; padding-left: 60px;">
+          <ion-icon name="star-outline"></ion-icon>
+          <div>STAR</div>
+        </button>
+
+        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px">
+          <ion-icon name="ice-cream-outline"></ion-icon>
+          <div>JOIN</div>
+        </button>
+
+      </ion-item>
+
+
+
+
+
+
+    </ion-item>
+
+
+
+
+    <ion-item no-lines>
+
+      <ion-item>
+
+        <h2 class="event_title">Pizza at Pizza House</h2>
+        <p>11h ago</p>
+        <p>16:30, 1456 Main Street, Ann Arbor</p>
+
+      </ion-item>
+
+
+      <ion-item no-lines>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
+        </ion-avatar>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
+        </ion-avatar>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
+        </ion-avatar>
+
+        <p style="display: inline-block; padding-top: 20px">+5</p>
+
+
+        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px; padding-left: 60px;">
+          <ion-icon name="star-outline"></ion-icon>
+          <div>STAR</div>
+        </button>
+
+        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px">
+          <ion-icon name="ice-cream-outline"></ion-icon>
+          <div>JOIN</div>
+        </button>
+
+      </ion-item>
+
+
+
+
+
+    </ion-item>
+
+  </ion-list>
+
+
+  <!-- ********************************************************************************************************************* -->
+  <ion-list>
+
+    <ion-item no-lines>
+
+
+      <ion-list-header no-lines class="list_header"> Tomorrow, Tus, Nov 26 </ion-list-header>
+
+      <ion-item no-lines>
+
+        <h2 class="event_title">Pizza at Pizza House, Join Me!</h2>
+        <p>11h ago</p>
+        <p>16:30, 1456 Main Street, Ann Arbor</p>
+
+      </ion-item>
+
+
+      <ion-item no-lines>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
+        </ion-avatar>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
+        </ion-avatar>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
+        </ion-avatar>
+
+        <p style="display: inline-block; padding-top: 20px">+5</p>
+
+
+        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px; padding-left: 60px;">
+          <ion-icon name="star-outline"></ion-icon>
+          <div style="padding-left: 5px;">STAR</div>
+        </button>
+
+        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px">
+          <ion-icon name="ice-cream-outline"></ion-icon>
+          <div style="padding-left: 5px;">JOIN</div>
+        </button>
+
+      </ion-item>
+
+
+
+
+
+
+    </ion-item>
+
+  </ion-list>
+
+
+
+  <!-- ********************************************************************************************************************* -->
+  <ion-list>
+
+    <ion-item no-lines>
+
+
+      <ion-list-header no-lines class="list_header"> Tomorrow, Tus, Nov 26 </ion-list-header>
+
+      <ion-item no-lines>
+
+        <h2 class="event_title">Pizza at Pizza House, Join Me!</h2>
+        <p>11h ago</p>
+        <p>16:30, 1456 Main Street, Ann Arbor</p>
+
+      </ion-item>
+
+
+      <ion-item no-lines>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
+        </ion-avatar>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
+        </ion-avatar>
+
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
+        </ion-avatar>
+
+        <p style="display: inline-block; padding-top: 20px">+5</p>
+
+
+        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px; padding-left: 60px;">
+          <ion-icon name="star-outline"></ion-icon>
+          <div>STAR</div>
+        </button>
+
+        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px">
+          <ion-icon name="ice-cream-outline"></ion-icon>
+          <div>JOIN</div>
+        </button>
+      </ion-item>
+
+
+
+
+
+    </ion-item>
+
+  </ion-list>
+  <!-- ********************************************************************************************************************* -->
+
+  <ion-fab bottom right edge class="addnew" (click)=createEvent()>
+    <button ion-fab mini side="top">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+
 </ion-content>
+
