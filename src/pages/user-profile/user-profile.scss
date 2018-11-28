@@ -1,3 +1,17 @@
 page-user-profile {
+	.user-main-data-row {
 
+		.user-image {
+			border-radius: 50%;
+		}
+	}
+	.user-bio-row {
+		.user-description {
+			font-size: 1.2rem;
+			line-height: 1.6;
+			letter-spacing: 0.2px;
+			color: darken(#FFFFFF, 50%);
+			margin-top: 10px;
+		}
+	}
 }

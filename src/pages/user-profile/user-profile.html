@@ -16,34 +16,38 @@
 <ion-content padding>
   <div class="user-details">
     <ion-row class="user-main-data-row">
-      <ion-col no-padding width-33>
-      	<ion-img width="160" height="120" src="https://2380ie25r0n01w5tt7mvyi81-wpengine.netdna-ssl.com/wp-content/uploads/2015/12/LA_SIRENITA_SERA%CC%81_RUBIA_joya_life.jpg"> </ion-img>
+      <ion-col>
+  		<ion-img class="user-image" width="120" height="120" src="https://2380ie25r0n01w5tt7mvyi81-wpengine.netdna-ssl.com/wp-content/uploads/2015/12/LA_SIRENITA_SERA%CC%81_RUBIA_joya_life.jpg"> </ion-img>
       </ion-col>
       <ion-col no-padding>
         <ion-row class="social-presence-row">
           <ion-col width-50 class="social-presence-item">
-            <a (click)="goToFollowersList()">
               <h2 class="social-presence-value">Princess</h2>
               <h4 class="social-presence-title">Facebook</h4>
-            </a>
           </ion-col>
         </ion-row>
         <ion-row class="profile-action-row">
           <ion-col no-padding>
-            <button ion-button block small (click)="goToSettings()">
-              Available
-            </button>
+			<ion-item>
+			  <ion-label>Available</ion-label>
+			  <ion-toggle checked="false"></ion-toggle>
+			</ion-item>
           </ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
     <ion-row wrap class="user-bio-row">
-      <ion-col no-padding width-100>
+      <ion-col>
       	<h4> Bio </h4>
         <p class="user-description">
           Ariel has a distinctive appearance, with her long, flowing, bright red hair, blue eyes, green mermaid tail and purple seashell bikini top. In the films and television series, she is the seventh-born daughter of King Triton and Queen Athena of an underwater kingdom of Merfolk called Atlantica.[4][5] She is often rebellious, and in the first film, she longs to be a part of the human world. She marries Prince Eric, whom she rescued from a shipwreck, and together they have a daughter, Melody.
         </p>
       </ion-col>
+    </ion-row>
+    <ion-row>
+    	<ion-col>
+    		<button ion-button>Save Profile</button>
+    	</ion-col>
     </ion-row>
   </div>
 
