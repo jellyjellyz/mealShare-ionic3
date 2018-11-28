@@ -11,6 +11,53 @@
 
 <ion-content padding>
 
+  <ion-list-header no-lines class="list_header"> November 27, 2018 </ion-list-header>
+  <ion-card (click)="todetail()">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/avatar-ts-woody.png">
+      </ion-avatar>
+      <h2>Marty McFly</h2>
+      <p>November 27, 2018</p>
+    </ion-item>
+
+    <img src="assets/imgs/pizzahouse.jpg" />
+
+    <ion-card-content>
+      <ion-card-title>
+        Piazza ad Piazza House, Join Me!
+        <ion-badge>6</ion-badge>
+      </ion-card-title>
+      <p>
+        Welcome all!!!
+      </p>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='happy'></ion-icon>
+          Join
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='star-outline'></ion-icon>
+          Bookmark
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='share-alt'></ion-icon>
+          Share
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+
   <ion-list-header no-lines class="list_header"> November 26, 2018 </ion-list-header>
 
   <ion-card (click)="todetail()">
