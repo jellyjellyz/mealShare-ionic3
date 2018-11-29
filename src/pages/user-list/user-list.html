@@ -9,45 +9,56 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="friends">
+  <ion-segment [(ngModel)]="segment" color="primary">
+    <ion-segment-button value="all">
       ALL
     </ion-segment-button>
-    <ion-segment-button value="enemies">
+    <ion-segment-button value="users">
       Users
     </ion-segment-button>
-    <ion-segment-button value="enemies">
+    <ion-segment-button value="groups">
       Groups
     </ion-segment-button>
   </ion-segment>
-  <ion-item-group *ngFor="let user of users"> 
-    <ion-item no-padding (click)="jump()">
-      <ion-avatar item-start>
-        <img src={{user.img}}>
-      </ion-avatar>
-      <h2>{{user.name}}</h2>
-      <p>{{user.company}}</p>
-      <ion-note item-end>3:43 pm</ion-note>
-    </ion-item>
-  </ion-item-group>
 
-  <ion-item no-padding (click)="jump()">
-    <ion-thumbnail item-start>
-      <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
-        <div class="conversation-summary-avatar-group-member-wrapper"><img src="assets/imgs/avatar-ts-woody.png" data-user-initial="J"></div>
+  <div [ngSwitch]="segment">
+    <ng-container *ngSwitchCase="'users'">
+      <ion-item-group *ngFor="let user of users">
+        <ion-item no-padding (click)="jump()">
+          <ion-avatar item-start>
+            <img src={{user.img}}>
+          </ion-avatar>
+          <h2>{{user.name}}</h2>
+          <p>{{user.company}}</p>
+          <ion-note item-end>3:43 pm</ion-note>
+        </ion-item>
+      </ion-item-group>
+    </ng-container>
 
-        <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="assets/imgs/avatar-ts-buzz.png" data-user-initial="P"></div>
+    <ng-container *ngSwitchCase="'groups'">
+      <ion-item no-padding (click)="jump()">
+        <ion-thumbnail item-start>
+          <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
+            <div class="conversation-summary-avatar-group-member-wrapper"><img src="assets/imgs/avatar-ts-woody.png" data-user-initial="J"></div>
 
-        <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="assets/imgs/avatar-ts-jessie.png" data-user-initial="B"></div>
-        
-        <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-1/c0.0.160.160/p160x160/11351261_10150581634174980_8970167313412859905_n.jpg?oh=d3379a24a42f4f697638bc012f987bbc&oe=581A1AA3"
-            data-user-initial="B"></div>
-      </div>
-    </ion-thumbnail>
-    <h2>Buzz Lightyear，Jessie， Mr. Potato Head</h2>
-    <p>You're not turning me into a Mashed Potato.</p>
-    <ion-note item-end>5:47 am</ion-note>
-  </ion-item>
+            <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="assets/imgs/avatar-ts-buzz.png" data-user-initial="P"></div>
 
+            <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="assets/imgs/avatar-ts-jessie.png" data-user-initial="B"></div>
+            
+            <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-1/c0.0.160.160/p160x160/11351261_10150581634174980_8970167313412859905_n.jpg?oh=d3379a24a42f4f697638bc012f987bbc&oe=581A1AA3"
+                data-user-initial="B"></div>
+          </div>
+        </ion-thumbnail>
+        <h2>Buzz Lightyear，Jessie， Mr. Potato Head</h2>
+        <p>You're not turning me into a Mashed Potato.</p>
+        <ion-note item-end>5:47 am</ion-note>
+      </ion-item>
+    </ng-container>
+
+  </div>
+
+
+  
+ 
 
 </ion-content>
