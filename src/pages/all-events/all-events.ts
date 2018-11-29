@@ -4,7 +4,7 @@ import { EventDetailPage } from '../event-detail/event-detail';
 import { Event } from '../../models/event';
 import { Restaurant } from '../../models/restaurtant';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
-
+import { OrderByPipe } from '../../pipes/order-by/order-by';
 /**
  * Generated class for the AllEventsPage page.
  *
