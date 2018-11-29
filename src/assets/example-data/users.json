@@ -1,0 +1,29 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Marty McFly",
+            "company": "facebook",
+            "availability": 1,
+            "img": "assets/imgs/avatar-ts-woody.png",
+            "bio": "Marty McFly is a 35-year-old tradesperson who enjoys reading, swimming and drone photography. She is stable and creative, but can also be very sadistic and a bit boring."
+        },
+        {
+            "id": 2,
+            "name": "Sarah Connor",
+            "company": "Google",
+            "availability": 0,
+            "img": "assets/imgs/sarah-avatar.png.jpeg",
+            "bio": "Marty McFly is a 35-year-old tradesperson who enjoys reading, swimming and drone photography. She is stable and creative, but can also be very sadistic and a bit boring."
+        },
+        {
+            "id": 3,
+            "name": "Dr. Ian Malcolm",
+            "company": "facebook",
+            "availability": 0,
+            "img": "assets/imgs/ian-avatar.png",
+            "bio": "Marty McFly is a 35-year-old tradesperson who enjoys reading, swimming and drone photography. She is stable and creative, but can also be very sadistic and a bit boring."
+        }
+    ]
+
+}

@@ -14,101 +14,47 @@
 
 
 <ion-content padding>
-  <!-- <ion-item-group>
-    <ion-item>
-      <ion-label>Event Title</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Meeting Date&Time</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
-    </ion-item>
-
-    <ion-item no-lines>
-      <ion-label>Event Description</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-textarea placeholder="Welcome, some interesting topics..."></ion-textarea>
-    </ion-item>
-  </ion-item-group>
-
-  <ion-item></ion-item>
-
-  <ion-item-group>
-    <ion-item no-lines>
-      <ion-label>Invite People here</ion-label>
-    </ion-item>
-    <ion-item no-lines>
-      <ion-label>Select a group</ion-label>
-      <ion-select>
-        <ion-option value="GroupId">MyGroup 1</ion-option>
-        <ion-option value="GroupId">MyGroup 2</ion-option>
-        <ion-option value="GroupId">MyGroup 3</ion-option>
-        <ion-option value="GroupId">MyGroup 4</ion-option>
-      </ion-select>
-    </ion-item>
-    <button ion-item>
-      TODO add choose user page, only show available users
-      Invite From User List
-    </button>
-  </ion-item-group>
-
-  <ion-item></ion-item>
-  <ion-item-group>
-    <button ion-item>
-      Select a Restaurant
-    </button>
-  </ion-item-group> -->
-
-
-
-
-
-
   <ion-card>
-    <form>
 
-      <ion-item>
-        <ion-input type="text" placeholder="Title: e.g. Chinese Food"></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Title: e.g. Chinese Food" [(ngModel)]="event.title"></ion-input>
+    </ion-item>
 
-      <button color="light" ion-button block large class="upload-image-button">
-        <ion-icon name="camera"></ion-icon>
-        <h3 class="button-title">select an image or use default image</h3>
-      </button>
+    <button color="light" ion-button block large class="upload-image-button">
+      <ion-icon name="camera"></ion-icon>
+      <h3 class="button-title">select an image or use default image</h3>
+    </button>
 
-      <ion-item>
-        <ion-textarea rows="3" placeholder="Write a description or something..."></ion-textarea>
-      </ion-item>
-      <button ion-item>
-        Select Restaurant
-      </button>
-      <button ion-item>
-        Invite Friends
-        <ion-badge item-end>0</ion-badge>
-      </button>
+    <ion-item>
+      <ion-textarea [(ngModel)]="event.description" rows="3" placeholder="Write a description or something..."></ion-textarea>
+    </ion-item>
+    <button ion-item>
+      Select Restaurant
+    </button>
+    <button ion-item>
+      Invite Friends
+      <ion-badge item-end>0</ion-badge>
+    </button>
 
-      <ion-item>
-        <ion-label>Meeting date:</ion-label>
-        <ion-datetime placeholder="01/01/2018" displayFormat="MM/DD/YY" pickerFormat="MM-DD-YYYY"></ion-datetime>
-      </ion-item>
+    <ion-item>
+      <ion-label>Meeting date:</ion-label>
+      <ion-datetime [(ngModel)]="event.meet_date" placeholder="2018-01-01" displayFormat="MM/DD/YY" pickerFormat="MM-DD-YYYY"></ion-datetime>
+    </ion-item>
 
-      <ion-item>Meeting hour:</ion-item>
+    <ion-item>Meeting hour:</ion-item>
 
-      <ion-item class="time-select">
-        <ion-label>FROM</ion-label>
-        <ion-datetime placeholder="6 00 pm" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
-      </ion-item>
+    <ion-item class="time-select">
+      <ion-label>FROM</ion-label>
+      <ion-datetime [(ngModel)]="event.start_time" placeholder="6 00 pm" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
+    </ion-item>
 
-      <ion-item class="time-select">
-        <ion-label>TO</ion-label>
-        <ion-datetime placeholder="9 00 pm" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
-      </ion-item>
+    <ion-item class="time-select">
+      <ion-label>TO</ion-label>
+      <ion-datetime [(ngModel)]="event.end_time" placeholder="9 00 pm" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
+    </ion-item>
 
-      <button ion-button block class="form-action-button" type="submit">Post!</button>
+    <button ion-button block class="form-action-button" (click)="addEvent()">Post!</button>
 
-    </form>
   </ion-card>
 
 </ion-content>

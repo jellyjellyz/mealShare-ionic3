@@ -1,0 +1,76 @@
+{
+  "restaurants": [
+    {
+      "id": "o8AJkkv6bLfeQLGAdGmQCw",
+      "alias": "chipotle-mexican-grill-ann-arbor-3",
+      "name": "Chipotle Mexican Grill",
+      "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/OiMfKPDrIwUmSGg74hiJEA/o.jpg",
+      "is_closed": false,
+      "url": "https://www.yelp.com/biz/chipotle-mexican-grill-ann-arbor-3?adjust_creative=3OfsR_5SmOSoaDlbEvEvnA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=3OfsR_5SmOSoaDlbEvEvnA",
+      "review_count": 61,
+      "categories": [
+        {
+          "alias": "hotdogs",
+          "title": "Fast Food"
+        },
+        {
+          "alias": "mexican",
+          "title": "Mexican"
+        }
+      ],
+      "rating": 3.5,
+      "coordinates": {
+        "latitude": 42.279319,
+        "longitude": -83.74044
+      },
+      "transactions": [],
+      "price": "$",
+      "location": [
+          "235 S State",
+          "Ann Arbor, MI 48104"
+        ],
+      "phone": "+17347940800",
+      "display_phone": "(734) 794-0800",
+      "distance": 3391.0964101718396
+    },
+    {
+      "id": "DqKnaIclxErF1JXdWanJ8g",
+      "name": "The Songbird Cafe",
+      "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/QBLmMu9yIzILm1L5u74wkg/o.jpg",
+      "url": "https://www.yelp.com/biz/the-songbird-cafe-ann-arbor?adjust_creative=3OfsR_5SmOSoaDlbEvEvnA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=3OfsR_5SmOSoaDlbEvEvnA",
+      "categories": [
+        {
+          "alias": "cafes",
+          "title": "Cafes"
+        },
+        {
+          "alias": "sandwiches",
+          "title": "Sandwiches"
+        },
+        {
+          "alias": "coffee",
+          "title": "Coffee & Tea"
+        }
+      ],
+      "coordinates": {
+        "latitude": 42.303807,
+        "longitude": -83.706791
+      },
+      "price": "$$",
+      "location": {
+        "address1": "2707 Plymouth Rd",
+        "address2": "",
+        "address3": "",
+        "city": "Ann Arbor",
+        "zip_code": "48105",
+        "country": "US",
+        "state": "MI",
+        "display_address": [
+          "2707 Plymouth Rd",
+          "Ann Arbor, MI 48105"
+        ]
+      },
+      "distance": 515.0715838432803
+    }
+  ]
+}

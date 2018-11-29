@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Event } from '../../models/event';
+import { Restaurant } from '../../models/restaurtant';
+import { AllEventsPage } from '../all-events/all-events';
+import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
 
 /**
  * Generated class for the CreateEventPage page.
@@ -15,11 +19,47 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CreateEventPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private event: Event = new Event();
+  constructor(private navCtrl: NavController, private navParams: NavParams,
+    private eventDataService: EventDataServiceProvider) {
+
+    // observer only creates when someone subscribe to it,
+    // i.e. if not subscribe it here, if no one subscribe to it before
+    // there will be no observer, 
+    // at this time, if call notify subscribers, it will break annoyingly. 
+    this.eventDataService.getObservable().subscribe(update => {
+    })
+
+    let eventKey = this.navParams.get("eventKey");
+    if (eventKey === undefined) {
+      this.event = {
+        key: 0,
+        title: "",
+        description: "",
+        post_date: new Date().toISOString(),
+        meet_date: new Date().toISOString(),
+        start_time: new Date(1514808000000).toISOString(),
+        end_time: new Date(1514808000000).toISOString(),
+        restaurant: new Restaurant(),
+        coming_people_ids: [2, 3, 4],
+        pending_people_ids: [6, 10],
+        host_id: 2,
+        image_url: "assets/imgs/card-portland.png"
+      };
+    };
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateEventPage');
+  }
+
+  addEvent() {
+
+    // console.log(this.event.meet_date);
+    console.log(this.event.start_time);
+    this.eventDataService.addEvent(this.event);
+    this.navCtrl.push(AllEventsPage);
   }
 
 }
