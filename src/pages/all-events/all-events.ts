@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EventDetailPage } from '../event-detail/event-detail';
+import { Event } from '../../models/event';
+import { Restaurant } from '../../models/restaurtant';
 
 /**
  * Generated class for the AllEventsPage page.
@@ -16,12 +18,19 @@ import { EventDetailPage } from '../event-detail/event-detail';
 })
 export class AllEventsPage {
 
+  events: Array<Event>;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    // this.events = this.getFakeEvents();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AllEventsPage');
   }
+
+  // getFakeEvents() {
+  //   return 
+  // }
 
   private todetail() {
     this.navCtrl.push(EventDetailPage);

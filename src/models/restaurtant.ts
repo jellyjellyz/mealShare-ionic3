@@ -1,8 +1,15 @@
 export class Restaurant {
     id: string;
     name: string;
-    location: string;
+    categories: string[];
+    location: string[];
     url: string;
-    imageUrl: string;
-    
+    image_url: string;
+    price: string;
+    coordinates: {latitude: number, longitude: number};
+    distance: number;
+}
+
+export class Restaurants {
+    restaurants: Array<Restaurant>;
 }

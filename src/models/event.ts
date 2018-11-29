@@ -1,13 +1,15 @@
 import { Restaurant } from "./restaurtant";
 
 export class Event {
-    Title: string;
-    Description: string;
-    Date: Date;
-    startTime: Date;
-    endTime: Date;
-    Restaurant: Restaurant;
-    coming: number[];
-    pending: number[];
-    hostId: number;
+    title: string;
+    description: string;
+    post_date: string;
+    meet_date: string;
+    start_time: string;
+    end_time: string;
+    restaurant: Restaurant;
+    coming_people_ids: number[];
+    pending_people_ids: number[];
+    host_id: number;
 }
+
