@@ -11,30 +11,32 @@
 
 <ion-content padding>
 
-  <ion-list-header no-lines class="list_header"> November 27, 2018 </ion-list-header>
-  <ion-card (click)="todetail()">
-
+  <ion-list-header no-lines class="list_header"> {{ events.post_date | date }} </ion-list-header>
+  <ion-card (click)="todetail()" *ngFor="let event of events">
+    <!-- avatar -->
     <ion-item>
       <ion-avatar item-start>
-        <img src="assets/imgs/avatar-ts-woody.png">
+        <img src={{getUserImg(event.host_id)}}>
       </ion-avatar>
-      <h2>Marty McFly</h2>
-      <p>November 27, 2018</p>
+      <h2>{{ getUserName(event.host_id) }}</h2>
+      <p>{{ event.post_date | date: 'medium' }}</p>
     </ion-item>
 
-    <img src="assets/imgs/chipotle.jpg" />
+    <!-- card image -->
+    <img src="{{ event.image_url }}">
 
+    <!-- card content -->
     <ion-card-content>
       <ion-card-title>
-        Mexican Food
-        <ion-badge>8</ion-badge>
+        {{ event.title }}
+        <ion-badge>{{ event.coming_people_ids.length }}</ion-badge>
       </ion-card-title>
       <p>
-        Hola! we are newcomers from Sales department.
-        If you want to meet new friends and taste mexican food, join this group!!!👇🏻
+        {{ event.description }}
       </p>
     </ion-card-content>
 
+    <!-- little buttons below -->
     <ion-row no-padding>
       <ion-col>
         <button ion-button clear small color="danger" icon-start>
@@ -58,152 +60,4 @@
 
   </ion-card>
 
-
-  <ion-list-header no-lines class="list_header"> November 26, 2018 </ion-list-header>
-
-  <ion-card>
-
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/imgs/avatar-ts-woody.png">
-      </ion-avatar>
-      <h2>Marty McFly</h2>
-      <p>November 26, 2018</p>
-    </ion-item>
-
-    <img src="assets/imgs/pizzahouse.jpg" />
-
-    <ion-card-content>
-      <ion-card-title>
-        Piazza ad Piazza House, Join Me!
-        <ion-badge>6</ion-badge>
-      </ion-card-title>
-      <p>
-        Welcome all!!!
-      </p>
-    </ion-card-content>
-
-    <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='happy'></ion-icon>
-          Join
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='star-outline'></ion-icon>
-          Bookmark
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='share-alt'></ion-icon>
-          Share
-        </button>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
-
-
-
-  <ion-card>
-
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/imgs/sarah-avatar.png.jpeg">
-      </ion-avatar>
-      <h2>Sarah Connor</h2>
-      <p>November 26, 2018</p>
-    </ion-item>
-
-    <div>
-      <img src="assets/imgs/ramen.jpg" />
-    </div>
-
-    <ion-card-content>
-      <ion-card-title>
-        Welcome!!!!
-        <ion-badge>3</ion-badge>
-      </ion-card-title>
-      <p>
-        Ramen are very popular noodle dishes in Japan, and boiled noodles are basically served in different flavored
-        soup with many toppings. Come and taste it.
-      </p>
-    </ion-card-content>
-
-    <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='happy'></ion-icon>
-          Join
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='star'></ion-icon>
-          Bookmark
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='share-alt'></ion-icon>
-          Share
-        </button>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
-
-  <ion-list-header no-lines class="list_header"> November 24, 2018 </ion-list-header>
-
-  <ion-card>
-
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/imgs/ian-avatar.png">
-      </ion-avatar>
-      <h2>Dr. Ian Malcolm</h2>
-      <p>November 24, 2018</p>
-    </ion-item>
-
-    <div>
-      <img src="assets/imgs/salad.png" />
-    </div>
-
-    <ion-card-content>
-      <ion-card-title>
-        Salad Group 🥗
-        <ion-badge>1</ion-badge>
-      </ion-card-title>
-      <p>
-        Eat salad, be healthy, we could also fit together.
-        Avocado Salad is my favorite, what about you guys?
-        Come and join me!
-      </p>
-    </ion-card-content>
-
-    <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='happy'></ion-icon>
-          Join
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='star-outline'></ion-icon>
-          Bookmark
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='share-alt'></ion-icon>
-          Share
-        </button>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
 </ion-content>

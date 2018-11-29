@@ -10,7 +10,8 @@
             "restaurant": "",
             "coming_people_ids": [2],
             "pending_people_ids": [3],
-            "host_id": 1
+            "host_id": 1,
+            "image_url": "assets/imgs/chipotle.jpg"
         },
         {
             "title": "",
@@ -22,7 +23,8 @@
             "restaurant": "",
             "coming_people_ids": [1],
             "pending_people_ids": [],
-            "host_id": 2
+            "host_id": 2,
+            "image_url": "assets/imgs/pizzahouse.jpg"
         },
         {
             "title": "",
@@ -34,7 +36,8 @@
             "restaurant": "",
             "coming_people_ids": [2,3],
             "pending_people_ids": [],
-            "host_id": 1
+            "host_id": 1,
+            "image_url": "assets/imgs/ramen.jpg"
         }
     ]
 }
