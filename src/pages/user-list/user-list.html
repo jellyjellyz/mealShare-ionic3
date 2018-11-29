@@ -9,6 +9,17 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="friends">
+      ALL
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      Users
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      Groups
+    </ion-segment-button>
+  </ion-segment>
   <ion-item-group *ngFor="let user of users"> 
     <ion-item no-padding (click)="jump()">
       <ion-avatar item-start>
