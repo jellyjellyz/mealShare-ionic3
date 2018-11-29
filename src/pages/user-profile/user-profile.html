@@ -14,16 +14,30 @@
 
 
 <ion-content padding>
+	<ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="friends">
+      ALL
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      GOING
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      SAVED
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      PAST
+    </ion-segment-button>
+  </ion-segment>
   <div class="user-details">
     <ion-row class="user-main-data-row">
       <ion-col>
-  		<ion-img class="user-image" width="120" height="120" src="https://2380ie25r0n01w5tt7mvyi81-wpengine.netdna-ssl.com/wp-content/uploads/2015/12/LA_SIRENITA_SERA%CC%81_RUBIA_joya_life.jpg"> </ion-img>
+  		<ion-img class="user-image" width="120" height="120" src={{user.img}}> </ion-img>
       </ion-col>
       <ion-col no-padding>
         <ion-row class="social-presence-row">
           <ion-col width-50 class="social-presence-item">
-              <h2 class="social-presence-value">Princess</h2>
-              <h4 class="social-presence-title">Facebook</h4>
+              <h2 class="social-presence-value">{{user.name}}</h2>
+              <h4 class="social-presence-title">{{user.company}}</h4>
           </ion-col>
         </ion-row>
         <ion-row class="profile-action-row">
