@@ -15,7 +15,7 @@ import { User } from '../../models/user';
   templateUrl: 'user-profile.html',
 })
 export class UserProfilePage {
-	private user: User;
+	private user: User = new User();
 	
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	this.user = {

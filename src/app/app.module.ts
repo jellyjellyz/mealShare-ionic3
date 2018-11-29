@@ -17,6 +17,8 @@ import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { EventDetailPage } from '../pages/event-detail/event-detail';
 import { CreateEventPage } from '../pages/create-event/create-event';
 import { RestaurantDetailPage } from '../pages/restaurant-detail/restaurant-detail';
+import { EventDataServiceProvider } from '../providers/event-data-service/event-data-service';
+import { OrderByPipe } from '../pipes/order-by/order-by';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { RestaurantDetailPage } from '../pages/restaurant-detail/restaurant-deta
     EventDetailPage,
     CreateEventPage,
     RestaurantDetailPage,
-    TabsPage
+    TabsPage,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { RestaurantDetailPage } from '../pages/restaurant-detail/restaurant-deta
     InAppBrowser,
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    EventDataServiceProvider
   ]
 })
 export class AppModule { }

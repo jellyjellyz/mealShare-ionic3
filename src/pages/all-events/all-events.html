@@ -11,15 +11,16 @@
 
 <ion-content padding>
 
-  <ion-list-header no-lines class="list_header"> {{ events.post_date | date }} </ion-list-header>
-  <ion-card (click)="todetail()" *ngFor="let event of events">
+  <!-- <ion-list-header no-lines class="list_header"> {{ events.post_date | date }} </ion-list-header> -->
+  <ion-list-header no-lines class="list_header"> NOV 29, 2018 </ion-list-header>
+  <ion-card (click)="todetail()" *ngFor="let event of events | orderBy: 'meet_date'">
     <!-- avatar -->
     <ion-item>
       <ion-avatar item-start>
         <img src={{getUserImg(event.host_id)}}>
       </ion-avatar>
       <h2>{{ getUserName(event.host_id) }}</h2>
-      <p>{{ event.post_date | date: 'medium' }}</p>
+      <p>{{ event.meet_date | date }} {{ event.start_time | date: 'shortTime' : 'UTC' }}</p>
     </ion-item>
 
     <!-- card image -->
