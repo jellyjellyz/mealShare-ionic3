@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CreateEventPage } from '../create-event/create-event';
-
-/**
- * Generated class for the MyEventsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Event} from '../../models/event';
+import {EventDataServiceProvider} from '../../providers/event-data-service/event-data-service';
 
 @IonicPage()
 @Component({
@@ -15,13 +10,20 @@ import { CreateEventPage } from '../create-event/create-event';
   templateUrl: 'my-events.html',
 })
 export class MyEventsPage {
+  private events: Event[];
+  private dates: any[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public eventService: EventDataServiceProvider) {
+    this.eventService.getObservable().subscribe(update => {
+      this.events = this.eventService.getEvents();
+      this.dates = this.eventService.getDates();
+      console.log(this.events);
+    });
+
+    this.events = this.eventService.getEvents();
+    this.dates = this.eventService.getDates();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MyEventsPage');
-  }
 
   private createEvent() {
     this.navCtrl.push(CreateEventPage);
