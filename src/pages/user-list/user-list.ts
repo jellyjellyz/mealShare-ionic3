@@ -58,6 +58,14 @@ export class UserListPage {
 	    availability: 1,
 	    img: "assets/imgs/avatar-ts-potatohead.png",
 	    bio: "Have you had a meal today?",
+      },
+      {
+        id: 5,
+	    name: "Ariel",
+	    company: "Waymo",
+	    availability: 1,
+	    img: "https://2380ie25r0n01w5tt7mvyi81-wpengine.netdna-ssl.com/wp-content/uploads/2015/12/LA_SIRENITA_SERA%CC%81_RUBIA_joya_life.jpg",
+	    bio: "Ariel has a distinctive appearance, with her long, flowing, bright red hair, blue eyes, green mermaid tail and purple seashell bikini top. In the films and television series, she is the seventh-born daughter of King Triton and Queen Athena of an underwater kingdom of Merfolk called Atlantica.[4][5] She is often rebellious, and in the first film, she longs to be a part of the human world. She marries Prince Eric, whom she rescued from a shipwreck, and together they have a daughter, Melody.",
       }];      
 
   }
