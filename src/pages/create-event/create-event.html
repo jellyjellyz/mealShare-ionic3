@@ -14,62 +14,10 @@
 
 
 <ion-content padding>
-  <!-- <ion-item-group>
-    <ion-item>
-      <ion-label>Event Title</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Meeting Date&Time</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
-    </ion-item>
-
-    <ion-item no-lines>
-      <ion-label>Event Description</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-textarea placeholder="Welcome, some interesting topics..."></ion-textarea>
-    </ion-item>
-  </ion-item-group>
-
-  <ion-item></ion-item>
-
-  <ion-item-group>
-    <ion-item no-lines>
-      <ion-label>Invite People here</ion-label>
-    </ion-item>
-    <ion-item no-lines>
-      <ion-label>Select a group</ion-label>
-      <ion-select>
-        <ion-option value="GroupId">MyGroup 1</ion-option>
-        <ion-option value="GroupId">MyGroup 2</ion-option>
-        <ion-option value="GroupId">MyGroup 3</ion-option>
-        <ion-option value="GroupId">MyGroup 4</ion-option>
-      </ion-select>
-    </ion-item>
-    <button ion-item>
-      TODO add choose user page, only show available users
-      Invite From User List
-    </button>
-  </ion-item-group>
-
-  <ion-item></ion-item>
-  <ion-item-group>
-    <button ion-item>
-      Select a Restaurant
-    </button>
-  </ion-item-group> -->
-
-
-
-
-
-
   <ion-card>
 
     <ion-item>
-      <ion-input type="text" placeholder="Title: e.g. Chinese Food"></ion-input>
+      <ion-input type="text" placeholder="Title: e.g. Chinese Food" [(ngModel)]="event.title"></ion-input>
     </ion-item>
 
     <button color="light" ion-button block large class="upload-image-button">

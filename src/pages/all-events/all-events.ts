@@ -11,6 +11,7 @@ import { Restaurant } from '../../models/restaurtant';
  * Ionic pages and navigation.
  */
 
+export let events: Event[] = [];
 @IonicPage()
 @Component({
   selector: 'page-all-events',

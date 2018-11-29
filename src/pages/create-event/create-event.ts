@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Event } from '../../models/event';
 import { Restaurant } from '../../models/restaurtant';
+import { AllEventsPage, events } from '../all-events/all-events';
 
 /**
  * Generated class for the CreateEventPage page.
@@ -20,14 +21,15 @@ export class CreateEventPage {
   private event: Event = {
     title: "",
     description: "",
-    post_date: new Date(1514782800000).toISOString(),
-    meet_date: new Date(1514782800000).toISOString(),
-    start_time: new Date(1514804400000).toISOString(),
-    end_time: new Date(1514826000000).toISOString(),
+    post_date: new Date().toISOString(),
+    meet_date: new Date().toISOString(),
+    start_time: new Date().toISOString(),
+    end_time: new Date().toISOString(),
     restaurant: new Restaurant(),
     coming_people_ids: [],
     pending_people_ids: [],
-    host_id: -1
+    host_id: 2,
+    image_url: "assets/imgs/ramen.jpg"
   };
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -37,8 +39,9 @@ export class CreateEventPage {
   }
 
   addEvent() {
-    console.log(typeof(this.event.meet_date));
-    console.log(this.event.start_time);
-    console.log(this.event.end_time);
+    events.push(this.event);
+    console.log(events.length);
+    this.navCtrl.push(AllEventsPage, {events});
   }
+
 }
