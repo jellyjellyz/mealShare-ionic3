@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CreateEventPage } from '../create-event/create-event';
-import { TestHttpPage } from '../test-http/test-http';
 
 /**
  * Generated class for the MyEventsPage page.
@@ -28,8 +27,5 @@ export class MyEventsPage {
     this.navCtrl.push(CreateEventPage);
   }
 
-  private goTest() {
-    this.navCtrl.push(TestHttpPage);
-  }
 
 }
