@@ -19,6 +19,7 @@ import { CreateEventPage } from '../pages/create-event/create-event';
 import { RestaurantDetailPage } from '../pages/restaurant-detail/restaurant-detail';
 import { EventDataServiceProvider } from '../providers/event-data-service/event-data-service';
 import { OrderByPipe } from '../pipes/order-by/order-by';
+import { UserDataServiceProvider } from '../providers/user-data-service/user-data-service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { OrderByPipe } from '../pipes/order-by/order-by';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    EventDataServiceProvider
+    EventDataServiceProvider,
+    UserDataServiceProvider
   ]
 })
 export class AppModule { }

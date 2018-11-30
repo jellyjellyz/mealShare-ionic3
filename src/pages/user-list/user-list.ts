@@ -20,9 +20,11 @@ export class UserListPage {
   private users: User[] = [];
   private groups: Group[] = [];
   private segment: string;
+  private hide: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	this.loadFakeEntries();
   	this.segment = "all";
+  	this.hide = true;
   }
 
   ionViewDidLoad() {
@@ -84,6 +86,9 @@ export class UserListPage {
   }
   public jump() {
   	this.navCtrl.push(UserProfilePage); 
+  }
+  private createGroup() {
+    this.hide = !this.hide;
   }
 
 }

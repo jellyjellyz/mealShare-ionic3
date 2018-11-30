@@ -90,14 +90,21 @@
     </ng-container>
   </div>
 
-  <ion-fab bottom left edge class="addnew" (click)=createGroup()>
+  <ion-fab bottom right edge class="addnew" (click)=createGroup()>
     <button ion-fab mini side="top">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
 
+  <ion-list *ngIf="hide">
+    <ng-container *ngFor="let user of users">
+      <ion-item>
+        <ion-label>{{user.name}}</ion-label>
+        <ion-checkbox color="dark" checked="true"></ion-checkbox>
+      </ion-item>
+    </ng-container>
+  </ion-list>
 
-  
- 
+  <button ion-button>Save Group</button>
 
 </ion-content>
