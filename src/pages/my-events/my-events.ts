@@ -31,4 +31,5 @@ export class MyEventsPage {
     this.navCtrl.push(CreateEventPage);
   }
 
+
 }

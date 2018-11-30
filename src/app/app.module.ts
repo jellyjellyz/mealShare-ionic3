@@ -20,6 +20,8 @@ import { RestaurantDetailPage } from '../pages/restaurant-detail/restaurant-deta
 import { EventDataServiceProvider } from '../providers/event-data-service/event-data-service';
 import { OrderByPipe } from '../pipes/order-by/order-by';
 import { UserDataServiceProvider } from '../providers/user-data-service/user-data-service';
+import { RestaurantSelectionPage } from '../pages/restaurant-selection/restaurant-selection';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { UserDataServiceProvider } from '../providers/user-data-service/user-dat
     EventDetailPage,
     CreateEventPage,
     RestaurantDetailPage,
+    RestaurantSelectionPage,
     TabsPage,
     OrderByPipe
   ],
@@ -57,6 +60,7 @@ import { UserDataServiceProvider } from '../providers/user-data-service/user-dat
     EventDetailPage,
     CreateEventPage,
     RestaurantDetailPage,
+    RestaurantSelectionPage,
     TabsPage
   ],
   providers: [
