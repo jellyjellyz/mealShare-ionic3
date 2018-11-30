@@ -97,4 +97,21 @@ export class EventDataServiceProvider {
   private notifySubscribers(): void {
     this.serviceObserver.next(undefined);
   }
+
+  public getDates(): string[]{
+    let dateNums: string[] = [];
+
+    for(let i = 0; i < this.events.length; i ++){
+      let dateNum = this.events[i].meet_date;
+      if (dateNums.indexOf(dateNum) > -1) {
+        dateNums.push(dateNum);
+      }
+    }
+
+    console.log(dateNums)
+
+    return dateNums;
+  }
+
+
 }
