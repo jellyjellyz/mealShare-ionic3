@@ -103,7 +103,7 @@ export class EventDataServiceProvider {
 
     for(let i = 0; i < this.events.length; i ++){
       let dateNum = this.events[i].meet_date;
-      if (!dateNums.includes(dateNum)) {
+      if (dateNums.indexOf(dateNum) > -1) {
         dateNums.push(dateNum);
       }
     }

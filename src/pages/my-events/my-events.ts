@@ -12,6 +12,7 @@ import {EventDataServiceProvider} from '../../providers/event-data-service/event
 export class MyEventsPage {
   private events: Event[];
   private dates: any[];
+  private event_type: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public eventService: EventDataServiceProvider) {
     this.eventService.getObservable().subscribe(update => {
@@ -22,6 +23,7 @@ export class MyEventsPage {
 
     this.events = this.eventService.getEvents();
     this.dates = this.eventService.getDates();
+    this.event_type = "all";
   }
 
 

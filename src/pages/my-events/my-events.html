@@ -15,71 +15,86 @@
 
 <ion-content padding>
 
-  <ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="friends">
+  <ion-segment [(ngModel)]="event_type" color="primary">
+    <ion-segment-button value="all">
       ALL
     </ion-segment-button>
-    <ion-segment-button value="enemies">
+    <ion-segment-button value="going">
       GOING
     </ion-segment-button>
-    <ion-segment-button value="enemies">
+    <ion-segment-button value="saved">
       SAVED
     </ion-segment-button>
-    <ion-segment-button value="enemies">
+    <ion-segment-button value="past">
       PAST
     </ion-segment-button>
   </ion-segment>
 
 
+  <div [ngSwitch]="event_type">
+    <ng-container *ngSwitchCase="'all'">
 
-  <ion-list *ngFor="let eventDate of dates">
-      <ion-list-header no-lines class="list_header"> {{eventDate | date: 'fullDate'}} </ion-list-header>
-    <ion-item>
+      <ion-list *ngFor="let eventDate of dates">
+          <ion-list-header no-lines class="list_header"> {{eventDate | date: 'fullDate'}} </ion-list-header>
+        <ion-item>
 
-      <ion-item no-lines>
+          <ion-item no-lines>
 
-        <h2 class="event_title">Pizza at Pizza House, Join Me!</h2>
-        <p>11h ago</p>
-        <p>16:30, 1456 Main Street, Ann Arbor</p>
+            <h2 class="event_title">Pizza at Pizza House, Join Me!</h2>
+            <p>11h ago</p>
+            <p>16:30, 1456 Main Street, Ann Arbor</p>
 
-      </ion-item>
-
-
-      <ion-item no-lines>
-
-        <ion-avatar item-start>
-          <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
-        </ion-avatar>
-
-        <ion-avatar item-start>
-          <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
-        </ion-avatar>
-
-        <ion-avatar item-start>
-          <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
-        </ion-avatar>
-
-        <p style="display: inline-block; padding-top: 20px">+5</p>
+          </ion-item>
 
 
-        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px; padding-left: 60px;">
-          <ion-icon name="star-outline"></ion-icon>
-          <div>STAR</div>
-        </button>
+          <ion-item no-lines>
 
-        <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px">
-          <ion-icon name="ice-cream-outline"></ion-icon>
-          <div>JOIN</div>
-        </button>
+            <ion-avatar item-start>
+              <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
+            </ion-avatar>
 
-      </ion-item>
+            <ion-avatar item-start>
+              <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
+            </ion-avatar>
+
+            <ion-avatar item-start>
+              <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
+            </ion-avatar>
+
+            <p style="display: inline-block; padding-top: 20px">+5</p>
 
 
-    </ion-item>
+            <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px; padding-left: 60px;">
+              <ion-icon name="star-outline"></ion-icon>
+              <div>STAR</div>
+            </button>
 
+            <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px">
+              <ion-icon name="ice-cream-outline"></ion-icon>
+              <div>JOIN</div>
+            </button>
 
+          </ion-item>
 
-  </ion-list>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+  </div>
+
+  <div [ngSwitch]="event_type">
+    <ng-container *ngSwitchCase="'going'">
+    </ng-container>
+  </div>
+
+  <div [ngSwitch]="event_type">
+    <ng-container *ngSwitchCase="'saved'">
+    </ng-container>
+  </div>
+
+  <div [ngSwitch]="event_type">
+    <ng-container *ngSwitchCase="'past'">
+    </ng-container>
+  </div>
 
 
 
