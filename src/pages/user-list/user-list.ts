@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProfilePage } from '../user-profile/user-profile';
 import { User } from '../../models/user';
 import { Group } from '../../models/group';
+import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
+
 
 /**
  * Generated class for the UserListPage page.
@@ -20,9 +22,20 @@ export class UserListPage {
   private users: User[] = [];
   private groups: Group[] = [];
   private segment: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.loadFakeEntries();
+  private hide: boolean;
+  constructor(public navCtrl: NavController, 
+  			  public navParams: NavParams,
+  			  private userService: UserDataServiceProvider) {
+  	// this.loadFakeEntries();
+  	this.userService.getObservable().subscribe(update => {
+      this.users = userService.getUsers();
+      this.groups = userService.getGroups();
+    })
+    this.users = userService.getUsers();
+    this.groups = userService.getGroups();
+    console.log(this.groups);
   	this.segment = "all";
+  	this.hide = true;
   }
 
   ionViewDidLoad() {
@@ -37,7 +50,7 @@ export class UserListPage {
 	    company: "Google",
 	    availability: true,
 	    img: "assets/imgs/avatar-ts-woody.png",
-	    bio: "How are you?",
+	    bio: "How are you?"
       },
       {
         id: 2,
@@ -45,7 +58,7 @@ export class UserListPage {
 	    company: "Amazon",
 	    availability: false,
 	    img: "assets/imgs/avatar-ts-buzz.png",
-	    bio: "Bonjour!",
+	    bio: "Bonjour!"
       },
       {
         id: 3,
@@ -53,7 +66,7 @@ export class UserListPage {
 	    company: "Microsoft",
 	    availability: true,
 	    img: "assets/imgs/avatar-ts-jessie.png",
-	    bio: "Hello",
+	    bio: "Hello"
       },
       {
         id: 4,
@@ -61,7 +74,7 @@ export class UserListPage {
 	    company: "Uber",
 	    availability: false,
 	    img: "assets/imgs/avatar-ts-potatohead.png",
-	    bio: "Have you had a meal today?",
+	    bio: "Have you had a meal today?"
       },
       {
         id: 5,
@@ -69,7 +82,7 @@ export class UserListPage {
 	    company: "Waymo",
 	    availability: true,
 	    img: "https://2380ie25r0n01w5tt7mvyi81-wpengine.netdna-ssl.com/wp-content/uploads/2015/12/LA_SIRENITA_SERA%CC%81_RUBIA_joya_life.jpg",
-	    bio: "Ariel has a distinctive appearance, with her long, flowing, bright red hair, blue eyes, green mermaid tail and purple seashell bikini top. In the films and television series, she is the seventh-born daughter of King Triton and Queen Athena of an underwater kingdom of Merfolk called Atlantica.[4][5] She is often rebellious, and in the first film, she longs to be a part of the human world. She marries Prince Eric, whom she rescued from a shipwreck, and together they have a daughter, Melody.",
+	    bio: "Ariel has a distinctive appearance, with her long, flowing, bright red hair, blue eyes, green mermaid tail and purple seashell bikini top. In the films and television series, she is the seventh-born daughter of King Triton and Queen Athena of an underwater kingdom of Merfolk called Atlantica.[4][5] She is often rebellious, and in the first film, she longs to be a part of the human world. She marries Prince Eric, whom she rescued from a shipwreck, and together they have a daughter, Melody."
       }];
       this.groups = [
       {
@@ -84,6 +97,9 @@ export class UserListPage {
   }
   public jump() {
   	this.navCtrl.push(UserProfilePage); 
+  }
+  private createGroup() {
+    this.hide = !this.hide;
   }
 
 }
