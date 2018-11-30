@@ -15,4 +15,25 @@
 
 <ion-content padding>
 
+  <div *ngIf="restaurants != undefined">
+    <ion-card *ngFor="let res of restaurants">
+      <ion-item>
+        <ion-label>{{ res.name }}</ion-label>
+        <ion-checkbox item-end color="danger" checked="false"></ion-checkbox>
+
+      </ion-item>
+
+      <img data-src="{{res.image_url}}">
+
+      <ion-item>
+        <h2>Category: {{ res.categories }}</h2>
+        <p>{{ res.location }}</p>
+        <ion-icon name="arrow-dropright" item-right (click)="redirect()"></ion-icon>
+      </ion-item>
+
+
+    </ion-card>
+  </div>
+
+
 </ion-content>

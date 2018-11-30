@@ -15,6 +15,7 @@
 
 <ion-content padding>
 
+  <button ion-button (click)="goTest()">go to test page </button>
   <ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="friends">
       ALL

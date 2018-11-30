@@ -4,6 +4,7 @@ import { Event } from '../../models/event';
 import { Restaurant } from '../../models/restaurtant';
 import { AllEventsPage } from '../all-events/all-events';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
+import { RestaurantSelectionPage } from '../restaurant-selection/restaurant-selection';
 
 /**
  * Generated class for the CreateEventPage page.
@@ -60,6 +61,10 @@ export class CreateEventPage {
     console.log(this.event.start_time);
     this.eventDataService.addEvent(this.event);
     this.navCtrl.push(AllEventsPage);
+  }
+
+  private toSelectRestaurant() {
+    this.navCtrl.push(RestaurantSelectionPage);
   }
 
 }

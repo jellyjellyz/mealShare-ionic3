@@ -36,7 +36,6 @@ export class EventDetailPage {
         this.res = data.restaurants[0];
         this.loading.dismiss();
       });
-    console.log('ionViewDidEnter EventDetailPage');
   }
 
   private gotoRestDetail() {

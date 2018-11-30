@@ -28,7 +28,7 @@
     <ion-item>
       <ion-textarea [(ngModel)]="event.description" rows="3" placeholder="Write a description or something..."></ion-textarea>
     </ion-item>
-    <button ion-item>
+    <button ion-item (click)="toSelectRestaurant()">
       Select Restaurant
     </button>
     <button ion-item>

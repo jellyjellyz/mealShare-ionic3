@@ -19,6 +19,8 @@ import { CreateEventPage } from '../pages/create-event/create-event';
 import { RestaurantDetailPage } from '../pages/restaurant-detail/restaurant-detail';
 import { EventDataServiceProvider } from '../providers/event-data-service/event-data-service';
 import { OrderByPipe } from '../pipes/order-by/order-by';
+import { TestHttpPage } from '../pages/test-http/test-http';
+import { RestaurantSelectionPage } from '../pages/restaurant-selection/restaurant-selection';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { OrderByPipe } from '../pipes/order-by/order-by';
     EventDetailPage,
     CreateEventPage,
     RestaurantDetailPage,
+    RestaurantSelectionPage,
     TabsPage,
+    TestHttpPage,
     OrderByPipe
   ],
   imports: [
@@ -56,6 +60,8 @@ import { OrderByPipe } from '../pipes/order-by/order-by';
     EventDetailPage,
     CreateEventPage,
     RestaurantDetailPage,
+    RestaurantSelectionPage,
+    TestHttpPage,
     TabsPage
   ],
   providers: [
