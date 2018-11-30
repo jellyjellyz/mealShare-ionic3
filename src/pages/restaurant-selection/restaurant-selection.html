@@ -18,7 +18,7 @@
   <div *ngIf="restaurants != undefined">
     <ion-card *ngFor="let res of restaurants">
       <ion-item>
-        <ion-label>{{ res.name }}</ion-label>
+        <ion-label><b>{{ res.name }}</b></ion-label>
         <ion-checkbox item-start color="danger" checked="false"></ion-checkbox>
 
       </ion-item>
@@ -27,6 +27,7 @@
         <div class="description">
           <h2>Category: {{ res.categories }}</h2>
           <p>{{ res.location }}</p>
+          <p>price: {{ res.price }}, distance: {{ res.distance }}mi</p>
           <ion-icon name="arrow-dropright" class="next-button" item-right (click)="redirect(res.url)"></ion-icon>
         </div>
       </ion-card-content>

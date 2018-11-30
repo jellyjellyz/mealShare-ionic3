@@ -48,7 +48,7 @@ export class RestaurantSelectionPage {
           let res = new Restaurant();
           res.id = temp["id"];
           res.name = temp["name"];
-          res.distance = temp["distance"];
+          res.distance = Math.round(temp["distance"] * 0.01) / 10;
           res.categories = temp["categories"][0]["title"];
           res.image_url = temp["image_url"];
           res.location = temp["location"]["display_address"];
@@ -67,7 +67,7 @@ export class RestaurantSelectionPage {
 
   }
 
-  redirect(url: string) {
+  private redirect(url: string) {
     const options: InAppBrowserOptions = {
       zoom: 'no',
     }
