@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Restaurant } from '../../models/restaurtant';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import 'rxjs/add/operator/map';
 
 /**
@@ -22,7 +23,8 @@ export class RestaurantSelectionPage {
   loading: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private http: Http, public loadingCtrl: LoadingController) {
+              private http: Http, public loadingCtrl: LoadingController,
+              private inAppBrowser: InAppBrowser) {
     this.loading = this.loadingCtrl.create();
   }
 
@@ -63,6 +65,14 @@ export class RestaurantSelectionPage {
       });
     console.log('ionViewDidLoad SelectionPage');
 
+  }
+
+  redirect(url: string) {
+    const options: InAppBrowserOptions = {
+      zoom: 'no',
+    }
+    const browser = this.inAppBrowser.create(url, '_system', options);
+    browser.show();
   }
 
 

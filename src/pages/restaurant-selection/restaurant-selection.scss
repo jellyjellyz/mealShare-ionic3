@@ -1,3 +1,25 @@
 page-restaurant-selection {
+    .restaurant-preview-img {
+        width: 100px;
+        display: inline-block;
+        float: left;
+        padding-bottom: 15px;
+    }
+    
+
+    .description {
+        padding: 10px;
+        float: left;
+        width: calc(100% - 100px);
+        height: calc(100% - 100px);
+        h2 {
+            font-weight: bold;
+        }
+        .next-button {
+            float: right;
+            margin: 0;
+            font-size: 2em;
+        }
+    }
 
 }
