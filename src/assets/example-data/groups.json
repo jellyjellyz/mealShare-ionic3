@@ -1,0 +1,17 @@
+{
+  	"groups": 
+		[
+		{
+			"groupId": 1,
+			"userIds": [1,2,3]
+		},
+		{
+			"groupId": 2,
+			"userIds": [1,2,4]
+		},
+		{
+			"groupId": 3,
+			"userIds": [1,2,5]
+		}
+	]
+}

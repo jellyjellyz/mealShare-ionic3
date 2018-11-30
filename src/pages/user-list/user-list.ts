@@ -29,8 +29,11 @@ export class UserListPage {
   	// this.loadFakeEntries();
   	this.userService.getObservable().subscribe(update => {
       this.users = userService.getUsers();
+      this.groups = userService.getGroups();
     })
     this.users = userService.getUsers();
+    this.groups = userService.getGroups();
+    console.log(this.groups);
   	this.segment = "all";
   	this.hide = true;
   }

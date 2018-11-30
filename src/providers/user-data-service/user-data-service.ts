@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import firebase from 'firebase';
 import { environment } from '../../environment/environment';
 import { User } from '../../models/user';
+import { Group } from '../../models/group';
 /*
   Generated class for the UserDataServiceProvider provider.
 
@@ -13,7 +14,8 @@ import { User } from '../../models/user';
 @Injectable()
 export class UserDataServiceProvider {
 	private db: any;
-	private users: any[] = [];
+	private users: User[] = [];
+	private groups: Group[] = [];
 	private serviceObserver: Observer<any[]>;
 	private clientObservable: Observable<any[]>;
 	private nextID: number = 0;
@@ -26,10 +28,10 @@ export class UserDataServiceProvider {
 	    });
 
 	    // retrieve data from firebase
-	  	let dataRef = this.db.ref('/users2');		
-	  	dataRef.on('value', snapshot => {
-	    		this.users = []; //start with a blank list
-	    		snapshot.forEach(childSnapshot => {
+	  	let usersRef = this.db.ref('/users2');		
+	  	usersRef.on('value', snapshot => {
+    		this.users = []; //start with a blank list
+    		snapshot.forEach(childSnapshot => {
 	          	let user: User = { 
 	  	          id: childSnapshot.val().id,
 	  	          name: childSnapshot.val().name,
@@ -38,11 +40,26 @@ export class UserDataServiceProvider {
 	  	          img: childSnapshot.val().img,
 	  	          bio: childSnapshot.val().bio
 	  	        };
-	      		this.users.push(user);
-	    		});
+	  	        console.log(user);
+	      		this.users.push(user);	 
+      		});
+      		this.notifySubscribers();
+	    });
+	    let groupsRef = this.db.ref('/groups');	
+	  	groupsRef.on('value', snapshot => {
+    		this.groups = []; //start with a blank list
+    		snapshot.forEach(childSnapshot => {
+	          	let group: Group = { 
+	  	          groupId: childSnapshot.val().groupId,
+	  	          userIds: childSnapshot.val().userIds
+	  	        };
+	  	        console.log(group);
+	      		this.groups.push(group);
+	      	});		
 	        // notify subscriber in home page to sync the update
-	    		this.notifySubscribers();
+	    	this.notifySubscribers();
 	 	});
+
   	}
   	public getObservable(): Observable<any[]> {
     	return this.clientObservable;
@@ -52,6 +69,10 @@ export class UserDataServiceProvider {
   	}
 	public getUsers(): User[] {
 	    let usersClone = JSON.parse(JSON.stringify(this.users)); // clone another entries to entriesClone
+	    return usersClone;
+  	}
+  	public getGroups(): Group[] {
+	    let usersClone = JSON.parse(JSON.stringify(this.groups)); // clone another entries to entriesClone
 	    return usersClone;
   	}
 
