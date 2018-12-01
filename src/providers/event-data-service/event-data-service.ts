@@ -50,10 +50,13 @@ export class EventDataServiceProvider {
           image_url: childSnapshot.val().image_url
         };
         this.events.push(event);
-        console.log("inservice");
+        console.log("in service");
         console.log(this.events);
       });
       // notify subscribers in all-event page to sync the update
+
+      //sort this.events chronologically
+      this.events.sort((a,b) => Number(a.start_time) - Number(b.start_time))
       
       this.notifySubscribers();
 
@@ -98,19 +101,34 @@ export class EventDataServiceProvider {
     this.serviceObserver.next(undefined);
   }
 
-  public getDates(): string[]{
-    let dateNums: string[] = [];
+  public getSchedule(): string[]{
+    let dateNums: string[] = []; // used to check if a date already eaxists in scheduleItems
+    let scheduleItems: any[] = []; // [{date:1432535, events: [{events[i]}, ...]}, ...]
+
 
     for(let i = 0; i < this.events.length; i ++){
       let dateNum = this.events[i].meet_date;
-      if (dateNums.indexOf(dateNum) > -1) {
+
+      if (dateNums.indexOf(dateNum) == -1) { // if the date is not in schedule, then create a new array under the date with this event
         dateNums.push(dateNum);
+
+        let newSchedule = {};
+        newSchedule['date'] = dateNum;
+        newSchedule['events'] = [];
+        newSchedule['events'].push(this.events[i]);
+
+        scheduleItems.push(newSchedule);
+      } else if (dateNums.indexOf(dateNum) > 1) { // if the sate exists, then push the event into the array
+        for(let j = 0; j < scheduleItems.length; j ++){
+          if(scheduleItems[j].date == dateNum){
+            scheduleItems[j].events.push(this.events[i])
+          }
+        };
       }
     }
 
-    console.log(dateNums)
-
-    return dateNums;
+    // console.log(dateNums)
+    return scheduleItems;
   }
 
 

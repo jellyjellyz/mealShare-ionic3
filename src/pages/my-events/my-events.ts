@@ -11,18 +11,19 @@ import {EventDataServiceProvider} from '../../providers/event-data-service/event
 })
 export class MyEventsPage {
   private events: Event[];
-  private dates: any[];
+  private schedules: any[];
   private event_type: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public eventService: EventDataServiceProvider) {
     this.eventService.getObservable().subscribe(update => {
       this.events = this.eventService.getEvents();
-      this.dates = this.eventService.getDates();
+      this.schedules = this.eventService.getSchedule();
       console.log(this.events);
+      console.log(this.schedules);
     });
 
     this.events = this.eventService.getEvents();
-    this.dates = this.eventService.getDates();
+    this.schedules = this.eventService.getSchedule();
     this.event_type = "all";
   }
 
