@@ -56,9 +56,9 @@ export class CreateEventPage {
   }
 
   ionViewWillEnter() {
-    // this.res = this.navParams.get('restaurant') || undefined;
+    this.res = this.navParams.get('restaurant') || undefined;
     this.checkedGroup = this.navParams.get('group') || undefined;
-    console.log(this.navParams.get('group'))
+    console.log(this.checkedGroup)
 }
 
   ionViewDidLoad() {
