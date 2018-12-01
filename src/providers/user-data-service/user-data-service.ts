@@ -70,7 +70,19 @@ export class UserDataServiceProvider {
 	public getUsers(): User[] {
 	    let usersClone = JSON.parse(JSON.stringify(this.users)); // clone another entries to entriesClone
 	    return usersClone;
-  	}
+		}
+		
+	public getUserById(userId: number): User {
+		for (let i = 0; i < this.users.length; i ++){
+			if (this.users[i].id == userId){
+				let userClone: User = JSON.parse(JSON.stringify(this.users[i]));
+				return userClone;
+			}
+		}
+
+	}
+
+
   	public getGroups(): Group[] {
 	    let usersClone = JSON.parse(JSON.stringify(this.groups)); // clone another entries to entriesClone
 	    return usersClone;
