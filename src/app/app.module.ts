@@ -24,6 +24,8 @@ import { RestaurantSelectionPage } from '../pages/restaurant-selection/restauran
 
 import { Geolocation } from '@ionic-native/geolocation';
 
+import { InvitegroupPage } from '../pages/invitegroup/invitegroup';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -37,7 +39,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     RestaurantDetailPage,
     RestaurantSelectionPage,
     TabsPage,
-    OrderByPipe
+    OrderByPipe,
+    InvitegroupPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     CreateEventPage,
     RestaurantDetailPage,
     RestaurantSelectionPage,
-    TabsPage
+    TabsPage,
+    InvitegroupPage
   ],
   providers: [
     Geolocation,
