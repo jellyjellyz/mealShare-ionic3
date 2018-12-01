@@ -15,7 +15,9 @@
 
 <ion-content padding>
 <ion-item-group *ngFor="let group of groups">
+  <ion-list radio-group [(ngModel)]="relationship">
         <ion-item no-padding (click)="jump()">
+        	  <ion-radio value="friends" ></ion-radio>
           <ion-thumbnail item-start>
             <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
               <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]].img}} data-user-initial="J"></div>
@@ -32,5 +34,6 @@
           <p>You're not turning me into a Mashed Potato.</p>
           <ion-note item-end>5:47 am</ion-note>
         </ion-item>
+        </ion-list>
       </ion-item-group>
 </ion-content>
