@@ -56,6 +56,7 @@ export class InvitegroupPage {
 
 	console.log("in save group page");
 	this.navCtrl.getPrevious().data.group = this.groups.find((ele) => { return ele["groupId"] == this.checkedGroupId});
+
 	console.log(this.navCtrl.getPrevious().data);
 	this.navCtrl.pop();
    
