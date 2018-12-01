@@ -22,7 +22,8 @@ export class InvitegroupPage {
   private groups: Group[] = [];
   private segment: string;
   private hide: boolean;
-  private checkedRestaurantId: string;
+  private checkedGroupId: string;
+   private checkedGroup: Group;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private userService: UserDataServiceProvider) {
@@ -45,11 +46,16 @@ export class InvitegroupPage {
 
 
  private checkCardIsunSelected(id: string) {
-    if (this.checkedRestaurantId !== undefined && id !== this.checkedRestaurantId) {
+    if (this.checkedGroupId !== undefined && id !== this.checkedGroupId) {
       return true;
     }
     return false;
   }
 
-  
+    private saveGroup() {
+    this.checkedgroup = this.groups.find((ele) => { return ele["groupId"] == this.checkedGroupId});
+    console.log(this.checkedgroup);
+    this.navCtrl.getPrevious().data.group = this.checkedGroup;
+    this.navCtrl.pop();
+  }
 }

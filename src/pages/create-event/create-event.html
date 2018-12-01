@@ -70,7 +70,7 @@
 
     <button ion-item (click)="toInviteGroup()">
       Invite Friends
-      <ion-badge item-end>0</ion-badge>
+      <ion-badge item-end>{{ group.groupId }}</ion-badge>
     </button>
 
     <button ion-button block class="form-action-button" (click)="addEvent()">Post!</button>

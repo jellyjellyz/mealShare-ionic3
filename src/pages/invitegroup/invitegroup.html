@@ -16,14 +16,14 @@
 <ion-content padding>
 
   <ion-item no-lines>
-    <button [disabled]="checkedRestaurantId === undefined" 
-     (click)="saveRestaurant()"
-     round ion-button color="primary" full>Save my Choice</button>
+    <button [disabled]="checkedGroupId === undefined" 
+     (click)="saveGroup()"
+     round ion-button color="primary" full>Confirm The Groups</button>
   </ion-item>
 
 
       <ion-item-group *ngFor="let group of groups">
-        <ion-item no-padding (click)="jump()"  radio-group [(ngModel)]="checkedRestaurantId">
+        <ion-item no-padding (click)="jump()"  radio-group [(ngModel)]="checkedGroupId">
           <ion-radio id="res-title" class="radio-btn" item-start color="primary" value="{{ group.groupId }}"></ion-radio>
 
           <ion-thumbnail item-start>
