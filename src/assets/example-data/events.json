@@ -1,5 +1,6 @@
 {
-    "events": [
+    "events": 
+    [
         {
             "title": "Mexican Food",
             "description": "Hola! we are newcomers from Sales department. If you want to meet new friends and taste mexican food, join this group!!!",
@@ -34,9 +35,9 @@
             "start_time": 1543453346630,
             "end_time": "",
             "restaurant": "",
-            "coming_people_ids": [2,3],
-            "pending_people_ids": [],
-            "host_id": 1,
+            "coming_people_ids": [],
+            "pending_people_ids": [1],
+            "host_id": 3,
             "image_url": "assets/imgs/ramen.jpg"
           }, 
           {
