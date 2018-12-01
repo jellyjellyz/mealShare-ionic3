@@ -27,7 +27,12 @@ export class UserDataServiceProvider {
 	      this.serviceObserver = observerThatWasCreated;
 	    });
 
-	    // retrieve data from firebase
+	    // retreive data from firebase
+	    this.getFirebaseUserData();
+	    this.getFirebaseGroupData();
+
+  	}
+  	public getFirebaseUserData() {
 	  	let usersRef = this.db.ref('/users2');		
 	  	usersRef.on('value', snapshot => {
     		this.users = []; //start with a blank list
@@ -45,7 +50,9 @@ export class UserDataServiceProvider {
       		});
       		this.notifySubscribers();
 	    });
-	    let groupsRef = this.db.ref('/groups');	
+  	}
+  	public getFirebaseGroupData() {
+  		let groupsRef = this.db.ref('/groups');	
 	  	groupsRef.on('value', snapshot => {
     		this.groups = []; //start with a blank list
     		snapshot.forEach(childSnapshot => {
@@ -59,7 +66,6 @@ export class UserDataServiceProvider {
 	        // notify subscriber in home page to sync the update
 	    	this.notifySubscribers();
 	 	});
-
   	}
   	public getObservable(): Observable<any[]> {
     	return this.clientObservable;

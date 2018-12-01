@@ -3,7 +3,9 @@ import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import firebase from 'firebase';
 import { Event } from '../../models/event'; 
-
+import { User } from '../../models/user'; 
+import { UserDataServiceProvider } from '../user-data-service/user-data-service';
+import { EventDataServiceProvider } from '../event-data-service/event-data-service';
 /*
   Generated class for the MessageDataServiceProvider provider.
 
@@ -13,13 +15,15 @@ import { Event } from '../../models/event';
 @Injectable()
 export class MessageDataServiceProvider {
   	private events: Event[] = [];
+  	private users: User[] = [];
   	private db: any;
 	// private users: User[] = [];
 	// private groups: Group[] = [];
 	private serviceObserver: Observer<any[]>;
 	private clientObservable: Observable<any[]>;
 	// private nextID: number = 0;
-	constructor() {
+	constructor(private userService: UserDataServiceProvider,
+				private eventService: EventDataServiceProvider) {
 		this.db = firebase.database();
 
 	    // create observer and observable
@@ -27,30 +31,15 @@ export class MessageDataServiceProvider {
 	      this.serviceObserver = observerThatWasCreated;
 	    });
 
-	    // retrieve data from firebase
-	  	let usersRef = this.db.ref('/events');		
-	  	usersRef.on('value', snapshot => {
-    		this.events = []; //start with a blank list
-    		snapshot.forEach(childSnapshot => {
-	          	let event: Event = {
-					key: childSnapshot.key,
-					title: childSnapshot.val().title,
-					description: childSnapshot.val().description,
-					post_date: childSnapshot.val().post_date,
-					meet_date: childSnapshot.val().meet_date,
-					start_time: childSnapshot.val().start_time,
-					end_time: childSnapshot.val().end_time,
-					restaurant: childSnapshot.val().restaurant,
-					coming_people_ids: childSnapshot.val().coming_people_ids,
-					pending_people_ids: childSnapshot.val().pending_people_ids,
-					host_id: childSnapshot.val().host_id,
-					image_url: childSnapshot.val().image_url
-        		};
-	      		this.events.push(event);	 
-      		});
-      		console.log(this.events);
-      		this.notifySubscribers();
-	    });
+	    // retreive events and users data from firebase
+	   	this.eventService.getObservable().subscribe(update => {
+      		this.events = eventService.getEvents();
+  		});
+	  	this.userService.getObservable().subscribe(update => {
+      		this.users = userService.getUsers();
+  		});
+
+
 	}
 
 	// 1: request to join (host)
