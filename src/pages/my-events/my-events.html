@@ -30,62 +30,58 @@
     </ion-segment-button>
   </ion-segment>
 
+  <div class="eventDiv">
+    <!-- for each day there's a list -->
+    <ion-list *ngFor="let schedule of schedules">
+        <ion-list-header no-lines class="list_header"> {{schedule.date | date: 'fullDate'}} </ion-list-header>
+      
+        <!-- for each event happening in one day -->
+        <ion-card *ngFor="let event of schedule.events">
 
-  <!-- for each day there's a list -->
-  <ion-list *ngFor="let schedule of schedules">
-      <ion-list-header no-lines class="list_header"> {{schedule.date | date: 'fullDate'}} </ion-list-header>
-    
-      <!-- for each event happening in one day -->
-      <ion-item *ngFor="let event of schedule.events">
-
-          <!-- for text info per event -->
-          <ion-item no-lines>
-            <h2 class="event_title">{{event.title}}</h2>
-            <!-- <p>11h ago</p> -->
-            <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
-          </ion-item>
-
-
-          <ion-item no-lines>
-            
-            <ion-avatar item-start><!-- will have *ngfor="let participantId of schedule.event.coming_people_ids" -->
-              <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
-            </ion-avatar>
-
-            <ion-avatar item-start>
-              <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
-            </ion-avatar>
-
-            <ion-avatar item-start>
-              <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
-            </ion-avatar>
-
-            <p style="display: inline-block; padding-top: 20px">+5</p>
+            <!-- for text info per event -->
+            <ion-item no-lines>
+              <h2 class="event_title">{{event.title}}</h2>
+              <!-- <p>11h ago</p> -->
+              <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
+            </ion-item>
 
 
-            <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px; padding-left: 60px;">
-              <ion-icon name="star-outline"></ion-icon>
-              <div>STAR</div>
-            </button>
+            <ion-item no-lines>
+              
+              <ion-avatar item-start><!-- will have *ngfor="let participantId of schedule.event.coming_people_ids" -->
+                <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
+              </ion-avatar>
 
-            <button ion-button icon-end clear small style=" margin-top: 0; padding-bottom: 12px">
-              <ion-icon name="ice-cream-outline"></ion-icon>
-              <div>JOIN</div>
-            </button>
+              <ion-avatar item-start>
+                <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
+              </ion-avatar>
 
-          </ion-item>
+              <ion-avatar item-start>
+                <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
+              </ion-avatar>
 
+              <p class="moreNum">+5</p>
 
-      </ion-item>
+              <button ion-button clear small class="eventCardButton" >
+                  <ion-icon name="ice-cream-outline"></ion-icon>
+                  <div>JOIN</div>
+              </button>
+              
+              <button ion-button clear small class="eventCardButton">
+                <ion-icon name="star-outline"></ion-icon>
+                <div>STAR</div>
+              </button>
 
+              
 
-
-  </ion-list>
+            </ion-item>
+        </ion-card>
+    </ion-list>
+  </div>
 
 
 
 
-  <!-- ********************************************************************************************************************* -->
 
   <ion-fab bottom right edge class="addnew" (click)=createEvent()>
     <button ion-fab mini side="top">
