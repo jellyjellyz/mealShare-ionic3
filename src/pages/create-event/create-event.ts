@@ -21,6 +21,8 @@ import { RestaurantSelectionPage } from '../restaurant-selection/restaurant-sele
 export class CreateEventPage {
 
   private event: Event = new Event();
+  private res: Restaurant;
+
   constructor(private navCtrl: NavController, private navParams: NavParams,
     private eventDataService: EventDataServiceProvider) {
 
@@ -50,6 +52,10 @@ export class CreateEventPage {
     };
 
   }
+
+  ionViewWillEnter() {
+    this.res = this.navParams.get('restaurant') || undefined;
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateEventPage');

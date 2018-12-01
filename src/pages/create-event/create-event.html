@@ -15,7 +15,6 @@
 
 <ion-content padding>
   <ion-card>
-
     <ion-item>
       <ion-input type="text" placeholder="Title: e.g. Chinese Food" [(ngModel)]="event.title"></ion-input>
     </ion-item>
@@ -28,13 +27,6 @@
     <ion-item>
       <ion-textarea [(ngModel)]="event.description" rows="3" placeholder="Write a description or something..."></ion-textarea>
     </ion-item>
-    <button ion-item (click)="toSelectRestaurant()">
-      Select Restaurant
-    </button>
-    <button ion-item>
-      Invite Friends
-      <ion-badge item-end>0</ion-badge>
-    </button>
 
     <ion-item>
       <ion-label>Meeting date:</ion-label>
@@ -52,6 +44,34 @@
       <ion-label>TO</ion-label>
       <ion-datetime [(ngModel)]="event.end_time" placeholder="9 00 pm" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
     </ion-item>
+
+    <button ion-item (click)="toSelectRestaurant()">
+      Select Restaurant
+    </button>
+
+    <ion-card *ngIf="res" class="inner-card">
+      <ion-item>
+        <ion-label class="res-title"><b>{{ res.name }}</b></ion-label>
+      </ion-item>
+
+      <ion-card-content>
+        <img data-src="{{res.image_url}}" class="restaurant-preview-img">
+        <div class="description">
+          <h2>Category: {{ res.categories }}</h2>
+          <p>{{ res.location }}</p>
+          <p>price: {{ res.price }}, distance: {{ res.distance }}mi</p>
+        </div>
+      </ion-card-content>
+
+
+    </ion-card>
+
+
+
+    <button ion-item>
+      Invite Friends
+      <ion-badge item-end>0</ion-badge>
+    </button>
 
     <button ion-button block class="form-action-button" (click)="addEvent()">Post!</button>
 

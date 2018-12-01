@@ -1,4 +1,8 @@
 page-restaurant-selection {
+    .res-title {
+        color: map-get($colors, primary);
+    }
+
     .restaurant-preview-img {
         width: 100px;
         display: inline-block;
@@ -12,10 +16,28 @@ page-restaurant-selection {
         float: left;
         width: calc(100% - 100px);
         height: calc(100% - 100px);
+    }
+
+    .next-button {
+        width: 100%;
+        margin: 0;
+    }
+
+    .radio-btn {
+        border: 2px solid map-get($colors, primary);
+        border-radius: 3px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .unselect-card * {
+        color: rgb(150, 150, 150);
         .next-button {
-            float: right;
-            margin: 0;
-            font-size: 2em;
+            border: 1px solid rgb(150, 150, 150);
+        }
+        .radio-btn {
+            border: 2px solid grey;
+            background-color: #f1f1f1;
         }
     }
 

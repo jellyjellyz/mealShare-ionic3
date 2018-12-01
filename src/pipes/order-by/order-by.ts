@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Event } from '../../models/event';
+import { Restaurant } from '../../models/restaurtant';
 
 /**
  * Generated class for the OrderByPipe pipe.
@@ -27,6 +28,14 @@ export class OrderByPipe implements PipeTransform {
     return 0;
   }
 
+  compare3(a: Restaurant , b: Restaurant) {
+    if (a.distance > b.distance)
+      return 1;
+    if (a.distance < b.distance)
+      return -1;
+    return 0;
+  }
+
   transform(input: Array<any>, args: string) : Array<any> {
     if (args == 'post_date') {
       return input.sort(this.compare1);
@@ -34,6 +43,10 @@ export class OrderByPipe implements PipeTransform {
     if (args == 'meet_date') {
       return input.sort(this.compare2);
     }
+    if (args == 'distance') {
+      return input.sort(this.compare3);
+    }
+
     console.log(args);
     
   }

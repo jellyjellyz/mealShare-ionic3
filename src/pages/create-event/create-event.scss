@@ -37,4 +37,26 @@ page-create-event {
     .time-select {
         font-size: 0.9em;
     }
+
+    .restaurant-preview-img {
+        width: 100px;
+        display: inline-block;
+        float: left;
+        padding-bottom: 15px;
+    }
+    
+
+    .description {
+        padding: 10px;
+        float: left;
+        width: calc(100% - 100px);
+        height: calc(100% - 100px);
+    }
+
+    .inner-card {
+        border-top: 3px solid map-get($colors, light);
+        border-bottom: 3px solid map-get($colors, light);
+        width: 100%;
+        margin: 0;
+    }
 }

@@ -15,11 +15,18 @@
 
 <ion-content padding>
 
+  <ion-item no-lines>
+    <button [disabled]="checkedRestaurantId === undefined" 
+     (click)="saveRestaurant()"
+     round ion-button color="primary" full>Save my Choice</button>
+  </ion-item>
+
   <div *ngIf="restaurants != undefined">
-    <ion-card *ngFor="let res of restaurants">
+    <ion-card [class.unselect-card]="checkCardIsunSelected(res.id)" radio-group [(ngModel)]="checkedRestaurantId"
+      *ngFor="let res of restaurants  | orderBy: 'distance'">
       <ion-item>
-        <ion-label><b>{{ res.name }}</b></ion-label>
-        <ion-checkbox item-start color="danger" checked="false"></ion-checkbox>
+        <ion-label for="res-title" class="res-title"><b>{{ res.name }}</b></ion-label>
+        <ion-radio id="res-title" class="radio-btn" item-start color="primary" value="{{ res.id }}"></ion-radio>
 
       </ion-item>
       <ion-card-content>
@@ -28,8 +35,10 @@
           <h2>Category: {{ res.categories }}</h2>
           <p>{{ res.location }}</p>
           <p>price: {{ res.price }}, distance: {{ res.distance }}mi</p>
-          <ion-icon name="arrow-dropright" class="next-button" item-right (click)="redirect(res.url)"></ion-icon>
         </div>
+        <button (click)="redirect(res.url)" color="primary" round outline ion-button small class="next-button">
+            View in Yelp
+        </button>
       </ion-card-content>
     </ion-card>
   </div>
