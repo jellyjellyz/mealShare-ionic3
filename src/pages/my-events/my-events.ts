@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CreateEventPage } from '../create-event/create-event';
-import {Event} from '../../models/event';
-import {EventDataServiceProvider} from '../../providers/event-data-service/event-data-service';
-import {UserDataServiceProvider} from '../../providers/user-data-service/user-data-service';
+import { MessagePage } from '../message/message';
+import { Event } from '../../models/event';
+import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
+import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
 
 @IonicPage()
 @Component({
@@ -43,6 +44,10 @@ export class MyEventsPage {
 
   private createEvent() {
     this.navCtrl.push(CreateEventPage);
+  }
+
+  private joinEvent(event: Event) {
+    this.navCtrl.push(MessagePage,{"event": event});
   }
 
 

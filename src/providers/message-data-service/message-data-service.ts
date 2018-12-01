@@ -43,11 +43,10 @@ export class MessageDataServiceProvider {
 	}
 
 	// 1: request to join (host)
+	// -- press "join", push event to message.ts, get  
 	// 2: accept invite (host)
 	// 3: reject invite (host)
 	// 4: receive invite (participant)	
-
-	
 	public getObservable(): Observable<any[]> {
     	return this.clientObservable;
   	}	

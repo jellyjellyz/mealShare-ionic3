@@ -58,6 +58,7 @@ export class UserDataServiceProvider {
     		snapshot.forEach(childSnapshot => {
 	          	let group: Group = { 
 	  	          groupId: childSnapshot.val().groupId,
+	  	          groupName: childSnapshot.val().groupName,
 	  	          userIds: childSnapshot.val().userIds
 	  	        };
 	  	        console.log(group);

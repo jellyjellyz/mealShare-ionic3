@@ -23,7 +23,7 @@
             "end_time": "",
             "restaurant": "",
             "coming_people_ids": [1],
-            "pending_people_ids": [],
+            "pending_people_ids": [4],
             "host_id": 2,
             "image_url": "assets/imgs/pizzahouse.jpg"
           },
@@ -35,7 +35,7 @@
             "start_time": 1543453346630,
             "end_time": "",
             "restaurant": "",
-            "coming_people_ids": [],
+            "coming_people_ids": [5],
             "pending_people_ids": [1],
             "host_id": 3,
             "image_url": "assets/imgs/ramen.jpg"
@@ -49,7 +49,7 @@
             "end_time": "",
             "restaurant": "",
             "coming_people_ids": [2,3],
-            "pending_people_ids": [],
+            "pending_people_ids": [4],
             "host_id": 1,
             "image_url": "assets/imgs/salad.png"
     
