@@ -23,6 +23,7 @@ export class CreateEventPage {
 
   private event: Event = new Event();
   private res: Restaurant;
+  private checkedGroup: Group;
 
   constructor(private navCtrl: NavController, private navParams: NavParams,
     private eventDataService: EventDataServiceProvider) {
@@ -56,6 +57,8 @@ export class CreateEventPage {
 
   ionViewWillEnter() {
     this.res = this.navParams.get('restaurant') || undefined;
+    this.checkedGroup = this.navParams.get('group') || undefined;
+    console.log(this.checkedGroup)
 }
 
   ionViewDidLoad() {

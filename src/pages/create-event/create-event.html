@@ -73,6 +73,24 @@
       <ion-badge item-end>0</ion-badge>
     </button>
 
+    <ion-card *ngIf="checkedGroup" class="inner-card">
+      <ion-item>
+        <ion-label class="res-title"><b>{{ checkedGroup.GroupId }}</b></ion-label>
+      </ion-item>
+
+      <ion-card-content>
+
+        <div class="description">
+          <h2>Group Selected</h2>
+          
+          <p>Total People:{{checkedGroup.userIds.length}}</p>
+
+        </div>
+      </ion-card-content>
+
+
+    </ion-card>
+
     <button ion-button block class="form-action-button" (click)="addEvent()">Post!</button>
 
   </ion-card>
