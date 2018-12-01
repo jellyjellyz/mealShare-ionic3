@@ -5,6 +5,7 @@ import { Restaurant } from '../../models/restaurtant';
 import { AllEventsPage } from '../all-events/all-events';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
 import { RestaurantSelectionPage } from '../restaurant-selection/restaurant-selection';
+import { InvitegroupPage } from '../invitegroup/invitegroup';
 
 /**
  * Generated class for the CreateEventPage page.
@@ -72,5 +73,10 @@ export class CreateEventPage {
   private toSelectRestaurant() {
     this.navCtrl.push(RestaurantSelectionPage);
   }
+
+   private toInviteGroup() {
+    this.navCtrl.push(InvitegroupPage);
+  }
+
 
 }

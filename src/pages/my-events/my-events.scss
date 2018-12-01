@@ -44,4 +44,21 @@ page-my-events {
     ion-app.ios [padding] .scroll-content {
         padding: 0px;
     }
+
+
+    button.eventCardButton{
+        float: right;
+        padding-top: 6px
+    }
+
+
+
+    div.eventDiv{
+        margin-top: 25px;
+    }
+
+    p.moreNum{
+        display: inline-block; 
+        padding-top: 9px
+    }
 }

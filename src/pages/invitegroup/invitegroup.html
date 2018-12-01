@@ -14,5 +14,23 @@
 
 
 <ion-content padding>
+<ion-item-group *ngFor="let group of groups">
+        <ion-item no-padding (click)="jump()">
+          <ion-thumbnail item-start>
+            <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
+              <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]].img}} data-user-initial="J"></div>
 
+              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[1]].img}} data-user-initial="P"></div>
+
+              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="B"></div>
+              
+              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src=""
+                  data-user-initial="B"></div>
+            </div>
+          </ion-thumbnail>
+          <h2>{{users[group.userIds[0]].name}}, {{users[group.userIds[1]].name}}</h2>
+          <p>You're not turning me into a Mashed Potato.</p>
+          <ion-note item-end>5:47 am</ion-note>
+        </ion-item>
+      </ion-item-group>
 </ion-content>

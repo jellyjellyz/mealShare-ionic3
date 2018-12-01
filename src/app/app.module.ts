@@ -25,6 +25,8 @@ import { RestaurantSelectionPage } from '../pages/restaurant-selection/restauran
 import { Geolocation } from '@ionic-native/geolocation';
 import { MessageDataServiceProvider } from '../providers/message-data-service/message-data-service';
 
+import { InvitegroupPage } from '../pages/invitegroup/invitegroup';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -38,7 +40,8 @@ import { MessageDataServiceProvider } from '../providers/message-data-service/me
     RestaurantDetailPage,
     RestaurantSelectionPage,
     TabsPage,
-    OrderByPipe
+    OrderByPipe,
+    InvitegroupPage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ import { MessageDataServiceProvider } from '../providers/message-data-service/me
     CreateEventPage,
     RestaurantDetailPage,
     RestaurantSelectionPage,
-    TabsPage
+    TabsPage,
+    InvitegroupPage
   ],
   providers: [
     Geolocation,
