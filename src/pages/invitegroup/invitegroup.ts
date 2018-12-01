@@ -54,16 +54,10 @@ export class InvitegroupPage {
 
   private saveGroup() {
 
-    // console.log("in save group page");
-    // this.navCtrl.getPrevious().data.group = this.groups.find((ele) => { return ele["groupId"] === Number(this.checkedGroupId) });
-    // console.log(this.navCtrl.getPrevious().data);
-    // this.navCtrl.pop();
+    console.log("in save group page");
+    this.navCtrl.getPrevious().data.group = this.groups.find((ele) => { return ele["groupId"] === Number(this.checkedGroupId) });
+    console.log(this.navCtrl.getPrevious().data);
+    this.navCtrl.pop();
 
-	console.log("in save group page");
-	this.navCtrl.getPrevious().data.group = this.groups.find((ele) => { return ele["groupId"] == this.checkedGroupId});
-
-	console.log(this.navCtrl.getPrevious().data);
-	this.navCtrl.pop();
-   
   }
 }
