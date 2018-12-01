@@ -14,7 +14,11 @@
 
 
 <ion-content padding>
-<ion-item-group *ngFor="let group of groups">
+
+
+
+
+      <ion-item-group *ngFor="let group of groups">
         <ion-item no-padding (click)="jump()">
           <ion-thumbnail item-start>
             <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
@@ -33,4 +37,11 @@
           <ion-note item-end>5:47 am</ion-note>
         </ion-item>
       </ion-item-group>
+
+
+
+
+
+
+  <button ion-button>Save Group</button>
 </ion-content>

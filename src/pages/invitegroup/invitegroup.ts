@@ -22,6 +22,7 @@ export class InvitegroupPage {
   private groups: Group[] = [];
   private segment: string;
   private hide: boolean;
+  private checkedRestaurantId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private userService: UserDataServiceProvider) {
@@ -42,4 +43,13 @@ export class InvitegroupPage {
     
   }
 
+
+ private checkCardIsunSelected(id: string) {
+    if (this.checkedRestaurantId !== undefined && id !== this.checkedRestaurantId) {
+      return true;
+    }
+    return false;
+  }
+
+  
 }
