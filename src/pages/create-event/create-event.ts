@@ -6,6 +6,7 @@ import { AllEventsPage } from '../all-events/all-events';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
 import { RestaurantSelectionPage } from '../restaurant-selection/restaurant-selection';
 import { InvitegroupPage } from '../invitegroup/invitegroup';
+import { Group } from '../../models/group';
 
 /**
  * Generated class for the CreateEventPage page.
@@ -49,14 +50,14 @@ export class CreateEventPage {
         coming_people_ids: [2, 3, 4],
         pending_people_ids: [6, 10],
         host_id: 2,
-        image_url: "assets/imgs/card-portland.png"
+        image_url: ""
       };
     };
 
   }
 
   ionViewWillEnter() {
-    // this.res = this.navParams.get('restaurant') || undefined;
+    this.res = this.navParams.get('restaurant') || undefined;
     this.checkedGroup = this.navParams.get('group') || undefined;
     console.log(this.navParams.get('group'))
 }
@@ -69,6 +70,8 @@ export class CreateEventPage {
 
     // console.log(this.event.meet_date);
     console.log(this.event.start_time);
+    this.event.restaurant = this.res;
+    this.event.image_url = this.res.image_url;
     this.eventDataService.addEvent(this.event);
     this.navCtrl.push(AllEventsPage);
   }

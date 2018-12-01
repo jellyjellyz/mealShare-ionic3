@@ -23,41 +23,41 @@ export class InvitegroupPage {
   private segment: string;
   private hide: boolean;
   private checkedGroupId: string;
-   private checkedGroup: Group;
+  private checkedGroup: Group;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private userService: UserDataServiceProvider) {
 
-  	this.userService.getObservable().subscribe(update => {
+    this.userService.getObservable().subscribe(update => {
       this.users = userService.getUsers();
       this.groups = userService.getGroups();
     })
     this.users = userService.getUsers();
     this.groups = userService.getGroups();
     console.log(this.groups);
-  	this.segment = "all";
-  	this.hide = true;
+    this.segment = "all";
+    this.hide = true;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AllEventsPage');
-    
+
   }
 
 
- private checkCardIsunSelected(id: string) {
-    if (this.checkedGroupId !== undefined && id !== this.checkedGroupId) {
-      return true;
-    }
+  private checkCardIsunSelected(id: string) {
+    // if (this.checkedGroupId !== undefined && id !== this.checkedGroupId) {
+    //   return true;
+    // }
     return false;
   }
 
-    private saveGroup() {
+  private saveGroup() {
 
-	console.log("in save group page");
-	this.navCtrl.getPrevious().data.group = this.groups.find((ele) => { return ele["groupId"] == this.checkedGroupId});
-	console.log(this.navCtrl.getPrevious().data);
-	this.navCtrl.pop();
-   
+    // console.log("in save group page");
+    // this.navCtrl.getPrevious().data.group = this.groups.find((ele) => { return ele["groupId"] === Number(this.checkedGroupId) });
+    // console.log(this.navCtrl.getPrevious().data);
+    // this.navCtrl.pop();
+
   }
 }
