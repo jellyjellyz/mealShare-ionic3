@@ -53,9 +53,11 @@ export class InvitegroupPage {
   }
 
     private saveGroup() {
-    this.checkedgroup = this.groups.find((ele) => { return ele["groupId"] == this.checkedGroupId});
-    console.log(this.checkedgroup);
-    this.navCtrl.getPrevious().data.group = this.checkedGroup;
-    this.navCtrl.pop();
+
+	console.log("in save group page");
+	this.navCtrl.getPrevious().data.group = this.groups.find((ele) => { return ele["groupId"] == this.checkedGroupId});
+	console.log(this.navCtrl.getPrevious().data);
+	this.navCtrl.pop();
+   
   }
 }

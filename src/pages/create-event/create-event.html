@@ -70,8 +70,25 @@
 
     <button ion-item (click)="toInviteGroup()">
       Invite Friends
-      <ion-badge item-end>{{ group.groupId }}</ion-badge>
+      <ion-badge item-end>0</ion-badge>
     </button>
+
+    <ion-card *ngIf="checkedGroup" class="inner-card">
+      <ion-item>
+        <ion-label class="res-title"><b>{{ checkedGroup.GroupId }}</b></ion-label>
+      </ion-item>
+
+      <ion-card-content>
+
+        <div class="description">
+          
+          <p>My Group </p>
+
+        </div>
+      </ion-card-content>
+
+
+    </ion-card>
 
     <button ion-button block class="form-action-button" (click)="addEvent()">Post!</button>
 
