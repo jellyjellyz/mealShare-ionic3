@@ -22,6 +22,7 @@ import { OrderByPipe } from '../pipes/order-by/order-by';
 import { UserDataServiceProvider } from '../providers/user-data-service/user-data-service';
 import { RestaurantSelectionPage } from '../pages/restaurant-selection/restaurant-selection';
 
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { RestaurantSelectionPage } from '../pages/restaurant-selection/restauran
     TabsPage
   ],
   providers: [
+    Geolocation,
     InAppBrowser,
     StatusBar,
     SplashScreen,

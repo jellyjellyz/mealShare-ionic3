@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { Restaurant } from '../../models/restaurtant';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
+import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation';
 import 'rxjs/add/operator/map';
 
 /**
@@ -24,22 +25,32 @@ export class RestaurantSelectionPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private http: Http, public loadingCtrl: LoadingController,
-              private inAppBrowser: InAppBrowser) {
+              private inAppBrowser: InAppBrowser, private geolocation: Geolocation) {
     this.loading = this.loadingCtrl.create();
   }
 
   ionViewDidLoad() {
     this.loading.present();
     let headers = new Headers();
+    const requestOptions = new RequestOptions({ headers: headers });
+
+    let geoOptions = {
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 0
+    };
+    this.geolocation.getCurrentPosition(geoOptions).then((resp) => {
+      let lat = resp.coords.latitude;
+      let lon = resp.coords.longitude;
+
     headers.append("Access-Control-Allow-Origin", "*");
     headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
     headers.append("Authorization", 'Bearer W7x7s2mi6B6Aik_gXboxmBxo-mMuT7fT_tOa_-pzBPUpl81dxhvweTHzqcy3gMBBpKGUk7EDJ6_Qug9Z_DdqyYRQ1FWLFZAH9_wJuatDDX89dIn1AdpvJEVK-Dt0W3Yx');
     headers.append('Accept', 'application/json');
     headers.append('content-type', 'application/json');
 
-    const requestOptions = new RequestOptions({ headers: headers });
-
-    this.http.get('/api.yelp.com/v3/businesses/search?term=chipotle&latitude=42.299637&longitude=-83.709518', requestOptions)
+    
+    this.http.get(`/api.yelp.com/v3/businesses/search?latitude=${lat}&longitude=${lon}`, requestOptions)
       .map(res => res.json())
       .subscribe(data => {
         let rests = data['businesses'];
@@ -63,6 +74,11 @@ export class RestaurantSelectionPage {
       }, err => {
         console.log(JSON.stringify(err));
       });
+
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+    
     console.log('ionViewDidLoad SelectionPage');
 
   }
