@@ -23,6 +23,7 @@ import { UserDataServiceProvider } from '../providers/user-data-service/user-dat
 import { RestaurantSelectionPage } from '../pages/restaurant-selection/restaurant-selection';
 
 import { Geolocation } from '@ionic-native/geolocation';
+import { MessageDataServiceProvider } from '../providers/message-data-service/message-data-service';
 
 import { InvitegroupPage } from '../pages/invitegroup/invitegroup';
 
@@ -75,7 +76,8 @@ import { InvitegroupPage } from '../pages/invitegroup/invitegroup';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     EventDataServiceProvider,
-    UserDataServiceProvider
+    UserDataServiceProvider,
+    MessageDataServiceProvider
   ]
 })
 export class AppModule { }
