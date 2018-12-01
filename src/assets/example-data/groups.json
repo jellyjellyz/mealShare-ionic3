@@ -3,14 +3,17 @@
 		[
 		{
 			"groupId": 1,
+			"groupName": "Crazy Rich Asians",
 			"userIds": [1,2,3]
 		},
 		{
 			"groupId": 2,
+			"groupName": "Sassy Latinos",
 			"userIds": [1,2,4]
 		},
 		{
 			"groupId": 3,
+			"groupName": "Black Lives Matter",
 			"userIds": [1,2,5]
 		}
 	]
