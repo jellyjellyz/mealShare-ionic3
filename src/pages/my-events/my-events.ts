@@ -36,6 +36,7 @@ export class MyEventsPage {
 
       this.events = this.eventService.getEvents();
       this.schedules = this.eventService.getSchedule();
+      console.log(this.schedules)
       this.event_type = "all";
     }
 

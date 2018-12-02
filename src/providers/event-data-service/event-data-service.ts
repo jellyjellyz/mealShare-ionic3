@@ -47,7 +47,8 @@ export class EventDataServiceProvider {
           coming_people_ids: childSnapshot.val().coming_people_ids,
           pending_people_ids: childSnapshot.val().pending_people_ids,
           host_id: childSnapshot.val().host_id,
-          image_url: childSnapshot.val().image_url
+          image_url: childSnapshot.val().image_url,
+          saved_people_ids: childSnapshot.val().saved_people_ids,
         };
         this.events.push(event);
         console.log(this.events);
@@ -85,7 +86,8 @@ export class EventDataServiceProvider {
         coming_people_ids: event.coming_people_ids,
         pending_people_ids: event.pending_people_ids,
         host_id: event.host_id,
-        image_url: event.image_url
+        image_url: event.image_url,
+        saved_people_ids: event.saved_people_ids
       }
       // console.log(itemRecord);
       itemRef.set(itemRecord);
@@ -117,7 +119,7 @@ export class EventDataServiceProvider {
         newSchedule['events'].push(this.events[i]);
 
         scheduleItems.push(newSchedule);
-      } else if (dateNums.indexOf(dateNum) > 1) { // if the sate exists, then push the event into the array
+      } else if (dateNums.indexOf(dateNum) > -1) { // if the sate exists, then push the event into the array
         for(let j = 0; j < scheduleItems.length; j ++){
           if(scheduleItems[j].date == dateNum){
             scheduleItems[j].events.push(this.events[i])

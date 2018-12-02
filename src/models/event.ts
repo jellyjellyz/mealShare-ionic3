@@ -13,5 +13,6 @@ export class Event {
     pending_people_ids: number[];
     host_id: number;
     image_url: string;
+    saved_people_ids: number[];
 }
 

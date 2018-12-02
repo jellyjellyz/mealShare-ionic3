@@ -50,7 +50,8 @@ export class CreateEventPage {
         coming_people_ids: [2, 3, 4],
         pending_people_ids: [6, 10],
         host_id: 2,
-        image_url: ""
+        image_url: "",
+        saved_people_ids:[]
       };
     };
 
