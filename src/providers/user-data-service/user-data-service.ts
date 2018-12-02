@@ -88,7 +88,6 @@ export class UserDataServiceProvider {
 
 	}
 
-
   	public getGroups(): Group[] {
 	    let usersClone = JSON.parse(JSON.stringify(this.groups)); // clone another entries to entriesClone
 	    return usersClone;

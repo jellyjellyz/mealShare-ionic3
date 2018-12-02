@@ -15,18 +15,19 @@ import { EventDataServiceProvider } from '../event-data-service/event-data-servi
   */
   @Injectable()
   export class MessageDataServiceProvider {
+  	private db: any;
  	private nextMessageID: number = 0;
   	private events: Event[] = [];
   	private users: User[] = [];
   	private messages: Message[] = [];
-  	private db: any;
+  	
   	// private users: User[] = [];
   	// private groups: Group[] = [];
   	private serviceObserver: Observer<any[]>;
   	private clientObservable: Observable<any[]>;
   	// private nextID: number = 0;
   	constructor(private userService: UserDataServiceProvider,
-  		private eventService: EventDataServiceProvider) {
+  				private eventService: EventDataServiceProvider) {
   		this.db = firebase.database();
 
   		// create observer and observable
@@ -72,8 +73,8 @@ import { EventDataServiceProvider } from '../event-data-service/event-data-servi
   	}
 
   	public getMessages(): Message[] {
-	    let usersClone = JSON.parse(JSON.stringify(this.messages)); // clone another entries to entriesClone
-	    return usersClone;
+	    let messagesClone = JSON.parse(JSON.stringify(this.messages)); // clone another entries to entriesClone
+	    return messagesClone;
   	}
 
   	// send message
@@ -88,6 +89,7 @@ import { EventDataServiceProvider } from '../event-data-service/event-data-servi
   			messageType: messageType
   		}
   		prefRef.set(dataRecord);
+  		this.notifySubscribers();
   	}
 
   	// receive message
@@ -103,24 +105,23 @@ import { EventDataServiceProvider } from '../event-data-service/event-data-servi
 	  	          receiverId: childSnapshot.val().receiverId,
 	  	          messageType: childSnapshot.val().messageType
 	  	        };
-	  	        console.log(1);
-	  	        console.log(message);
+	  	        // console.log(1);
+	  	        // console.log(message);
 	      		this.messages.push(message);	 
       		});
-      		console.log(2);
-      		console.log(this.messages);
-
+      		// this.notifySubscribers();
+      		// console.log(2);
+      		// console.log(this.messages);
 		});
-      	// this.notifySubscribers();
-      	console.log(3);
-	    console.log(this.messages);
+     //  	console.log(3);
+	    // console.log(this.messages);
 	    
   	}
 
   	// click message
 	// when user clicks a message, it will redirect to event detail page
-	private clickMessage() {
-	}
+	// private clickMessage() {
+	// }
 }
 
 

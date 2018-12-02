@@ -15,27 +15,17 @@
 
 <ion-content padding>
 	<ion-item-group no-padding>
-		<ion-item-divider class="notifications-divider"> 11/26/18 </ion-item-divider>
+		<ion-item-divider class="notifications-divider">11/26/18</ion-item-divider>
 		<ion-list *ngFor="let message of messages">
 			<ion-item no-padding class="notification-item">
 				<ion-avatar item-left>
-					<ion-img src={{users[message.senderId].img}}> </ion-img>
+					<ion-img src={{findSender(message.senderId).img}}> </ion-img>
 				</ion-avatar>
-				<h2 class="item-title">Princess</h2>
-				<p class="item-description">I request to join your Thanksgiving Dinner event.</p>
+				<h2 class="item-title">{{findSender(message.senderId).name}}</h2>
+				<!-- <p class="item-description">{{findEvent(message.eventId).title}}</p> -->
 				<ion-note class="item-time" item-right>10:10am</ion-note>
 			</ion-item>
-<!-- 		<ion-item no-padding class="notification-item">
-			<ion-avatar item-left>
-				<ion-img src="assets/imgs/avatar-ts-woody.png"> </ion-img>
-			</ion-avatar>
-			<h2 class="item-title">Woody</h2>
-			<p class="item-description">I request to join your Thanksgiving Dinner event.</p>
-			<ion-note class="item-time" item-right>10:10am</ion-note>
-		</ion-item> -->
 		</ion-list>
-
-
 		<ion-item-divider no-padding class="notifications-divider">11/25/18</ion-item-divider>
 
 	</ion-item-group>

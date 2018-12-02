@@ -182,7 +182,7 @@
                   <p class="moreNum" *ngIf="event.coming_people_ids.length > 3">+{{event.coming_people_ids.length - 3}}</p>
   
                   <ng-container *ngIf= "checkEventRelationshipToMe(event) !== 'host'">
-                      <button ion-button clear small class="eventCardButton" >
+                      <button ion-button clear small class="eventCardButton" (click)="joinEvent(event)">
                           <ion-icon name="ice-cream-outline"></ion-icon>
                           <div>JOIN</div>
                       </button>
