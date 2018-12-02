@@ -103,13 +103,18 @@ import { EventDataServiceProvider } from '../event-data-service/event-data-servi
 	  	          receiverId: childSnapshot.val().receiverId,
 	  	          messageType: childSnapshot.val().messageType
 	  	        };
+	  	        console.log(1);
 	  	        console.log(message);
 	      		this.messages.push(message);	 
       		});
+      		console.log(2);
+      		console.log(this.messages);
+
 		});
-      	this.notifySubscribers();
+      	// this.notifySubscribers();
+      	console.log(3);
 	    console.log(this.messages);
-	    console.log("haha");
+	    
   	}
 
   	// click message

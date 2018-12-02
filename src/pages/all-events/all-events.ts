@@ -20,27 +20,26 @@ import { OrderByPipe } from '../../pipes/order-by/order-by';
 export class AllEventsPage {
 
   // events: Array<Event> ;
-  events: any = [];
+  private events: any = [];
+  private showEvents: Event[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private eventService: EventDataServiceProvider) {
 
     this.eventService.getObservable().subscribe(update => {
       this.events = eventService.getEvents();
+      this.showEvents = this.events;
       // this.events.post_date = new Date().getTime();
     })
     this.events = eventService.getEvents();
-    // console.log(this.events.post_date);
+    this.showEvents = this.events;
+    // console.log(JSON.stringify(this.showEvents));
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AllEventsPage');
-    
   }
 
-  // getFakeEvents() {
-  //   return 
-  // }
 
   private todetail() {
     this.navCtrl.push(EventDetailPage);
@@ -54,6 +53,23 @@ export class AllEventsPage {
   // TODO
   private getUserName(host_id: number) {
     return "Marty McFly";
+  }
+
+  private getEvents(ev) {
+    // Reset items back to all of the items
+    this.showEvents = this.events;
+
+    // set val to the value of the ev target
+    var val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.showEvents = this.showEvents.filter((item) => {
+        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1 
+             || item.description .toLowerCase().indexOf(val.toLowerCase()) > -1
+        );
+      })
+    }
   }
 
   // // TO BE Deleted
@@ -116,7 +132,7 @@ export class AllEventsPage {
   //       image_url: "assets/imgs/salad.png"
 
   //     }
-      
+
   //   ]
   // }
 

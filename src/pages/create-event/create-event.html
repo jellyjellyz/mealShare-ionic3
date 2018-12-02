@@ -70,7 +70,7 @@
 
     <button ion-item (click)="toInviteGroup()">
       Invite Friends
-      <ion-badge item-end>0</ion-badge>
+   <!--    <ion-badge item-end>0</ion-badge> -->
     </button>
 
     <ion-card *ngIf="checkedGroup" class="inner-card">
@@ -81,7 +81,7 @@
       <ion-card-content>
 
         <div class="description">
-          <h2>Group Selected</h2>
+          <h2>Group Selected:{{checkedGroup.groupName}} </h2>
           
           <p>Total People:{{checkedGroup.userIds.length}}</p>
 

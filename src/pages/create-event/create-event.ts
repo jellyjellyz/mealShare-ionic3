@@ -50,7 +50,8 @@ export class CreateEventPage {
         coming_people_ids: [2, 3, 4],
         pending_people_ids: [6, 10],
         host_id: 2,
-        image_url: "assets/imgs/card-portland.png"
+        image_url: "",
+        saved_people_ids:[]
       };
     };
 
@@ -59,8 +60,8 @@ export class CreateEventPage {
   ionViewWillEnter() {
     this.res = this.navParams.get('restaurant') || undefined;
     this.checkedGroup = this.navParams.get('group') || undefined;
-    // console.log(this.checkedGroup)
-}
+
+  }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad CreateEventPage');
@@ -69,7 +70,10 @@ export class CreateEventPage {
   addEvent() {
 
     // console.log(this.event.meet_date);
-    // console.log(this.event.start_time);
+
+    console.log(this.event.start_time);
+    this.event.restaurant = this.res;
+    this.event.image_url = this.res.image_url;
     this.eventDataService.addEvent(this.event);
     this.navCtrl.push(AllEventsPage);
   }

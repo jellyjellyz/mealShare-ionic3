@@ -7,6 +7,7 @@ import { EventDataServiceProvider } from '../../providers/event-data-service/eve
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
 import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
 
+
 @IonicPage()
 @Component({
   selector: 'page-my-events',
@@ -23,8 +24,7 @@ export class MyEventsPage {
     public navParams: NavParams, 
     public eventService: EventDataServiceProvider,
     public userService: UserDataServiceProvider,
-    public messageService: MessageDataServiceProvider
-    ) {
+    public messageService: MessageDataServiceProvider) {
       this.eventService.getObservable().subscribe(update => {
         this.events = this.eventService.getEvents();
         this.schedules = this.eventService.getSchedule();
@@ -51,6 +51,25 @@ export class MyEventsPage {
 
   private joinEvent(event: Event) {
     this.messageService.sendMessage(event.key, this.myId, event.host_id, 1);
+  }
+
+  public getUserImgById(userId) {
+    if (this.userService.getUserById(userId) != undefined){
+      let userImg = this.userService.getUserById(userId).img;
+      // console.log(userImg);
+      return userImg;
+    }
+  }
+
+  public checkEventRelationshipToMe(event: Event): string{
+    if ( event.host_id == 1) { // if I(1) am the host
+        return "host";
+    } else if ( event.coming_people_ids.indexOf(1) > -1 ) { // if I(1) am in the list of going people
+        return "going";
+    } else if ( event.saved_people_ids.indexOf(1) > -1 ) { // if I(1) am in the list of  people who saved the event
+        return "saved";
+    }
+    
   }
 
 }

@@ -15,22 +15,22 @@
 
 <ion-content padding>
 
-  <ion-segment [(ngModel)]="event_type" color="primary" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="friends">
+  <ion-segment [(ngModel)]="segment" color="primary" >
+    <ion-segment-button value="all">
       ALL
     </ion-segment-button>
-    <ion-segment-button value="enemies">
+    <ion-segment-button value="host">
+      HOST
+    </ion-segment-button>
+    <ion-segment-button value="going">
       GOING
     </ion-segment-button>
-    <ion-segment-button value="enemies">
+    <ion-segment-button value="saved">
       SAVED
-    </ion-segment-button>
-    <ion-segment-button value="enemies">
-      PAST
     </ion-segment-button>
   </ion-segment>
 
-  <div class="eventDiv">
+  <div [ngSwitch]="segment" class="eventDiv">
     <!-- for each day there's a list -->
     <ion-list *ngFor="let schedule of schedules">
         <ion-list-header no-lines class="list_header"> {{schedule.date | date: 'fullDate'}} </ion-list-header>
@@ -40,25 +40,35 @@
 
             <!-- for text info per event -->
             <ion-item no-lines>
-              <h2 class="event_title">{{event.title}}</h2>
-              <!-- <p>11h ago</p> -->
+              <h2 class="event_title">
+                <ion-icon name="contact" *ngIf= "checkEventRelationshipToMe(event) == 'host'" class="hostIcon"></ion-icon> 
+                {{event.title}} 
+              </h2>
               <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
             </ion-item>
 
+            
+
 
             <ion-item no-lines>
-              
-              <ion-avatar item-start><!-- will have *ngfor="let participantId of schedule.event.coming_people_ids" -->
-                <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
-              </ion-avatar>
 
-              <ion-avatar item-start>
-                <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
+              <ion-avatar item-start *ngFor="let participantId of event.coming_people_ids.slice(0,3)">
+                <img src={{getUserImgById(participantId)}} class="participant_img">
               </ion-avatar>
+              <p class="moreNum" *ngIf="event.coming_people_ids.length > 3">+{{event.coming_people_ids.length - 3}}</p>
 
-              <ion-avatar item-start>
-                <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
-              </ion-avatar>
+              <ng-container *ngIf= "checkEventRelationshipToMe(event) !== 'host'">
+                  <button ion-button clear small class="eventCardButton" >
+                      <ion-icon name="ice-cream-outline"></ion-icon>
+                      <div>JOIN</div>
+                  </button>
+                  
+                  <button ion-button clear small class="eventCardButton">
+                    <ion-icon name="star-outline"></ion-icon>
+                    <div>SAVE</div>
+                  </button>
+              </ng-container>
+
 
               <p class="moreNum">+5</p>
 
@@ -71,6 +81,7 @@
                 <ion-icon name="star-outline"></ion-icon>
                 <div>STAR</div>
               </button>
+
             </ion-item>
         </ion-card>
     </ion-list>

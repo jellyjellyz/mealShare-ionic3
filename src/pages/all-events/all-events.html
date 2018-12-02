@@ -5,15 +5,18 @@
       Explore
     </ion-title>
   </ion-navbar>
-
+  <ion-toolbar no-border-top>
+    <ion-searchbar 
+    showCancelButton
+    (ionInput)="getEvents($event)">
+    </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
 
-  <!-- <ion-list-header no-lines class="list_header"> {{ events.post_date | date }} </ion-list-header> -->
-  <ion-list-header no-lines class="list_header"> NOV 29, 2018 </ion-list-header>
-  <ion-card (click)="todetail()" *ngFor="let event of events | orderBy: 'meet_date'">
+  <ion-card (click)="todetail()" *ngFor="let event of showEvents | orderBy: 'meet_date'">
     <!-- avatar -->
     <ion-item>
       <ion-avatar item-start>
@@ -30,7 +33,7 @@
     <ion-card-content>
       <ion-card-title>
         {{ event.title }}
-        <ion-badge>{{ event.coming_people_ids.length }}</ion-badge>
+        <!-- <ion-badge>{{ event.coming_people_ids.length }}</ion-badge> -->
       </ion-card-title>
       <p>
         {{ event.description }}
