@@ -15,7 +15,7 @@
 
 <ion-content padding>
 
-<ion-card>
+<ion-card *ngIf="showProfile"> 
 
   <ion-item>
 <ion-row>
@@ -23,7 +23,7 @@
         <img src={{users[0].img}}>
       </ion-avatar>
 
-       <button ion-button clear>Edit Profile</button>
+       <button ion-button clear (click)="edit()">Edit Profile</button>
 </ion-row>
     </ion-item>
 
@@ -69,23 +69,47 @@
 
 </ion-card>
 
-  <ion-card *ngIf="checkedGroup" class="inner-card">
-<!--       <ion-item>
-        <ion-label class="res-title"><b>{{ checkedGroup.GroupId }}</b></ion-label>
-      </ion-item>
+  
 
-      <ion-card-content>
+  <ion-card *ngIf="editProfile" class="inner-card">
+  <ion-item>
+    <ion-row>
+      <ion-avatar >
+        <img src={{users[0].img}}>
+      </ion-avatar>
 
-        <div class="description">
-          <h2>Group Selected:{{checkedGroup.groupName}} </h2>
-          
-          <p>Total People:{{checkedGroup.userIds.length}}</p>
+       <button ion-button clear (click)="save()">Save Change</button>
+</ion-row>
+  </ion-item>
 
-        </div>
-      </ion-card-content> -->
+  <ion-item>
+    <ion-label color="primary" stacked>Enter Name</ion-label>
+    <ion-input [(ngModel)]="users[0].name"  type="email" placeholder="{{users[0].name}}"></ion-input>
+  </ion-item>
 
 
-    </ion-card>
+  <ion-item>
+    <ion-label color="primary" stacked>Enter Company</ion-label>
+    <ion-input [(ngModel)]="users[0].company" type="email" placeholder="{{users[0].company}}"></ion-input>
+  </ion-item>
+
+
+  <ion-item>
+
+      <h2 >Location</h2>
+      <p >2353, Main Street, Ann Arbor, Michigan</p>
+   
+  </ion-item>
+
+
+
+  <ion-item>
+    <ion-label color="primary" stacked>Enter Bio</ion-label>
+    <ion-input [(ngModel)]="users[0].bio" type="email" placeholder="{{users[0].bio}}"></ion-input>
+  </ion-item>
+
+
+ </ion-card>
 
 
 </ion-content>

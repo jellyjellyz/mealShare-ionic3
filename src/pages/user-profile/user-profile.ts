@@ -19,15 +19,21 @@ import { UserDataServiceProvider } from '../../providers/user-data-service/user-
 export class UserProfilePage {
 	
    private users: User[] = [];
+   private editProfile: boolean;
+   private showProfile: boolean;
 	
    constructor(public navCtrl: NavController, public navParams: NavParams,
     private userService: UserDataServiceProvider) {
 
    this.userService.getObservable().subscribe(update => {
       this.users = userService.getUsers();
+      this.showProfile=true;
+      this.editProfile=false;
       console.log(this.users)
     })
     this.users = userService.getUsers();  
+    this.showProfile=true;
+    this.editProfile=false
     console.log(this.users)
   }
   // constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -44,5 +50,17 @@ export class UserProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserProfilePage');
   }
+
+ edit(){
+  this.showProfile=false
+  this.editProfile=true;
+
+ }
+
+
+save(){
+   this.showProfile=true
+  this.editProfile=false;
+ }
 
 }
