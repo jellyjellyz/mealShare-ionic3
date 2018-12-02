@@ -3,7 +3,7 @@ import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import 'firebase/database';
-// import { User } from '../../models/user';
+import { User } from '../../models/user';
 import { Group } from '../../models/group';
 /*
   Generated class for the UserDataServiceProvider provider.
@@ -18,7 +18,7 @@ export class UserDataServiceProvider {
 	private groups: Group[] = [];
 	private serviceObserver: Observer<any[]>;
 	private clientObservable: Observable<any[]>;
-	
+
 	// private nextID: number = 0;
   	constructor() {
 	  	this.db = firebase.database();
@@ -34,11 +34,11 @@ export class UserDataServiceProvider {
 
   	}
   	public getFirebaseUserData() {
-	  	let usersRef = this.db.ref('/users2');		
+	  	let usersRef = this.db.ref('/users2');
 	  	usersRef.on('value', snapshot => {
     		this.users = []; //start with a blank list
     		snapshot.forEach(childSnapshot => {
-	          	let user: User = { 
+	          	let user: User = {
 	  	          id: childSnapshot.val().id,
 	  	          name: childSnapshot.val().name,
 	  	          company: childSnapshot.val().company,
@@ -46,30 +46,30 @@ export class UserDataServiceProvider {
 	  	          img: childSnapshot.val().img,
 	  	          bio: childSnapshot.val().bio
 	  	        };
-	      		this.users.push(user);	 
+	      		this.users.push(user);
       		});
       		this.notifySubscribers();
 	    });
   	}
   	public getFirebaseGroupData() {
-  		let groupsRef = this.db.ref('/groups');	
+  		let groupsRef = this.db.ref('/groups');
 	  	groupsRef.on('value', snapshot => {
     		this.groups = []; //start with a blank list
     		snapshot.forEach(childSnapshot => {
-	          	let group: Group = { 
+	          	let group: Group = {
 	  	          groupId: childSnapshot.val().groupId,
 	  	          groupName: childSnapshot.val().groupName,
 	  	          userIds: childSnapshot.val().userIds
 	  	        };
 	      		this.groups.push(group);
-	      	});		
+	      	});
 	        // notify subscriber in home page to sync the update
 	    	this.notifySubscribers();
 	 	});
   	}
   	public getObservable(): Observable<any[]> {
     	return this.clientObservable;
-  	}	
+  	}
   	private notifySubscribers(): void {
     	this.serviceObserver.next(undefined);
   	}
@@ -77,7 +77,7 @@ export class UserDataServiceProvider {
 	    let usersClone = JSON.parse(JSON.stringify(this.users)); // clone another entries to entriesClone
 	    return usersClone;
 		}
-		
+
 	public getUserById(userId: number): User {
 		for (let i = 0; i < this.users.length; i ++){
 			if (this.users[i].id == userId){
