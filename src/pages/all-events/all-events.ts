@@ -41,8 +41,8 @@ export class AllEventsPage {
   }
 
 
-  private todetail() {
-    this.navCtrl.push(EventDetailPage);
+  private todetail(eventKey: string) {
+    this.navCtrl.push(EventDetailPage, {"eventKey": eventKey});
   }
 
   // TODO: use service to get data

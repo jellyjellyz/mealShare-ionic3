@@ -69,10 +69,10 @@ export class CreateEventPage {
   addEvent() {
 
     // console.log(this.event.meet_date);
-    console.log(this.event.start_time);
     this.event.restaurant = this.res;
     this.event.image_url = this.res.image_url;
     this.eventDataService.addEvent(this.event);
+    // console.log(JSON.stringify(this.event));
     this.navCtrl.push(AllEventsPage);
   }
 

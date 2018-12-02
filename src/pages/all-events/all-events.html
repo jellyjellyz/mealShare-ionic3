@@ -6,9 +6,7 @@
     </ion-title>
   </ion-navbar>
   <ion-toolbar no-border-top>
-    <ion-searchbar 
-    showCancelButton
-    (ionInput)="getEvents($event)">
+    <ion-searchbar showCancelButton (ionInput)="getEvents($event)">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -16,52 +14,54 @@
 
 <ion-content padding>
 
-  <ion-card (click)="todetail()" *ngFor="let event of showEvents | orderBy: 'meet_date'">
-    <!-- avatar -->
-    <ion-item>
-      <ion-avatar item-start>
-        <img src={{getUserImg(event.host_id)}}>
-      </ion-avatar>
-      <h2>{{ getUserName(event.host_id) }}</h2>
-      <p>{{ event.meet_date | date }} {{ event.start_time | date: 'shortTime' : 'UTC' }}</p>
-    </ion-item>
+  <ion-card *ngFor="let event of showEvents | orderBy: 'meet_date'">
+    <div (click)="todetail(event.key)">
+      <!-- avatar -->
+      <ion-item>
+        <ion-avatar item-start>
+          <img src={{getUserImg(event.host_id)}}>
+        </ion-avatar>
+        <h2>{{ getUserName(event.host_id) }}</h2>
+        <p>{{ event.meet_date | date }} {{ event.start_time | date: 'shortTime' : 'UTC' }}</p>
+      </ion-item>
 
-    <!-- card image -->
-    <img src="{{ event.image_url }}">
+      <!-- card image -->
+      <img src="{{ event.image_url }}">
 
-    <!-- card content -->
-    <ion-card-content>
-      <ion-card-title>
-        {{ event.title }}
-        <ion-badge>{{ event.coming_people_ids.length }}</ion-badge>
-      </ion-card-title>
-      <p>
-        {{ event.description }}
-      </p>
-    </ion-card-content>
+      <!-- card content -->
+      <ion-card-content>
+        <ion-card-title>
+          {{ event.title }}
+          <ion-badge>{{ event.coming_people_ids.length }}</ion-badge>
+        </ion-card-title>
+        <p>
+          {{ event.description }}
+        </p>
+      </ion-card-content>
 
-    <!-- little buttons below -->
-    <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='happy'></ion-icon>
-          Join
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='star-outline'></ion-icon>
-          Bookmark
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='share-alt'></ion-icon>
-          Share
-        </button>
-      </ion-col>
-    </ion-row>
+      <!-- little buttons below -->
+      <ion-row no-padding>
+        <ion-col>
+          <button ion-button clear small color="danger" icon-start>
+            <ion-icon name='happy'></ion-icon>
+            Join
+          </button>
+        </ion-col>
+        <ion-col text-center>
+          <button ion-button clear small color="danger" icon-start>
+            <ion-icon name='star-outline'></ion-icon>
+            Bookmark
+          </button>
+        </ion-col>
+        <ion-col text-right>
+          <button ion-button clear small color="danger" icon-start>
+            <ion-icon name='share-alt'></ion-icon>
+            Share
+          </button>
+        </ion-col>
+      </ion-row>
 
+    </div>
   </ion-card>
 
 </ion-content>

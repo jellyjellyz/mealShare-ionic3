@@ -14,32 +14,37 @@
 
 
 <ion-content padding>
-  <ion-card>
-    <img src="assets/imgs/chipotle.jpg" />
+  <ion-card *ngIf="event !== undefined">
+    <img data-src="{{ event.image_url }}" />
 
     <ion-card-content>
-      <ion-card-title>Mexican Food</ion-card-title>
+      <ion-card-title>{{ event.title }}</ion-card-title>
       <p>
-        Hola! we are newcomers from Sales department.
-        If you want to meet new friends and taste mexican food, join this group!!!👇🏻
+        {{ event.description }}
       </p>
     </ion-card-content>
 
     <ion-item>
-      <ion-label>
-        Time:
-      </ion-label>
-      <div item-content>
-        11/28/2018 5:30pm
-      </div>
+      Time:
+    </ion-item>
+    <ion-item icon-end>
+      <ion-icon name="time" item-start medium></ion-icon>
+      <h2>
+        {{ event.meet_date | date: 'd MMMM yyyy' : 'UTC' }}
+      </h2>
+      <p>
+        from {{ event.start_time | date:'shortTime': 'UTC' }}
+        to {{ event.end_time | date:'shortTime' : 'UTC' }}
+      </p>
+
     </ion-item>
 
 
     <ion-item>Restaurtant:</ion-item>
-    <ion-item icon-end (click)="redirect(res.url)">
+    <ion-item icon-end (click)="redirect(event.restaurant.url)">
       <ion-icon name="wine" item-start large></ion-icon>
-      <h2>{{ res.name }}</h2>
-      <p>{{ res.location }}</p>
+      <h2>{{ event.restaurant.name }}</h2>
+      <p>{{ event.restaurant.location }}</p>
       <ion-icon name="arrow-dropright" item-right></ion-icon>
     </ion-item>
 

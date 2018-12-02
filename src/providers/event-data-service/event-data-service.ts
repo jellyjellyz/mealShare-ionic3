@@ -81,7 +81,7 @@ export class EventDataServiceProvider {
         meet_date: new Date(event.meet_date).getTime(),
         start_time: new Date(event.start_time).getTime(),
         end_time: new Date(event.end_time).getTime(),
-        restaurant: "", //to be changed to Restaurant model
+        restaurant: event.restaurant, 
         coming_people_ids: event.coming_people_ids,
         pending_people_ids: event.pending_people_ids,
         host_id: event.host_id,
@@ -90,6 +90,12 @@ export class EventDataServiceProvider {
       // console.log(itemRecord);
       itemRef.set(itemRecord);
     }
+  }
+
+  public getEventById(eventId: string) {
+    let parentRef = this.db.ref('/events');
+    let childRef = parentRef.child(eventId);
+    return childRef.once('value');
   }
 
   public getObservable(): Observable<Event[]> {
