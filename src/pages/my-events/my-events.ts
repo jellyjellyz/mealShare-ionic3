@@ -13,7 +13,7 @@ import {UserDataServiceProvider} from '../../providers/user-data-service/user-da
 export class MyEventsPage {
   private events: Event[];
   private schedules: any[];
-  private event_type: string;
+  private segment: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -36,7 +36,7 @@ export class MyEventsPage {
 
       this.events = this.eventService.getEvents();
       this.schedules = this.eventService.getSchedule();
-      this.event_type = "all";
+      this.segment = "all";
     }
 
 
@@ -57,8 +57,12 @@ export class MyEventsPage {
         return "host";
     } else if ( event.coming_people_ids.indexOf(1) > -1 ) { // if I(1) am in the list of going people
         return "going";
-    } else if ( event.saved_people_ids.indexOf(1) > -1 ) { // if I(1) am in the list of  people who saved the event
-        return "saved";
+    } else if ( event.saved_people_ids != undefined ) { 
+        if (event.saved_people_ids.indexOf(1) > -1){ // if I(1) am in the list of  people who saved the event
+          return "saved";
+        }
+    } else {
+      return "else";
     }
     
   }
