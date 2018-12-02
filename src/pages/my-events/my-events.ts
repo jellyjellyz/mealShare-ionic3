@@ -36,7 +36,6 @@ export class MyEventsPage {
 
       this.events = this.eventService.getEvents();
       this.schedules = this.eventService.getSchedule();
-      console.log(this.schedules)
       this.event_type = "all";
     }
 
@@ -51,6 +50,17 @@ export class MyEventsPage {
       // console.log(userImg);
       return userImg;
     }
+  }
+
+  public checkEventRelationshipToMe(event: Event): string{
+    if ( event.host_id == 1) { // if I(1) am the host
+        return "host";
+    } else if ( event.coming_people_ids.indexOf(1) > -1 ) { // if I(1) am in the list of going people
+        return "going";
+    } else if ( event.saved_people_ids.indexOf(1) > -1 ) { // if I(1) am in the list of  people who saved the event
+        return "saved";
+    }
+    
   }
 
 
