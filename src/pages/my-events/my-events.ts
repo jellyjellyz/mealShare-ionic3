@@ -66,6 +66,7 @@ export class MyEventsPage {
         return "host";
     } else if ( event.coming_people_ids.indexOf(1) > -1 ) { // if I(1) am in the list of going people
         return "going";
+        
     } else if ( event.saved_people_ids.indexOf(1) > -1 ) { // if I(1) am in the list of  people who saved the event
         return "saved";
     }
