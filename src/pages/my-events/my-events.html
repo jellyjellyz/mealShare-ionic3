@@ -73,6 +73,7 @@
     <ng-container *ngSwitchCase="'host'">
       <!-- for each day there's a list -->
       <ion-list *ngFor="let schedule of schedules">
+        <ng-container *ngIf="schedule.relationships.indexOf(segment) > -1 ">
           <ion-list-header no-lines class="list_header"> {{schedule.date | date: 'fullDate'}} </ion-list-header>
         
           <!-- for each event happening in one day -->
@@ -108,12 +109,14 @@
               </ion-item>
             </ng-container>
           </ion-card>
+        </ng-container>
       </ion-list>
     </ng-container>
 
     <ng-container *ngSwitchCase="'going'">
         <!-- for each day there's a list -->
         <ion-list *ngFor="let schedule of schedules">
+          <ng-container *ngIf="schedule.relationships.indexOf(segment) > -1 ">
             <ion-list-header no-lines class="list_header"> {{schedule.date | date: 'fullDate'}} </ion-list-header>
           
             <!-- for each event happening in one day -->
@@ -149,12 +152,14 @@
                 </ion-item>
               </ng-container>
             </ion-card>
+          </ng-container>
         </ion-list>
     </ng-container>
 
     <ng-container *ngSwitchCase="'saved'">
         <!-- for each day there's a list -->
         <ion-list *ngFor="let schedule of schedules">
+          <ng-container *ngIf="schedule.relationships.indexOf(segment) > -1 ">
             <ion-list-header no-lines class="list_header"> {{schedule.date | date: 'fullDate'}} </ion-list-header>
           
             <!-- for each event happening in one day -->
@@ -190,6 +195,7 @@
                 </ion-item>
               </ng-container>
             </ion-card>
+          </ng-container>
         </ion-list>
     </ng-container>
 

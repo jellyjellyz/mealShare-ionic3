@@ -115,6 +115,8 @@ export class EventDataServiceProvider {
 
         let newSchedule = {};
         newSchedule['date'] = dateNum;
+        newSchedule['relationships'] = [];
+        newSchedule['relationships'].push(this.checkEventRelationshipToMe(this.events[i]));
         newSchedule['events'] = [];
         newSchedule['events'].push(this.events[i]);
 
@@ -122,14 +124,32 @@ export class EventDataServiceProvider {
       } else if (dateNums.indexOf(dateNum) > -1) { // if the sate exists, then push the event into the array
         for(let j = 0; j < scheduleItems.length; j ++){
           if(scheduleItems[j].date == dateNum){
+            let relationship = this.checkEventRelationshipToMe(this.events[i]);
+            if (scheduleItems[j].relationships.indexOf(relationship) == -1){ // if there's no such relationship before, now add it
+              scheduleItems[j].relationships.push(relationship)
+            }
             scheduleItems[j].events.push(this.events[i])
           }
         };
       }
     }
-
-    // console.log(dateNums)
+    console.log(scheduleItems)
     return scheduleItems;
+  }
+
+
+  private checkEventRelationshipToMe(event: Event, myId = 1): string{
+    if ( event.host_id == myId ) { // if I am the host
+        return "host";
+    } else if ( event.coming_people_ids.indexOf(myId ) > -1 ) { // if I am in the list of going people
+        return "going";
+    } else if ( event.saved_people_ids != undefined ) { 
+        if (event.saved_people_ids.indexOf(myId ) > -1){ // if I am in the list of  people who saved the event
+          return "saved";
+        }
+    } else {
+      return "else";
+    }
   }
 
 
