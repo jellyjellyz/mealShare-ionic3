@@ -5,6 +5,7 @@ import { Event } from '../../models/event';
 import { Restaurant } from '../../models/restaurtant';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
 import { OrderByPipe } from '../../pipes/order-by/order-by';
+import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
 /**
  * Generated class for the AllEventsPage page.
  *
@@ -24,15 +25,16 @@ export class AllEventsPage {
   private showEvents: Event[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private eventService: EventDataServiceProvider) {
+    private eventService: EventDataServiceProvider,
+    private userService: UserDataServiceProvider) {
 
     this.eventService.getObservable().subscribe(update => {
       this.events = eventService.getEvents();
-      this.showEvents = this.events;
+      this.showEvents = eventService.getEvents();
       // this.events.post_date = new Date().getTime();
     })
     this.events = eventService.getEvents();
-    this.showEvents = this.events;
+    this.showEvents = eventService.getEvents();
     // console.log(JSON.stringify(this.showEvents));
   }
 
@@ -47,12 +49,12 @@ export class AllEventsPage {
 
   // TODO: use service to get data
   private getUserImg(host_id: number) {
-    return "assets/imgs/avatar-ts-woody.png";
+    return this.userService.getUserById(host_id).img;
   }
 
   // TODO
   private getUserName(host_id: number) {
-    return "Marty McFly";
+    return this.userService.getUserById(host_id).name;
   }
 
   private getEvents(ev) {

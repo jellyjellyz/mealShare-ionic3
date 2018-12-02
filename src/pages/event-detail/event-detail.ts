@@ -8,6 +8,8 @@ import { Event } from '../../models/event';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
 import { resolveDefinition } from '@angular/core/src/view/util';
+import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
+import { User } from '../../models/user';
 
 
 /**
@@ -32,7 +34,7 @@ export class EventDetailPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public http: Http, private inAppBrowser: InAppBrowser,
     public loadingCtrl: LoadingController,
-    public eventService: EventDataServiceProvider) {
+    public eventService: EventDataServiceProvider, public userService: UserDataServiceProvider) {
 
     this.loading = this.loadingCtrl.create();
     this.eventKey = this.navParams.get("eventKey");
@@ -49,7 +51,9 @@ export class EventDetailPage {
         coming_people_ids: snapshot.val().coming_people_ids,
         pending_people_ids: snapshot.val().pending_people_ids,
         host_id: snapshot.val().host_id,
-        image_url: snapshot.val().image_url
+        image_url: snapshot.val().image_url,
+        saved_people_ids:[9999999999999999999] // it seems an empty array would not be saved to Firebase
+
       }
       console.log(JSON.stringify(this.event));
     });
@@ -69,7 +73,7 @@ export class EventDetailPage {
     this.navCtrl.push(RestaurantDetailPage);
   }
 
-  getData(): Promise<Restaurants> {
+  private getData(): Promise<Restaurants> {
     return this.http.get('./assets/example-data/restaurants.json')
       .toPromise()
       .then(response => response.json() as Restaurants)
@@ -81,12 +85,16 @@ export class EventDetailPage {
     return Promise.reject(error.message || error);
   }
 
-  redirect(url: string) {
+  private redirect(url: string) {
     const options: InAppBrowserOptions = {
       zoom: 'no',
     }
     const browser = this.inAppBrowser.create(url, '_system', options);
     browser.show();
+  }
+
+  private getUserById(userId: number): User {
+    return this.userService.getUserById(userId);
   }
 
 }

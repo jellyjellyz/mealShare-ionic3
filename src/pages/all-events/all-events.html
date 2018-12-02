@@ -15,9 +15,9 @@
 <ion-content padding>
 
   <ion-card *ngFor="let event of showEvents | orderBy: 'meet_date'">
-    <div (click)="todetail(event.key)">
+
       <!-- avatar -->
-      <ion-item>
+      <ion-item (click)="todetail(event.key)">
         <ion-avatar item-start>
           <img src={{getUserImg(event.host_id)}}>
         </ion-avatar>
@@ -26,11 +26,11 @@
       </ion-item>
 
       <!-- card image -->
-      <img src="{{ event.image_url }}">
+      <img src="{{ event.image_url }}" (click)="todetail(event.key)">
 
       <!-- card content -->
       <ion-card-content>
-        <ion-card-title>
+        <ion-card-title (click)="todetail(event.key)">
           {{ event.title }}
           <ion-badge>{{ event.coming_people_ids.length }}</ion-badge>
         </ion-card-title>
@@ -43,14 +43,14 @@
       <ion-row no-padding>
         <ion-col>
           <button ion-button clear small color="danger" icon-start>
-            <ion-icon name='happy'></ion-icon>
+            <ion-icon name='ice-cream-outline'></ion-icon>
             Join
           </button>
         </ion-col>
         <ion-col text-center>
           <button ion-button clear small color="danger" icon-start>
             <ion-icon name='star-outline'></ion-icon>
-            Bookmark
+            Save
           </button>
         </ion-col>
         <ion-col text-right>
@@ -61,7 +61,6 @@
         </ion-col>
       </ion-row>
 
-    </div>
   </ion-card>
 
 </ion-content>

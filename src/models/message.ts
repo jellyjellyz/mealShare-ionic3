@@ -1,4 +1,5 @@
 export class Message {
+	messageId: number;
 	eventId: number;
 	senderId: number;
 	receiverId: number;

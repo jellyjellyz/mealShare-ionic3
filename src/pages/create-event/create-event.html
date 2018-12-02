@@ -30,7 +30,7 @@
 
     <ion-item>
       <ion-label>Meeting date:</ion-label>
-      <ion-datetime [(ngModel)]="event.meet_date" placeholder="2018-01-01" displayFormat="MM/DD/YY" pickerFormat="MM-DD-YYYY"></ion-datetime>
+      <ion-datetime min="2018" max="2020-10-31" [(ngModel)]="event.meet_date" placeholder="2018-01-01" displayFormat="MM/DD/YY" pickerFormat="MM-DD-YYYY"></ion-datetime>
     </ion-item>
 
     <ion-item>Meeting hour:</ion-item>
@@ -70,21 +70,23 @@
 
     <button ion-item (click)="toInviteGroup()">
       Invite Friends
-   <!--    <ion-badge item-end>0</ion-badge> -->
+      <!--    <ion-badge item-end>0</ion-badge> -->
     </button>
 
     <ion-card *ngIf="checkedGroup" class="inner-card">
       <ion-item>
-        <ion-label class="res-title"><b>{{ checkedGroup.GroupId }}</b></ion-label>
+        <ion-label class="res-title"><b>Group Selected: {{checkedGroup.groupName}}</b></ion-label>
       </ion-item>
 
       <ion-card-content>
 
-        <div class="description">
-          <h2>Group Selected:{{checkedGroup.groupName}} </h2>
-          
-          <p>Total People:{{checkedGroup.userIds.length}}</p>
-
+        <div>
+          <h2>
+            <span *ngFor="let pId of checkedGroup.userIds; let isLast=last">
+              {{ getUserById(pId).name }} {{isLast ? '' : ', '}}
+            </span>
+          </h2>
+          <p>Total People: {{checkedGroup.userIds.length}}</p>
         </div>
       </ion-card-content>
 

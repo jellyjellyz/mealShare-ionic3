@@ -5,7 +5,7 @@ export class Event {
     title: string;
     description: string;
     post_date: string;
-    meet_date: string;
+    meet_date: any;
     start_time: string;
     end_time: string;
     restaurant: Restaurant;
@@ -13,5 +13,6 @@ export class Event {
     pending_people_ids: number[];
     host_id: number;
     image_url: string;
+    saved_people_ids: number[];
 }
 

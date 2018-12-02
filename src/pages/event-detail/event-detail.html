@@ -53,41 +53,42 @@
     <ion-item>
       <ion-label stack>Host:</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="getUserById(event.host_id) != undefined">
       <ion-avatar item-start>
-        <img src="assets/imgs/avatar-ts-woody.png">
+        <img src={{getUserById(event.host_id).img}}>
       </ion-avatar>
-      <h2>Woody</h2>
-      <p>This town ain't big enough for the two of us!</p>
+      <h2>{{ getUserById(event.host_id).name }}</h2>
+      <p>{{ getUserById(event.host_id).company }}</p>
+
     </ion-item>
 
     <ion-item>
       <ion-label stack>Participants:</ion-label>
     </ion-item>
 
-    <ion-item>
-      <ion-avatar item-start>
-        <img class="unavailable" src="assets/imgs/avatar-ts-buzz.png">
-      </ion-avatar>
-      <h2>Buzz Lightyear</h2>
-      <p>My eyeballs could have been sucked from their sockets!</p>
-    </ion-item>
+    <div *ngIf="event.coming_people_ids == -1">
+      <ion-item>
+        <ion-avatar item-start>
+          <img class="unavailable" src="assets/imgs/no-avatar.png">
+        </ion-avatar>
+        <h2>no participants for now</h2>
+      </ion-item>
 
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/imgs/avatar-ts-jessie.png">
-      </ion-avatar>
-      <h2>Jessie</h2>
-      <p>Well aren't you just the sweetest space toy I ever did meet!</p>
-    </ion-item>
+    </div>
 
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/imgs/avatar-ts-potatohead.png">
-      </ion-avatar>
-      <h2>Mr. Potato Head</h2>
-      <p>You're not turning me into a Mashed Potato.</p>
-    </ion-item>
+    <div *ngIf="event.coming_people_ids !== undefined && event.coming_people_ids != -1">
+      <div *ngFor="let pId of event.coming_people_ids">
+        <ion-item *ngIf="getUserById(pId) != undefined">
+          <ion-avatar item-start>
+            <img class="unavailable" src={{getUserById(pId).img}}>
+          </ion-avatar>
+          <h2>{{getUserById(pId).name}}</h2>
+          <p>{{getUserById(pId).company}}</p>
+        </ion-item>
+      </div>
+
+
+    </div>
 
 
   </ion-card>
