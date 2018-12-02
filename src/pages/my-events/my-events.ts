@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CreateEventPage } from '../create-event/create-event';
-import { MessagePage } from '../message/message';
-import { Event } from '../../models/event';
-import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
-import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
+import {Event} from '../../models/event';
+import {EventDataServiceProvider} from '../../providers/event-data-service/event-data-service';
+import {UserDataServiceProvider} from '../../providers/user-data-service/user-data-service';
 
 @IonicPage()
 @Component({
@@ -20,8 +19,7 @@ export class MyEventsPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public eventService: EventDataServiceProvider,
-    public userService: UserDataServiceProvider
-    ) {
+    public userService: UserDataServiceProvider) {
       this.eventService.getObservable().subscribe(update => {
         this.events = this.eventService.getEvents();
         this.schedules = this.eventService.getSchedule();
@@ -46,8 +44,12 @@ export class MyEventsPage {
     this.navCtrl.push(CreateEventPage);
   }
 
-  private joinEvent(event: Event) {
-    this.navCtrl.push(MessagePage,{"event": event});
+  public getUserImgById(userId) {
+    if (this.userService.getUserById(userId) != undefined){
+      let userImg = this.userService.getUserById(userId).img;
+      console.log(userImg);
+      return userImg;
+    }
   }
 
 
