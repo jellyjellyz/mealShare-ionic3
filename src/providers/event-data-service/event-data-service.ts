@@ -24,7 +24,7 @@ export class EventDataServiceProvider {
     this.clientObservable = Observable.create(observerThatWasCreated => {
       this.serviceObserver = observerThatWasCreated;
     })
-    console.log("in observer constructor", typeof(this.serviceObserver));
+
     // initiate firebase
     firebase.initializeApp(environment.firebase);
     this.db = firebase.database();
@@ -50,8 +50,7 @@ export class EventDataServiceProvider {
           image_url: childSnapshot.val().image_url
         };
         this.events.push(event);
-        console.log("in service");
-        console.log(this.events);
+        // console.log(this.events);
       });
       // notify subscribers in all-event page to sync the update
 

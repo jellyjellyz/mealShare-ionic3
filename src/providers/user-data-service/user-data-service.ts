@@ -18,7 +18,8 @@ export class UserDataServiceProvider {
 	private groups: Group[] = [];
 	private serviceObserver: Observer<any[]>;
 	private clientObservable: Observable<any[]>;
-	private nextID: number = 0;
+	
+	// private nextID: number = 0;
   	constructor() {
 	  	this.db = firebase.database();
 
@@ -45,7 +46,6 @@ export class UserDataServiceProvider {
 	  	          img: childSnapshot.val().img,
 	  	          bio: childSnapshot.val().bio
 	  	        };
-	  	        console.log(user);
 	      		this.users.push(user);	 
       		});
       		this.notifySubscribers();
@@ -61,7 +61,6 @@ export class UserDataServiceProvider {
 	  	          groupName: childSnapshot.val().groupName,
 	  	          userIds: childSnapshot.val().userIds
 	  	        };
-	  	        console.log(group);
 	      		this.groups.push(group);
 	      	});		
 	        // notify subscriber in home page to sync the update

@@ -5,6 +5,7 @@ import { MessagePage } from '../message/message';
 import { Event } from '../../models/event';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
+import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
 
 @IonicPage()
 @Component({
@@ -12,6 +13,7 @@ import { UserDataServiceProvider } from '../../providers/user-data-service/user-
   templateUrl: 'my-events.html',
 })
 export class MyEventsPage {
+  private myId: number = 1;
   private events: Event[];
   private schedules: any[];
   private event_type: string;
@@ -20,7 +22,8 @@ export class MyEventsPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public eventService: EventDataServiceProvider,
-    public userService: UserDataServiceProvider
+    public userService: UserDataServiceProvider,
+    public messageService: MessageDataServiceProvider
     ) {
       this.eventService.getObservable().subscribe(update => {
         this.events = this.eventService.getEvents();
@@ -47,10 +50,7 @@ export class MyEventsPage {
   }
 
   private joinEvent(event: Event) {
-    this.navCtrl.push(MessagePage,{"event": event});
+    this.messageService.sendMessage(event.key, this.myId, event.host_id, 1);
   }
-
-
-
 
 }

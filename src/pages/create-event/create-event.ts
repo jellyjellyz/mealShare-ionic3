@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Event } from '../../models/event';
+import { Group } from '../../models/group';
 import { Restaurant } from '../../models/restaurtant';
 import { AllEventsPage } from '../all-events/all-events';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
@@ -58,17 +59,17 @@ export class CreateEventPage {
   ionViewWillEnter() {
     this.res = this.navParams.get('restaurant') || undefined;
     this.checkedGroup = this.navParams.get('group') || undefined;
-    console.log(this.checkedGroup)
+    // console.log(this.checkedGroup)
 }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CreateEventPage');
+    // console.log('ionViewDidLoad CreateEventPage');
   }
 
   addEvent() {
 
     // console.log(this.event.meet_date);
-    console.log(this.event.start_time);
+    // console.log(this.event.start_time);
     this.eventDataService.addEvent(this.event);
     this.navCtrl.push(AllEventsPage);
   }
