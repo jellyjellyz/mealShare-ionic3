@@ -79,7 +79,45 @@ page-invitegroup {
             border: 2px solid grey;
             background-color: #f1f1f1;
         }
-    }
+	}
+
+
+	
+	.participant_img{
+		padding: 0;
+		width:20px !important;
+		height:20px !important;
+		margin-right:5px !important;;
+	}
+
+	.radio-btn {
+		border: 2px solid map-get($colors, primary);
+		border-radius: 3px;
+		width: 20px;
+		height: 20px;
+	}
+	.item-ios ion-avatar[item-start]{
+		margin: 8px 1px 8px 0;
+	}
+
+	.item-ios ion-avatar {
+			min-width: 12px;
+			min-height: 12px;
+	}
+
+	.item-borderless{
+        
+		border:0px !important;
+	}
+	ion-app.ios [padding] .scroll-content {
+		padding: 0px;
+	}
+
+	p.moreNum{
+		display: inline-block; 
+		padding-top: 9px
+	}
+
 }
 
 

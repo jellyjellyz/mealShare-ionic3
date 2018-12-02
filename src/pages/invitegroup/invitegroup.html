@@ -16,39 +16,57 @@
 <ion-content padding>
 
   <ion-item no-lines>
-    <button [disabled]="checkedGroupId === undefined" 
-     (click)="saveGroup()"
-     round ion-button color="primary" full>Confirm The Groups</button>
+    <button [disabled]="checkedGroupId === undefined" (click)="saveGroup()" round ion-button color="primary" full>Confirm
+      The Groups</button>
   </ion-item>
 
 
-      <ion-item-group *ngFor="let group of groups">
-        <ion-item no-padding   radio-group [(ngModel)]="checkedGroupId">
+  <ion-item-group no-padding radio-group [(ngModel)]="checkedGroupId" class="group-div">
 
-            <ion-item >
-         
-          <ion-radio id="res-title" class="radio-btn" item-start color="primary" value="{{ group.groupId }}"></ion-radio>
+    <ion-card *ngFor="let group of groups">
+      <ion-item no-lines>
+        <ion-label for="res-title">{{group.groupName}}</ion-label>
+        <ion-radio id="res-title" class="radio-btn" item-start color="primary" value="{{ group.groupId }}"></ion-radio>
+      </ion-item>
+      <!-- <ion-thumbnail item-start>
+          <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
+            <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]].img}}
+                data-user-initial="J"></div>
+  
+            <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial"
+                src={{users[group.userIds[1]].img}} data-user-initial="P"></div>
+  
+            <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial"
+                src="" data-user-initial="B"></div>
+  
+            <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial"
+                src="" data-user-initial="B"></div>
+          </div>
+        </ion-thumbnail> -->
+      <ion-item no-lines>
+        <p>{{users[group.userIds[0]].name}}, {{users[group.userIds[1]].name}}</p>
+      </ion-item>
+      <ion-item>
 
-        </ion-item >
-          <ion-thumbnail item-start>
-            <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
-              <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]].img}} data-user-initial="J"></div>
+        <ion-avatar item-start>
+          <!-- will have *ngfor="let participantId of schedule.event.coming_people_ids" -->
+          <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
+        </ion-avatar>
 
-              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[1]].img}} data-user-initial="P"></div>
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-woody.png" class="participant_img">
+        </ion-avatar>
 
-              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="B"></div>
-              
-              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src=""
-                  data-user-initial="B"></div>
-            </div>
-          </ion-thumbnail>
-           <p>{{group.groupId}}</p>
-          <h2>{{users[group.userIds[0]].name}}, {{users[group.userIds[1]].name}}</h2>
-          <p>You're not turning me into a Mashed Potato.</p>
-          <ion-note item-end>5:47 am</ion-note>
-        </ion-item>
-      </ion-item-group>
+        <ion-avatar item-start>
+          <img src="assets/imgs/avatar-ts-potatohead.png" class="participant_img">
+        </ion-avatar>
 
+        <p class="moreNum">+5</p>
+      </ion-item>
+    </ion-card>
+
+
+  </ion-item-group>
 
 
 </ion-content>
