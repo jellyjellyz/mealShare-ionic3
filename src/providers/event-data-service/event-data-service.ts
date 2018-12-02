@@ -50,7 +50,6 @@ export class EventDataServiceProvider {
           image_url: childSnapshot.val().image_url
         };
         this.events.push(event);
-        console.log("in service");
         console.log(this.events);
       });
       // notify subscribers in all-event page to sync the update
