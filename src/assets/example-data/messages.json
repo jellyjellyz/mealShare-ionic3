@@ -1,0 +1,26 @@
+{
+	"messages": 
+	[
+		{
+			"messageId": 0,
+			"eventId": 0,
+			"senderId": 2,
+			"receiverId": 1,
+			"messageType": 1
+		},
+		{
+			"messageId": 1,
+			"eventId": 1,
+			"senderId": 3,
+			"receiverId": 1,
+			"messageType": 2
+		},
+		{
+			"messageId": 2,
+			"eventId": 2,
+			"senderId": 4,
+			"receiverId": 1,
+			"messageType": 3
+		}
+	]
+}

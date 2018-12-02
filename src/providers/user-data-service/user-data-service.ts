@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
-import firebase from 'firebase';
-import { environment } from '../../environment/environment';
+import * as firebase from 'firebase/app';
+import 'firebase/database';
 import { User } from '../../models/user';
 import { Group } from '../../models/group';
 /*
@@ -32,57 +32,51 @@ export class UserDataServiceProvider {
 		this.getFirebaseUserData();
 		this.getFirebaseGroupData();
 
-	}
-	public getFirebaseUserData() {
-		let usersRef = this.db.ref('/users2');
-		usersRef.on('value', snapshot => {
-			this.users = []; //start with a blank list
-			snapshot.forEach(childSnapshot => {
-				let user: User = {
-					id: childSnapshot.val().id,
-					name: childSnapshot.val().name,
-					company: childSnapshot.val().company,
-					availability: childSnapshot.val().availability,
-					img: childSnapshot.val().img,
-					bio: childSnapshot.val().bio
-				};
-				this.users.push(user);
-			});
-			this.notifySubscribers();
-		});
-	}
-	public getFirebaseGroupData() {
-		let groupsRef = this.db.ref('/groups');
-		groupsRef.on('value', snapshot => {
-			this.groups = []; //start with a blank list
-			snapshot.forEach(childSnapshot => {
-				let group: Group = {
-					groupId: childSnapshot.val().groupId,
-					groupName: childSnapshot.val().groupName,
-					userIds: childSnapshot.val().userIds
-				};
-				this.groups.push(group);
-			});
-			// notify subscriber in home page to sync the update
-			this.notifySubscribers();
-		});
-	}
-	public getObservable(): Observable<any[]> {
-		return this.clientObservable;
-	}
-	private notifySubscribers(): void {
-		if (this.serviceObserver === undefined) {
-			// create observer and observable
-			this.clientObservable = Observable.create(observerThatWasCreated => {
-				this.serviceObserver = observerThatWasCreated;
-			});
-		}
-		this.serviceObserver.next(undefined);
-	}
+  	}
+  	public getFirebaseUserData() {
+	  	let usersRef = this.db.ref('/users2');
+	  	usersRef.on('value', snapshot => {
+    		this.users = []; //start with a blank list
+    		snapshot.forEach(childSnapshot => {
+	          	let user: User = {
+	  	          id: childSnapshot.val().id,
+	  	          name: childSnapshot.val().name,
+	  	          company: childSnapshot.val().company,
+	  	          availability: childSnapshot.val().availability,
+	  	          img: childSnapshot.val().img,
+	  	          bio: childSnapshot.val().bio
+	  	        };
+	      		this.users.push(user);
+      		});
+      		this.notifySubscribers();
+	    });
+  	}
+  	public getFirebaseGroupData() {
+  		let groupsRef = this.db.ref('/groups');
+	  	groupsRef.on('value', snapshot => {
+    		this.groups = []; //start with a blank list
+    		snapshot.forEach(childSnapshot => {
+	          	let group: Group = {
+	  	          groupId: childSnapshot.val().groupId,
+	  	          groupName: childSnapshot.val().groupName,
+	  	          userIds: childSnapshot.val().userIds
+	  	        };
+	      		this.groups.push(group);
+	      	});
+	        // notify subscriber in home page to sync the update
+	    	this.notifySubscribers();
+	 	});
+  	}
+  	public getObservable(): Observable<any[]> {
+    	return this.clientObservable;
+  	}
+  	private notifySubscribers(): void {
+    	this.serviceObserver.next(undefined);
+  	}
 	public getUsers(): User[] {
-		let usersClone = JSON.parse(JSON.stringify(this.users)); // clone another entries to entriesClone
-		return usersClone;
-	}
+	    let usersClone = JSON.parse(JSON.stringify(this.users)); // clone another entries to entriesClone
+	    return usersClone;
+		}
 
 	public getUserById(userId: number): User {
 		for (let i = 0; i < this.users.length; i++) {

@@ -28,6 +28,7 @@ export class MessagePage {
   			  private messageService: MessageDataServiceProvider,
   			  private userService: UserDataServiceProvider,
   			  private eventService: EventDataServiceProvider) {
+
     this.messageService.getObservable().subscribe(update => {
       this.messages = messageService.getMessages();
   	});
