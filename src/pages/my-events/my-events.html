@@ -48,12 +48,12 @@
 
             <ion-item no-lines>
 
-                <ion-avatar item-start *ngFor="let participantId of event.coming_people_ids">
+                <ion-avatar item-start *ngFor="let participantId of event.coming_people_ids.slice(0,3)">
                   <img src={{getUserImgById(participantId)}} class="participant_img">
                 </ion-avatar>
               
 
-              <!-- <p class="moreNum" *ngIf="moreThanThreeUser">+{{additionalNumberOfUsers}}</p> -->
+              <p class="moreNum" *ngIf="event.coming_people_ids.length > 3">+{{event.coming_people_ids.length - 3}}</p>
 
               <button ion-button clear small class="eventCardButton" >
                   <ion-icon name="ice-cream-outline"></ion-icon>

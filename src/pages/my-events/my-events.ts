@@ -47,7 +47,7 @@ export class MyEventsPage {
   public getUserImgById(userId) {
     if (this.userService.getUserById(userId) != undefined){
       let userImg = this.userService.getUserById(userId).img;
-      console.log(userImg);
+      // console.log(userImg);
       return userImg;
     }
   }
