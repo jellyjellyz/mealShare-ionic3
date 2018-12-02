@@ -51,7 +51,7 @@ export class CreateEventPage {
         pending_people_ids: [6, 10],
         host_id: 2,
         image_url: "",
-        saved_people_ids:[]
+        saved_people_ids:[9999999999999999999] // it seems an empty array would not be saved to Firebase
       };
     };
 
