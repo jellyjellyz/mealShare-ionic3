@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
-import firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/database';
 import { environment } from '../../environment/environment';
 import { Event } from '../../models/event';
 

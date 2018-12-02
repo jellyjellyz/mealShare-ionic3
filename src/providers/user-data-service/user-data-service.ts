@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
-import firebase from 'firebase';
-import { environment } from '../../environment/environment';
-import { User } from '../../models/user';
+import * as firebase from 'firebase/app';
+import 'firebase/database';
+// import { User } from '../../models/user';
 import { Group } from '../../models/group';
 /*
   Generated class for the UserDataServiceProvider provider.

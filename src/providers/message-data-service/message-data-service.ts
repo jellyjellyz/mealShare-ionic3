@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
-import firebase from 'firebase';
-import { Event } from '../../models/event'; 
-import { User } from '../../models/user'; 
+import * as firebase from 'firebase/app';
+import 'firebase/database';
 import { Message } from '../../models/message'; 
-import { UserDataServiceProvider } from '../user-data-service/user-data-service';
-import { EventDataServiceProvider } from '../event-data-service/event-data-service';
 /*
   Generated class for the MessageDataServiceProvider provider.
 
@@ -17,8 +14,8 @@ import { EventDataServiceProvider } from '../event-data-service/event-data-servi
   export class MessageDataServiceProvider {
   	private db: any;
  	private nextMessageID: number = 0;
-  	private events: Event[] = [];
-  	private users: User[] = [];
+  	// private events: Event[] = [];
+  	// private users: User[] = [];
   	private messages: Message[] = [];
   	
   	// private users: User[] = [];
@@ -26,8 +23,7 @@ import { EventDataServiceProvider } from '../event-data-service/event-data-servi
   	private serviceObserver: Observer<any[]>;
   	private clientObservable: Observable<any[]>;
   	// private nextID: number = 0;
-  	constructor(private userService: UserDataServiceProvider,
-  				private eventService: EventDataServiceProvider) {
+  	constructor() {
   		this.db = firebase.database();
 
   		// create observer and observable
@@ -35,14 +31,17 @@ import { EventDataServiceProvider } from '../event-data-service/event-data-servi
   			this.serviceObserver = observerThatWasCreated;
   		});
 
-  		// retreive events data from firebase
-  		this.eventService.getObservable().subscribe(update => {
-  			this.events = eventService.getEvents();
-  		});
-  		// retreive users data from firebase
-  		this.userService.getObservable().subscribe(update => {
-  			this.users = userService.getUsers();
-  		});
+  		// // retreive events data from firebase
+  		// this.eventService.getObservable().subscribe(update => {
+  		// 	this.events = eventService.getEvents();
+  		// });
+  		// this.events = eventService.getEvents();
+
+  		// // retreive users data from firebase
+  		// this.userService.getObservable().subscribe(update => {
+  		// 	this.users = userService.getUsers();
+  		// });
+  		// this.users = userService.getUsers();
   		// retreive messages data from firebase
   		this.receiveMessage();
 
