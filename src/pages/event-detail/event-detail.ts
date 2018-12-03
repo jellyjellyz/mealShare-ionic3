@@ -27,7 +27,7 @@ import { User } from '../../models/user';
 export class EventDetailPage {
 
   res: any = {}; // TODO: change it to corresponding data model
-  loading: any;
+  private loading: any;
   private eventKey: string;
   private event: Event;
 

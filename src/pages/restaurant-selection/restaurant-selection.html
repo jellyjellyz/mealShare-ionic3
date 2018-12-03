@@ -14,11 +14,60 @@
 
 
 <ion-content padding>
+  <ion-grid no-padding class="res-btns">
+    <ion-row nowrap class="forecast_container">
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Pizza')">Pizza</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Mexican')">Mexican</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Burgers')">Burgers</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Chinese')">Chinese</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Thai')">Thai</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('SeaFood')">SeaFood</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Sandwiches')">Sandwiches</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Italian')">Italian</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Steakhouses')">Steakhouses</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Korean')">Korean</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Japanese')">Japanese</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Vietnamese')">Vietnamese</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Vegetarian')">Vegetarian</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('Sushi Bars')">Sushi Bars</button>
+      </ion-col>
+      <ion-col col>
+        <button outline round small ion-button (click)="resCategory('American')">American</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 
   <ion-item no-lines>
-    <button [disabled]="checkedRestaurantId === undefined" 
-     (click)="saveRestaurant()"
-     round ion-button color="primary" full>Save my Choice</button>
+    <button [disabled]="checkedRestaurantId === undefined" (click)="saveRestaurant()" round ion-button color="secondary"
+      full>Save my Choice</button>
   </ion-item>
 
   <div *ngIf="restaurants != undefined">
@@ -37,7 +86,7 @@
           <p>price: {{ res.price }}, distance: {{ res.distance }}mi</p>
         </div>
         <button (click)="redirect(res.url)" color="primary" round outline ion-button small class="next-button">
-            View in Yelp
+          View in Yelp
         </button>
       </ion-card-content>
     </ion-card>

@@ -72,9 +72,30 @@ export class EventDataServiceProvider {
     return eventsClone;
   }
 
+  public updateEvent(event: Event) {
+    let parentRef = this.db.ref(`/events/`);
+    let childRef = parentRef.child(event.key);
+    let cloneEvent = {
+      title: event.title,
+      description: event.description,
+      post_date: new Date(event.post_date).getTime(),
+      meet_date: new Date(event.meet_date).getTime(),
+      start_time: new Date(event.start_time).getTime(),
+      end_time: new Date(event.end_time).getTime(),
+      restaurant: event.restaurant,
+      coming_people_ids: event.coming_people_ids,
+      pending_people_ids: event.pending_people_ids,
+      host_id: event.host_id,
+      image_url: event.image_url,
+      saved_people_ids: event.saved_people_ids
+    }
+    // console.log(JSON.stringify(event));
+    childRef.set(cloneEvent);
+  }
+
   public addEvent(event: Event) {
     if (event != undefined) {
-      let listRef = this.db.ref('/events');
+      let listRef = this.db.ref(`/events`);
       let itemRef = listRef.push();
       let itemRecord = {
         title: event.title,
@@ -118,10 +139,10 @@ export class EventDataServiceProvider {
   public getSchedule(): any[] {
     let dateNums: number[] = []; // used to check if a date already eaxists in scheduleItems
     let scheduleItems: any[] = []; // [{date:1432535, events: [{events[i]}, ...]}, ...]
+    let events: Event[] = this.getEvents();
 
-
-    for (let i = 0; i < this.events.length; i++) {
-      let dateNum = this.events[i].meet_date;
+    for (let i = 0; i < events.length; i++) {
+      let dateNum = events[i].meet_date;
 
       if (dateNums.indexOf(dateNum) == -1) { // if the date is not in schedule, then create a new array under the date with this event
         dateNums.push(dateNum);
@@ -129,19 +150,19 @@ export class EventDataServiceProvider {
         let newSchedule = {};
         newSchedule['date'] = dateNum;
         newSchedule['relationships'] = [];
-        newSchedule['relationships'].push(this.checkEventRelationshipToMe(this.events[i]));
+        newSchedule['relationships'].push(this.checkEventRelationshipToMe(events[i]));
         newSchedule['events'] = [];
-        newSchedule['events'].push(this.events[i]);
+        newSchedule['events'].push(events[i]);
 
         scheduleItems.push(newSchedule);
       } else if (dateNums.indexOf(dateNum) > -1) { // if the sate exists, then push the event into the array
         for (let j = 0; j < scheduleItems.length; j++) {
           if (scheduleItems[j].date == dateNum) {
-            let relationship = this.checkEventRelationshipToMe(this.events[i]);
+            let relationship = this.checkEventRelationshipToMe(events[i]);
             if (scheduleItems[j].relationships.indexOf(relationship) == -1) { // if there's no such relationship before, now add it
               scheduleItems[j].relationships.push(relationship)
             }
-            scheduleItems[j].events.push(this.events[i])
+            scheduleItems[j].events.push(events[i])
           }
         };
       }
