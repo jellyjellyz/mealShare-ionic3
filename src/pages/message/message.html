@@ -16,16 +16,31 @@
 <ion-content padding>
 	<ion-item-group no-padding>
 		<ion-item-divider class="notifications-divider">11/26/18</ion-item-divider>
-		<ion-list *ngFor="let message of messages">
-			<ion-item no-padding class="notification-item">
-				<ion-avatar item-left>
-					<ion-img src={{findSender(message.senderId).img}}> </ion-img>
-				</ion-avatar>
-				<h2 class="item-title">{{findSender(message.senderId).name}}</h2>
-				<!-- <p class="item-description">{{findEvent(message.eventId).title}}</p> -->
-				<ion-note class="item-time" item-right>10:10am</ion-note>
-			</ion-item>
-		</ion-list>
+			<ion-list *ngFor="let message of messages">
+				<ion-item no-padding class="notification-item">
+					<ion-avatar item-left>
+						<ion-img src={{findSenderImg(message)}}> </ion-img>
+					</ion-avatar>
+					<h2 class="item-title">{{findSenderName(message)}}</h2>
+						<div [ngSwitch]="message.messageType">
+							<div *ngSwitchCase=1>
+								<p class="item-description">requested to join the event {{findEventTitle(message)}}</p>
+								<button ion-button outline round outline small (click)="accept_request(message)">Accept</button>
+							</div>
+							<div *ngSwitchCase=2>
+								<p class="item-description">accepted to join the event {{findEventTitle(message)}}</p>
+							</div>
+							<div *ngSwitchCase=3>
+								<p class="item-description">rejected to join the event {{findEventTitle(message)}}</p>
+							</div>
+							<div *ngSwitchCase=4>
+								<p class="item-description">invited to join the event {{findEventTitle(message)}}</p>
+								<button ion-button round outline small (click)="send_request(message)">Join</button>
+							</div>
+						</div>
+					<ion-note class="item-time" item-right>10:10am</ion-note>
+				</ion-item>
+			</ion-list>
 		<ion-item-divider no-padding class="notifications-divider">11/25/18</ion-item-divider>
 
 	</ion-item-group>

@@ -3,7 +3,7 @@ import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import 'firebase/database';
-import { Message } from '../../models/message'; 
+import { Message } from '../../models/message';
 /*
   Generated class for the MessageDataServiceProvider provider.
 
@@ -13,13 +13,8 @@ import { Message } from '../../models/message';
   @Injectable()
   export class MessageDataServiceProvider {
   	private db: any;
- 	private nextMessageID: number = 0;
-  	// private events: Event[] = [];
-  	// private users: User[] = [];
+ 	  private nextMessageID: number = 0;
   	private messages: Message[] = [];
-  	
-  	// private users: User[] = [];
-  	// private groups: Group[] = [];
   	private serviceObserver: Observer<any[]>;
   	private clientObservable: Observable<any[]>;
   	// private nextID: number = 0;
@@ -30,18 +25,6 @@ import { Message } from '../../models/message';
   		this.clientObservable = Observable.create(observerThatWasCreated => {
   			this.serviceObserver = observerThatWasCreated;
   		});
-
-  		// // retreive events data from firebase
-  		// this.eventService.getObservable().subscribe(update => {
-  		// 	this.events = eventService.getEvents();
-  		// });
-  		// this.events = eventService.getEvents();
-
-  		// // retreive users data from firebase
-  		// this.userService.getObservable().subscribe(update => {
-  		// 	this.users = userService.getUsers();
-  		// });
-  		// this.users = userService.getUsers();
   		// retreive messages data from firebase
   		this.receiveMessage();
 
@@ -53,13 +36,13 @@ import { Message } from '../../models/message';
   	}
 
   	// 1: request to join (host)
-  	// -- press "join", push event to message.ts, get  
+  	// -- press "join", push event to message.ts, get
   	// 2: accept invite (host)
   	// 3: reject invite (host)
-  	// 4: receive invite (participant)	
+  	// 4: receive invite (participant)
   	public getObservable(): Observable<any[]> {
   		return this.clientObservable;
-  	}	
+  	}
   	private notifySubscribers(): void {
   		this.serviceObserver.next(undefined);
   	}
@@ -84,7 +67,7 @@ import { Message } from '../../models/message';
   			messageId: this.getNextMessageId(),
   			eventId: eventId,
   			senderId: senderId,
-  			receiverId: receiverId,	
+  			receiverId: receiverId,
   			messageType: messageType
   		}
   		prefRef.set(dataRecord);
@@ -93,7 +76,7 @@ import { Message } from '../../models/message';
 
   	// receive message
   	private receiveMessage() {
-	  	let ref = this.db.ref('/messages');	
+	  	let ref = this.db.ref('/messages');
 	  	ref.on('value', snapshot => {
     		this.messages = []; //start with a blank list
     		snapshot.forEach(childSnapshot => {
@@ -106,7 +89,7 @@ import { Message } from '../../models/message';
 	  	        };
 	  	        // console.log(1);
 	  	        // console.log(message);
-	      		this.messages.push(message);	 
+	      		this.messages.push(message);
       		});
       		// this.notifySubscribers();
       		// console.log(2);
@@ -114,7 +97,7 @@ import { Message } from '../../models/message';
 		});
      //  	console.log(3);
 	    // console.log(this.messages);
-	    
+
   	}
 
   	// click message
@@ -122,5 +105,3 @@ import { Message } from '../../models/message';
 	// private clickMessage() {
 	// }
 }
-
-

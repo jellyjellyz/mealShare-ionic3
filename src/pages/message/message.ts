@@ -24,7 +24,7 @@ export class MessagePage {
   private messages: Message[] = [];
   private users: User[] = [];
   private events: Event[] = [];
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
   			  private messageService: MessageDataServiceProvider,
   			  private userService: UserDataServiceProvider,
   			  private eventService: EventDataServiceProvider) {
@@ -41,25 +41,37 @@ export class MessagePage {
   	this.messages = messageService.getMessages();
   	this.users = userService.getUsers();
   	this.events = eventService.getEvents();
-
+    // console.log(this.events);
+    // console.log(this.messages);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MessagePage');
   }
 
-  private findSender(senderId: number): User {
-  	let user = this.users.find(user => user.id === senderId);
+  private findSender(message: Message): User {
+  	let user = this.users.find(user => user.id === message.senderId);
   	return user;
   }
-
-  private findEvent(eventId: number): Event {
-  	console.log("eventId");
-  	console.log(eventId);
-  	console.log("events");
-  	console.log(this.events);
-  	let event = this.events.find(event => event.key === eventId);
+  private findSenderName(message: Message) {
+    return this.findSender(message).name;
+  }
+  private findSenderImg(message: Message) {
+    return this.findSender(message).img;
+  }
+  private findEvent(message: Message): Event {
+  	let event = this.events.find(event => event.key == message.eventId);
   	return event;
   }
+  private findEventTitle(message: Message) {
+    return this.findEvent(message).title;
+  }
+  private send_request(message: Message) {
+
+  }
+  private accept_request(message: Message) {
+    
+  }
+
 
 }
