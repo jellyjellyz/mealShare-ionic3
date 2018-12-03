@@ -6,9 +6,7 @@ import { Event } from '../../models/event';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
 import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
-import { AllEventsPage } from '../all-events/all-events';
 import { OrderByPipe } from '../../pipes/order-by/order-by';
-import { EventDetailPage } from '../event-detail/event-detail';
 
 
 @IonicPage()
@@ -30,11 +28,11 @@ export class MyEventsPage {
     public userService: UserDataServiceProvider,
     public messageService: MessageDataServiceProvider) {
     this.eventService.getObservable().subscribe(update => {
-      this.events = this.eventService.getEvents();
+      // this.events = this.eventService.getEvents();
       this.schedules = this.eventService.getSchedule();
       // console.log(this.events);
 
-      console.log("get schedule", JSON.stringify(this.schedules));
+      // console.log("get schedule", JSON.stringify(this.schedules));
     });
 
     this.userService.getObservable().subscribe(update => {
@@ -44,13 +42,17 @@ export class MyEventsPage {
       // console.log(this.schedules);
     });
 
-    this.events = this.eventService.getEvents();
+    // this.events = this.eventService.getEvents();
     this.schedules = this.eventService.getSchedule();
     this.event_type = "all";
   }
 
+  ionViewWillEnter() {
+    this.schedules = this.eventService.getSchedule();
+  }
+
   private todetail(eventKey: string) {
-    this.navCtrl.push(EventDetailPage, { "eventKey": eventKey });
+    this.navCtrl.push(CreateEventPage, { "eventKey": eventKey });
   }
 
   private createEvent() {

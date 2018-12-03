@@ -19,10 +19,10 @@
       <ion-input type="text" placeholder="Title: e.g. Chinese Food" [(ngModel)]="event.title"></ion-input>
     </ion-item>
 
-    <button color="light" ion-button block large class="upload-image-button">
+    <!-- <button color="light" ion-button block large class="upload-image-button">
       <ion-icon name="camera"></ion-icon>
       <h3 class="button-title">select an image or use default image</h3>
-    </button>
+    </button> -->
 
     <ion-item>
       <ion-textarea [(ngModel)]="event.description" rows="3" placeholder="Write a description or something..."></ion-textarea>
@@ -30,7 +30,8 @@
 
     <ion-item>
       <ion-label>Meeting date:</ion-label>
-      <ion-datetime min="2018" max="2020-10-31" [(ngModel)]="event.meet_date" placeholder="2018-01-01" displayFormat="MM/DD/YY" pickerFormat="MM-DD-YYYY"></ion-datetime>
+      <ion-datetime min="2018" max="2020-10-31" [(ngModel)]="event.meet_date" placeholder="2018-01-01" displayFormat="MM/DD/YY"
+        pickerFormat="MM-DD-YYYY"></ion-datetime>
     </ion-item>
 
     <ion-item>Meeting hour:</ion-item>
@@ -45,8 +46,13 @@
       <ion-datetime [(ngModel)]="event.end_time" placeholder="9 00 pm" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
     </ion-item>
 
-    <button ion-item (click)="toSelectRestaurant()">
+    <!-- if no selected restaurant -->
+    <button *ngIf="!res" ion-item (click)="toSelectRestaurant()">
       Select Restaurant
+    </button>
+
+    <button *ngIf="res" ion-item (click)="toChangeRestaurant(res.id)">
+      Change Restaurant
     </button>
 
     <ion-card *ngIf="res" class="inner-card">
@@ -75,25 +81,67 @@
 
     <ion-card *ngIf="checkedGroup" class="inner-card">
       <ion-item>
-        <ion-label class="res-title"><b>Group Selected: {{checkedGroup.groupName}}</b></ion-label>
+        <ion-label class="res-title"><b>Friends Selected: </b></ion-label>
       </ion-item>
 
       <ion-card-content>
 
         <div>
+          <p>Total People: {{checkedGroup.userIds.length}}</p>
+
+          <div *ngFor="let pId of checkedGroup.userIds">
+            <ion-item no-padding *ngIf="getUserById(pId) != undefined">
+              <ion-avatar item-start>
+                <img class="unavailable" src={{getUserById(pId).img}}>
+              </ion-avatar>
+              <h2>{{getUserById(pId).name}}</h2>
+              <p>{{getUserById(pId).company}}</p>
+            </ion-item>
+          </div>
+
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="event.coming_people_ids != -1" class="inner-card">
+      <ion-item>
+        <ion-label class="res-title"><b>Coming people: </b></ion-label>
+      </ion-item>
+
+      <ion-card-content>
+        <div>
           <h2>
-            <span *ngFor="let pId of checkedGroup.userIds; let isLast=last">
+            <span *ngFor="let pId of event.coming_people_ids; let isLast=last">
               {{ getUserById(pId).name }} {{isLast ? '' : ', '}}
             </span>
           </h2>
-          <p>Total People: {{checkedGroup.userIds.length}}</p>
         </div>
       </ion-card-content>
+    </ion-card>
 
-
+    <ion-card *ngIf="event.pending_people_ids != -1" class="inner-card">
+      <ion-item>
+        <ion-label class="res-title"><b>Pending people: </b></ion-label>
+        <button outline color="danger" small ion-button item-end (click)="sendNotification()">resend invitation</button>
+      </ion-item>
+      <ion-card-content>
+        <div>
+          <h2>
+            <span *ngFor="let pId of event.pending_people_ids; let isLast=last">
+              {{ getUserById(pId).name }} {{isLast ? '' : ', '}}
+            </span>
+          </h2>
+        </div>
+      </ion-card-content>
     </ion-card>
 
   </ion-card>
-  <button ion-button block class="form-action-button" (click)="addEvent()">Post!</button>
+  <ng-container *ngIf="event.key === 0">
+    <button ion-button block class="form-action-button" (click)="addEvent()">Post!</button>
+  </ng-container>
+
+  <ng-container *ngIf="event.key !== 0">
+    <button color="warning" ion-button block class="form-action-button" (click)="updateEvent()">Update</button>
+  </ng-container>
 
 </ion-content>

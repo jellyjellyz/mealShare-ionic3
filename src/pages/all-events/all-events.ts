@@ -38,6 +38,11 @@ export class AllEventsPage {
     // console.log(JSON.stringify(this.showEvents));
   }
 
+  ionViewWillEnter() {
+    this.events = this.eventService.getEvents();
+    this.showEvents = this.eventService.getEvents();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad AllEventsPage');
   }
