@@ -20,7 +20,7 @@
   <ion-item>
 <ion-row>
       <ion-avatar >
-        <img src={{users[0].img}}>
+        <img src={{user.img}}>
       </ion-avatar>
 
        <button ion-button clear (click)="edit()">Edit Profile</button>
@@ -31,7 +31,7 @@
   <ion-item>
 
       <h2 >Full Name</h2>
-      <p >{{users[0].name}}</p>
+      <p >{{user.name}}</p>
    
 
     </ion-item>
@@ -41,7 +41,7 @@
     <ion-item>
 
       <h2 >Company</h2>
-      <p >{{users[0].company}}</p>
+      <p >{{user.company}}</p>
    
 
     </ion-item>
@@ -63,7 +63,7 @@
   <ion-item>
 
       <h2 >Bio </h2>
-      <p >{{users[0].bio}}</p>
+      <p >{{user.bio}}</p>
    
 
   </ion-item>
@@ -76,7 +76,7 @@
   <ion-item>
     <ion-row>
       <ion-avatar >
-        <img src={{users[0].img}}>
+        <img src={{user.img}}>
       </ion-avatar>
 
        <button ion-button clear (click)="save()">Save Change</button>
@@ -85,13 +85,13 @@
 
   <ion-item>
     <ion-label color="primary" stacked>Enter Name</ion-label>
-    <ion-input [(ngModel)]="users[0].name"  type="email" placeholder="{{users[0].name}}"></ion-input>
+    <ion-input [(ngModel)]="user.name"  type="email" placeholder="{{user.name}}"></ion-input>
   </ion-item>
 
 
   <ion-item>
     <ion-label color="primary" stacked>Enter Company</ion-label>
-    <ion-input [(ngModel)]="users[0].company" type="email" placeholder="{{users[0].company}}"></ion-input>
+    <ion-input [(ngModel)]="user.company" type="email" placeholder="{{user.company}}"></ion-input>
   </ion-item>
 
 
@@ -106,7 +106,7 @@
 
   <ion-item>
     <ion-label color="primary" stacked>Enter Bio</ion-label>
-    <ion-input [(ngModel)]="users[0].bio" type="email" placeholder="{{users[0].bio}}"></ion-input>
+    <ion-input [(ngModel)]="user.bio" type="email" placeholder="{{user.bio}}"></ion-input>
   </ion-item>
 
 

@@ -95,8 +95,8 @@ export class UserListPage {
   //     }];
 
   // }
-  public jump() {
-  	this.navCtrl.push(UserProfilePage); 
+  public jump(userId: number) {
+  	this.navCtrl.push(UserProfilePage, {"userId": userId}); 
   }
   private createGroup() {
     this.hide = !this.hide;
