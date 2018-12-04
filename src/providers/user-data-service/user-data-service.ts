@@ -92,6 +92,10 @@ export class UserDataServiceProvider {
 		let usersClone = JSON.parse(JSON.stringify(this.groups)); // clone another entries to entriesClone
 		return usersClone;
 	}
+	public updateUserProfile(user: User) {
+		let ref = this.db.ref('/users2').child(0);
+		ref.set(user);
+	}
 
 	public addUsers() {
 		let listRef = this.db.ref('/users2');

@@ -17,11 +17,11 @@ import { UserDataServiceProvider } from '../../providers/user-data-service/user-
   templateUrl: 'user-profile.html',
 })
 export class UserProfilePage {
-	
+
    private users: User[] = [];
    private editProfile: boolean;
    private showProfile: boolean;
-	
+
    constructor(public navCtrl: NavController, public navParams: NavParams,
     private userService: UserDataServiceProvider) {
 
@@ -31,7 +31,7 @@ export class UserProfilePage {
       this.editProfile=false;
       console.log(this.users)
     })
-    this.users = userService.getUsers();  
+    this.users = userService.getUsers();
     this.showProfile=true;
     this.editProfile=false
     console.log(this.users)
@@ -47,9 +47,9 @@ export class UserProfilePage {
   // 	}
   // }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserProfilePage');
-  }
+  // ionViewDidLoad() {
+  //   console.log('ionViewDidLoad UserProfilePage');
+  // }
 
  edit(){
   this.showProfile=false
@@ -57,10 +57,10 @@ export class UserProfilePage {
 
  }
 
-
-save(){
+ save(){
    this.showProfile=true
-  this.editProfile=false;
+   this.editProfile=false;
+   this.userService.updateUserProfile(this.users[0]);
  }
 
 }
