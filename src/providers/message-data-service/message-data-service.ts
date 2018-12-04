@@ -4,6 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 import { Message } from '../../models/message';
+// import { User } from '../../models/user';
+// import { Event } from '../../models/event';
+// import { UserDataServiceProvider } from '../user-data-service/user-data-service';
+// import { EventDataServiceProvider } from '../event-data-service/event-data-service';
 /*
   Generated class for the MessageDataServiceProvider provider.
 
@@ -15,6 +19,8 @@ import { Message } from '../../models/message';
   	private db: any;
  	  private nextMessageID: number = 0;
   	private messages: Message[] = [];
+    // private users: User[] = [];
+    // private events: Event[] = [];
   	private serviceObserver: Observer<any[]>;
   	private clientObservable: Observable<any[]>;
   	// private nextID: number = 0;
@@ -30,9 +36,9 @@ import { Message } from '../../models/message';
 
   		// retreive nextMessageID from firebase
   		let ref = this.db.ref('/nextMessageID');
-		ref.on('value', snapshot => {
-		    this.nextMessageID = snapshot.val();
-		});
+  		ref.on('value', snapshot => {
+  		    this.nextMessageID = snapshot.val();
+  		});
   	}
 
   	// 1: request to join (host)
@@ -99,7 +105,10 @@ import { Message } from '../../models/message';
 	    // console.log(this.messages);
 
   	}
-
+    public update_event(eventId: number, attribute: string, value: any) {
+      let ref = this.db.ref('/events').child(eventId);
+      ref.update({[attribute]: value});
+    }
   	// click message
 	// when user clicks a message, it will redirect to event detail page
 	// private clickMessage() {

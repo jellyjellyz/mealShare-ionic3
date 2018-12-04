@@ -27,7 +27,8 @@ export class MessagePage {
   constructor(public navCtrl: NavController,
   			  private messageService: MessageDataServiceProvider,
   			  private userService: UserDataServiceProvider,
-  			  private eventService: EventDataServiceProvider) {
+  			  private eventService: EventDataServiceProvider
+        ) {
 
     this.messageService.getObservable().subscribe(update => {
       this.messages = messageService.getMessages();
@@ -41,8 +42,9 @@ export class MessagePage {
   	this.messages = messageService.getMessages();
   	this.users = userService.getUsers();
   	this.events = eventService.getEvents();
-    // console.log(this.events);
-    // console.log(this.messages);
+    console.log(this.events);
+    console.log(this.messages);
+
   }
 
   ionViewDidLoad() {
@@ -70,8 +72,23 @@ export class MessagePage {
 
   }
   private accept_request(message: Message) {
+    let request_userId = message.senderId;
+    let request_event = this.findEvent(message);
+    if (request_event.coming_people_ids.indexOf(request_userId) === -1) {
+      request_event.coming_people_ids.push(request_userId);
+      console.log(request_event.coming_people_ids);
+      this.messageService.update_event(request_event.key, "coming_people_ids", request_event.coming_people_ids);
+    }
+    console.log("accept");
+  }
+  private checkGoingOrNot(message: Message) {
+    let request_userId = message.senderId;
+    let request_event = this.findEvent(message);
+    if (request_event.coming_people_ids.indexOf(request_userId) > -1) {
+      return true;
+      console.log("true");
+    }
+    return false;
 
   }
-
-
 }

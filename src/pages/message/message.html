@@ -25,7 +25,7 @@
 						<div [ngSwitch]="message.messageType">
 							<div *ngSwitchCase=1>
 								<p class="item-description">requested to join the event {{findEventTitle(message)}}</p>
-								<button ion-button outline round outline small (click)="accept_request(message)">Accept</button>
+								<button class="accept-request" ion-button outline round outline small (click)="accept_request(message)">Accept</button>
 							</div>
 							<div *ngSwitchCase=2>
 								<p class="item-description">accepted to join the event {{findEventTitle(message)}}</p>
