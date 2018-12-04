@@ -23,7 +23,7 @@ export class UserListPage {
   private groups: Group[] = [];
   private segment: string;
   private hide: boolean;
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
   			  public navParams: NavParams,
   			  private userService: UserDataServiceProvider) {
   	// this.loadFakeEntries();
@@ -34,7 +34,7 @@ export class UserListPage {
     this.users = userService.getUsers();
     this.groups = userService.getGroups();
     console.log(this.groups);
-  	this.segment = "all";
+  	this.segment = "users";
   	this.hide = true;
   }
 
@@ -96,7 +96,7 @@ export class UserListPage {
 
   // }
   public jump(userId: number) {
-  	this.navCtrl.push(UserProfilePage, {"userId": userId}); 
+  	this.navCtrl.push(UserProfilePage, {"userId": userId});
   }
   private createGroup() {
     this.hide = !this.hide;
