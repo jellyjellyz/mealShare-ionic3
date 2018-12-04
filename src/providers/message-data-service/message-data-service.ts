@@ -66,7 +66,7 @@ import { Message } from '../../models/message';
   	}
 
   	// send message
-  	public sendMessage(eventId: number, senderId: number, receiverId: number, messageType: number) {
+  	public sendMessage(eventId: string, senderId: number, receiverId: number, messageType: number) {
   		let listRef = this.db.ref('/messages');
   		let prefRef = listRef.push();
   		let dataRecord = {
@@ -107,12 +107,8 @@ import { Message } from '../../models/message';
 	    // console.log(this.messages);
 
   	}
-    public updateEvent(eventId: number, attribute: string, value: any) {
+    public updateEvent(eventId: string, attribute: string, value: any) {
       let ref = this.db.ref('/events').child(eventId);
       ref.update({[attribute]: value});
     }
-  	// click message
-	// when user clicks a message, it will redirect to event detail page
-	// private clickMessage() {
-	// }
 }

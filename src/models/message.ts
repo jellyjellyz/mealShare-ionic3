@@ -1,6 +1,6 @@
 export class Message {
 	messageId: number;
-	eventId: number;
+	eventId: string;
 	senderId: number;
 	receiverId: number;
 	// 1: request to join (host)

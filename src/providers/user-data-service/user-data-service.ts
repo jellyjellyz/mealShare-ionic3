@@ -95,6 +95,7 @@ export class UserDataServiceProvider {
 	public updateUserProfile(user: User) {
 		let ref = this.db.ref('/users2').child(0);
 		ref.set(user);
+		console.log(user);
 	}
 
 	public addUsers() {

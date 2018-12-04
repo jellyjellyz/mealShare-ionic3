@@ -13,9 +13,9 @@ export class TabsPage {
 
   tab1Root = MyEventsPage;
   tab2Root = AllEventsPage;
-  tab3Root = UserProfilePage;
-  tab4Root = MessagePage;
-  tab5Root = UserListPage;
+  tab3Root = MessagePage;
+  tab4Root = UserListPage;
+  tab5Root = UserProfilePage;
   constructor() {
 
   }

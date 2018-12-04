@@ -7,6 +7,7 @@ import { EventDataServiceProvider } from '../../providers/event-data-service/eve
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
 import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
 import { OrderByPipe } from '../../pipes/order-by/order-by';
+import { EventDetailPage } from '../event-detail/event-detail';
 
 
 @IonicPage()
@@ -55,12 +56,16 @@ export class MyEventsPage {
     this.navCtrl.push(CreateEventPage, { "eventKey": eventKey });
   }
 
+  private toViewdetail(eventKey: string) {
+    this.navCtrl.push(EventDetailPage, { "eventKey": eventKey });
+  }
+
   private createEvent() {
     this.navCtrl.push(CreateEventPage);
   }
 
   private joinEvent(event: Event) {
-    this.messageService.sendMessage(Number(event.key), this.myId, event.host_id, 1);
+    this.messageService.sendMessage(event.key, this.myId, event.host_id, 1);
   }
 
   public getUserImgById(userId) {
