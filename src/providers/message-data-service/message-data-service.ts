@@ -86,16 +86,18 @@ import { Message } from '../../models/message';
 	  	ref.on('value', snapshot => {
     		this.messages = []; //start with a blank list
     		snapshot.forEach(childSnapshot => {
-	          	let message: Message = {
-	          	  messageId: childSnapshot.val().messageId,
-	  	          eventId: childSnapshot.val().eventId,
-	  	          senderId: childSnapshot.val().senderId,
-	  	          receiverId: childSnapshot.val().receiverId,
-	  	          messageType: childSnapshot.val().messageType
-	  	        };
-	  	        // console.log(1);
-	  	        // console.log(message);
-	      		this.messages.push(message);
+              if (childSnapshot.val().receiverId === 1) {
+  	          	let message: Message = {
+  	          	  messageId: childSnapshot.val().messageId,
+  	  	          eventId: childSnapshot.val().eventId,
+  	  	          senderId: childSnapshot.val().senderId,
+  	  	          receiverId: childSnapshot.val().receiverId,
+  	  	          messageType: childSnapshot.val().messageType
+  	  	        };
+  	  	        // console.log(1);
+  	  	        // console.log(message);
+  	      		this.messages.push(message);
+            }
       		});
       		// this.notifySubscribers();
       		// console.log(2);
@@ -105,7 +107,7 @@ import { Message } from '../../models/message';
 	    // console.log(this.messages);
 
   	}
-    public update_event(eventId: number, attribute: string, value: any) {
+    public updateEvent(eventId: number, attribute: string, value: any) {
       let ref = this.db.ref('/events').child(eventId);
       ref.update({[attribute]: value});
     }
