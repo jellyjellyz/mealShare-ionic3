@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Event } from '../../models/event';
 import { Group } from '../../models/group';
 import { Restaurant } from '../../models/restaurtant';
@@ -33,7 +33,8 @@ export class CreateEventPage {
   constructor(private navCtrl: NavController, private navParams: NavParams,
     private eventDataService: EventDataServiceProvider,
     private userService: UserDataServiceProvider,
-    public loadingCtrl: LoadingController, ) {
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController) {
     this.loading = this.loadingCtrl.create();
 
     // observer only creates when someone subscribe to it,
@@ -47,7 +48,7 @@ export class CreateEventPage {
     let eventKey = this.navParams.get("eventKey");
     if (eventKey === undefined) {
       this.event = {
-        key: 0,
+        key: "0",
         title: "",
         description: "",
         post_date: new Date().toISOString(),
@@ -104,36 +105,49 @@ export class CreateEventPage {
   }
 
   private addEvent() {
-    this.event.host_id = this.getLoginUserId();
-    this.event.restaurant = this.res;
-    this.event.image_url = this.res.image_url;
-    this.event.pending_people_ids = this.checkedGroup.userIds;
-    let temp = new Date(this.event.meet_date);
-    let month = temp.getUTCMonth();
-    let date = temp.getUTCDate();
-    let year = temp.getUTCFullYear();
-    this.event.meet_date = new Date(year, month, date).toISOString();
+    let emptyField = this.checkValidEvent(this.event);
+    console.log(emptyField);
+    if (emptyField) {
+      this.presentAlert(emptyField);
+    } else {
+      this.event.host_id = this.getLoginUserId();
+      this.event.restaurant = this.res;
+      this.event.image_url = this.res.image_url;
+      this.event.pending_people_ids = this.checkedGroup.userIds;
+      let temp = new Date(this.event.meet_date);
+      let month = temp.getUTCMonth();
+      let date = temp.getUTCDate();
+      let year = temp.getUTCFullYear();
+      this.event.meet_date = new Date(year, month, date).toISOString();
 
-    this.eventDataService.addEvent(this.event);
-    this.navCtrl.pop();
+      this.eventDataService.addEvent(this.event);
+      this.navCtrl.pop();
+    }
+
   }
 
   private updateEvent() {
-    if (this.res) {
-      this.event.restaurant = this.res;
-      this.event.image_url = this.res.image_url;
+    let emptyField = this.checkValidEvent(this.event);
+    if (emptyField) {
+      this.presentAlert(emptyField);
+    } else {
+
+      if (this.res) {
+        this.event.restaurant = this.res;
+        this.event.image_url = this.res.image_url;
+      }
+
+      // this.event.pending_people_ids = this.checkedGroup.userIds;
+      let temp = new Date(this.event.meet_date);
+      let month = temp.getUTCMonth();
+      let date = temp.getUTCDate();
+      let year = temp.getUTCFullYear();
+      this.event.meet_date = new Date(year, month, date).toISOString();
+
+      // console.log(this.event.end_time);
+      this.eventDataService.updateEvent(this.event);
+      this.navCtrl.pop();
     }
-
-    // this.event.pending_people_ids = this.checkedGroup.userIds;
-    let temp = new Date(this.event.meet_date);
-    let month = temp.getUTCMonth();
-    let date = temp.getUTCDate();
-    let year = temp.getUTCFullYear();
-    this.event.meet_date = new Date(year, month, date).toISOString();
-
-    // console.log(this.event.end_time);
-    this.eventDataService.updateEvent(this.event);
-    this.navCtrl.pop();
   }
 
   private toSelectRestaurant() {
@@ -159,6 +173,53 @@ export class CreateEventPage {
   private sendNotification() {
     // TODO
 
+  }
+
+  private deleteEvent() {
+    const alert = this.alertCtrl.create({
+      title: 'Delete this event',
+      subTitle: 'are you sure?',
+      buttons: [{
+        text: 'Confirm',
+        handler: () => {
+          this.eventDataService.deleteEvent(this.event.key);
+
+          alert.onDidDismiss(() => {
+            this.navCtrl.pop();
+          });
+        }
+      },
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Buy clicked');
+        }
+      }]
+    });
+    alert.present();
+  }
+
+  private checkValidEvent(event: Event): string {
+    if (event.title == "") {
+      return "title";
+    } else if (event.description == "") {
+      return "description";
+    } else if (event.restaurant == undefined) {
+      return "restaurant";
+    } else {
+      return undefined;
+    }
+
+  }
+
+  private presentAlert(message) {
+    const alert = this.alertCtrl.create({
+      title: `${message} field is empty`,
+      subTitle: 'Please fill it out😁',
+      buttons: ['Got it!']
+    });
+    alert.present();
   }
 
 

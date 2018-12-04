@@ -94,9 +94,14 @@ export class MessagePage {
     let request_userId = message.senderId;
     let request_event = this.findEvent(message);
     if (request_event.coming_people_ids.indexOf(request_userId) > -1) {
+<<<<<<< HEAD
       console.log("true");
       return true;
 
+=======
+      return true;
+      // console.log("true");
+>>>>>>> 744ab1ce77152ac8b2bc7432e9dd21211b6ad101
     }
     return false;
 

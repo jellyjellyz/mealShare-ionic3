@@ -24,7 +24,7 @@
   <div [ngSwitch]="segment">
     <ng-container *ngSwitchCase="'all'">
       <ion-item-group *ngFor="let user of users">
-        <ion-item no-padding (click)="jump()">
+        <ion-item no-padding (click)="jump(user.id)">
           <ion-avatar item-start>
             <img src={{user.img}}>
           </ion-avatar>

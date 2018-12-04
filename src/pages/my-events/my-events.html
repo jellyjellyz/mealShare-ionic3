@@ -38,7 +38,7 @@
 
         <!-- for each event happening in one day -->
         <ion-card *ngFor="let event of schedule.events | orderBy: 'start_time'">
-          <div (click)="todetail(event.key)">
+          <div (click)="event.host_id === myId ? todetail(event.key) : toViewdetail(event.key)">
             <!-- for text info per event -->
             <ion-item no-lines>
               <h2 class="event_title">

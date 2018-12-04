@@ -18,13 +18,26 @@ Ionic pages and navigation.
           <img src={{users[0].img}}>
         </ion-avatar>
 
+
+  <ion-card *ngIf="showProfile">
+
+    <ion-item>
+      <ion-row>
+        <ion-avatar>
+          <img src={{user.img}}>
+        </ion-avatar>
+
         <button ion-button clear (click)="edit()">Edit Profile</button>
       </ion-row>
     </ion-item>
+
+
     <ion-item>
 
-      <h2 >Full Name</h2>
-      <p >{{users[0].name}}</p>
+      <h2>Full Name</h2>
+      <p>{{user.name}}</p>
+
+
 
     </ion-item>
     <ion-item>

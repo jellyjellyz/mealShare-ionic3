@@ -16,50 +16,44 @@
 
   <ion-card *ngFor="let event of showEvents | orderBy: 'meet_date'">
 
-      <!-- avatar -->
-      <ion-item (click)="todetail(event.key)">
-        <ion-avatar item-start>
-          <img src={{getUserImg(event.host_id)}}>
-        </ion-avatar>
-        <h2>{{ getUserName(event.host_id) }}</h2>
-        <p>{{ event.meet_date | date }} {{ event.start_time | date: 'shortTime' : 'UTC' }}</p>
-      </ion-item>
+    <!-- avatar -->
+    <ion-item (click)="todetail(event.key)">
+      <ion-avatar item-start>
+        <img src={{getUserImg(event.host_id)}}>
+      </ion-avatar>
+      <h2>{{ getUserName(event.host_id) }}</h2>
+      <p>{{ event.meet_date | date }} {{ event.start_time | date: 'shortTime' : 'UTC' }}</p>
+    </ion-item>
 
-      <!-- card image -->
-      <img src="{{ event.image_url }}" (click)="todetail(event.key)">
+    <!-- card image -->
+    <img src="{{ event.image_url }}" (click)="todetail(event.key)">
 
-      <!-- card content -->
-      <ion-card-content>
-        <ion-card-title (click)="todetail(event.key)">
-          {{ event.title }}
-          <ion-badge>{{ event.coming_people_ids.length }}</ion-badge>
-        </ion-card-title>
-        <p>
-          {{ event.description }}
-        </p>
-      </ion-card-content>
+    <!-- card content -->
+    <ion-card-content>
+      <ion-card-title (click)="todetail(event.key)">
+        {{ event.title }}
+        <ion-badge>{{ event.coming_people_ids == -1 ? 0 : event.coming_people_ids.length }}</ion-badge>
+      </ion-card-title>
+      <p>
+        {{ event.description }}
+      </p>
+    </ion-card-content>
 
-      <!-- little buttons below -->
-      <ion-row no-padding>
-        <ion-col>
-          <button ion-button clear small color="danger" icon-start>
-            <ion-icon name='ice-cream-outline'></ion-icon>
-            Join
-          </button>
-        </ion-col>
-        <ion-col text-center>
-          <button ion-button clear small color="danger" icon-start>
-            <ion-icon name='star-outline'></ion-icon>
-            Save
-          </button>
-        </ion-col>
-        <ion-col text-right>
-          <button ion-button clear small color="danger" icon-start>
-            <ion-icon name='share-alt'></ion-icon>
-            Share
-          </button>
-        </ion-col>
-      </ion-row>
+    <!-- little buttons below -->
+    <ion-row no-padding>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='star-outline'></ion-icon>
+          Save
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='ice-cream-outline'></ion-icon>
+          Join
+        </button>
+      </ion-col>
+    </ion-row>
 
   </ion-card>
 

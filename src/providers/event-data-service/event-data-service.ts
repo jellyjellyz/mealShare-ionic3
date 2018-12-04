@@ -186,5 +186,12 @@ export class EventDataServiceProvider {
     }
   }
 
+  public deleteEvent(eventKey: string) {
+    let parentRef = this.db.ref('/events');
+    let childRef = parentRef.child(eventKey);
+    childRef.remove();
+    return;
+  }
+
 
 }
