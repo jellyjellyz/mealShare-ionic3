@@ -70,7 +70,7 @@ export class MessagePage {
 
   }
   private accept_request(message: Message) {
-    
+
   }
 
 

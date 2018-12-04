@@ -1,7 +1,7 @@
 import { Restaurant } from "./restaurtant";
 
 export class Event {
-    key: string;
+    key: number;
     title: string;
     description: string;
     post_date: string;
