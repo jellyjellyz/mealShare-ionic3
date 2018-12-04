@@ -15,24 +15,24 @@
 
 <ion-content padding>
 
-<ion-card *ngIf="showProfile"> 
+  <ion-card *ngIf="showProfile">
 
-  <ion-item>
-<ion-row>
-      <ion-avatar >
-        <img src={{user.img}}>
-      </ion-avatar>
+    <ion-item>
+      <ion-row>
+        <ion-avatar>
+          <img src={{user.img}}>
+        </ion-avatar>
 
-       <button ion-button clear (click)="edit()">Edit Profile</button>
-</ion-row>
+        <button ion-button clear (click)="edit()">Edit Profile</button>
+      </ion-row>
     </ion-item>
 
 
-  <ion-item>
+    <ion-item>
 
-      <h2 >Full Name</h2>
-      <p >{{user.name}}</p>
-   
+      <h2>Full Name</h2>
+      <p>{{user.name}}</p>
+
 
     </ion-item>
 
@@ -40,19 +40,19 @@
 
     <ion-item>
 
-      <h2 >Company</h2>
-      <p >{{user.company}}</p>
-   
+      <h2>Company</h2>
+      <p>{{user.company}}</p>
+
 
     </ion-item>
 
 
 
-   <ion-item>
+    <ion-item>
 
-      <h2 >Location</h2>
-      <p >2353, Main Street, Ann Arbor, Michigan</p>
-   
+      <h2>Location</h2>
+      <p>2353, Main Street, Ann Arbor, Michigan</p>
+
 
     </ion-item>
 
@@ -60,57 +60,57 @@
 
 
 
-  <ion-item>
+    <ion-item>
 
-      <h2 >Bio </h2>
-      <p >{{user.bio}}</p>
-   
+      <h2>Bio </h2>
+      <p>{{user.bio}}</p>
 
-  </ion-item>
 
-</ion-card>
+    </ion-item>
 
-  
+  </ion-card>
+
+
 
   <ion-card *ngIf="editProfile" class="inner-card">
-  <ion-item>
-    <ion-row>
-      <ion-avatar >
-        <img src={{user.img}}>
-      </ion-avatar>
+    <ion-item>
+      <ion-row>
+        <ion-avatar>
+          <img src={{user.img}}>
+        </ion-avatar>
 
-       <button ion-button clear (click)="save()">Save Change</button>
-</ion-row>
-  </ion-item>
+        <button ion-button clear (click)="save()">Save Change</button>
+      </ion-row>
+    </ion-item>
 
-  <ion-item>
-    <ion-label color="primary" stacked>Enter Name</ion-label>
-    <ion-input [(ngModel)]="user.name"  type="email" placeholder="{{user.name}}"></ion-input>
-  </ion-item>
-
-
-  <ion-item>
-    <ion-label color="primary" stacked>Enter Company</ion-label>
-    <ion-input [(ngModel)]="user.company" type="email" placeholder="{{user.company}}"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Enter Name</ion-label>
+      <ion-input [(ngModel)]="user.name" type="email" placeholder="{{user.name}}"></ion-input>
+    </ion-item>
 
 
-  <ion-item>
-
-      <h2 >Location</h2>
-      <p >2353, Main Street, Ann Arbor, Michigan</p>
-   
-  </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Enter Company</ion-label>
+      <ion-input [(ngModel)]="user.company" type="email" placeholder="{{user.company}}"></ion-input>
+    </ion-item>
 
 
+    <ion-item>
 
-  <ion-item>
-    <ion-label color="primary" stacked>Enter Bio</ion-label>
-    <ion-input [(ngModel)]="user.bio" type="email" placeholder="{{user.bio}}"></ion-input>
-  </ion-item>
+      <h2>Location</h2>
+      <p>2353, Main Street, Ann Arbor, Michigan</p>
+
+    </ion-item>
 
 
- </ion-card>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Enter Bio</ion-label>
+      <ion-input [(ngModel)]="user.bio" type="email" placeholder="{{user.bio}}"></ion-input>
+    </ion-item>
+
+
+  </ion-card>
 
 
 </ion-content>

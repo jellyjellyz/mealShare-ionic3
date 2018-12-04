@@ -25,7 +25,11 @@ export class UserProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private userService: UserDataServiceProvider) {
+    
     let userId = this.navParams.get('userId');
+    if (userId == undefined) {
+      userId = 1;
+    }
     this.user = this.userService.getUserById(userId);
     this.showProfile = true;
 
