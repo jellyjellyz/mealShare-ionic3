@@ -106,6 +106,7 @@ export class MessageDataServiceProvider {
 		//  	console.log(3);
 		// console.log(this.messages);
 
+<<<<<<< HEAD
 	}
 	public updateEvent(eventId: string, attribute: string, value: any) {
 		let ref = this.db.ref('/events').child(eventId);
@@ -115,4 +116,11 @@ export class MessageDataServiceProvider {
 	// when user clicks a message, it will redirect to event detail page
 	// private clickMessage() {
 	// }
+=======
+  	}
+    public updateEvent(eventId: string, attribute: string, value: any) {
+      let ref = this.db.ref('/events').child(eventId);
+      ref.update({[attribute]: value});
+    }
+>>>>>>> 6ca62ae69354be7518f4cf1f76932525a49f2319
 }

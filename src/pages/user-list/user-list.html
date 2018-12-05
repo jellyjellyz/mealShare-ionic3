@@ -10,9 +10,6 @@
 
 <ion-content padding>
   <ion-segment [(ngModel)]="segment" color="primary">
-    <ion-segment-button value="all">
-      All
-    </ion-segment-button>
     <ion-segment-button value="users">
       Users
     </ion-segment-button>
@@ -22,49 +19,40 @@
   </ion-segment>
 
   <div [ngSwitch]="segment">
-    <ng-container *ngSwitchCase="'all'">
-      <ion-item-group *ngFor="let user of users">
-        <ion-item no-padding (click)="jump(user.id)">
-          <ion-avatar item-start>
-            <img src={{user.img}}>
-          </ion-avatar>
-          <h2>{{user.name}}</h2>
-          <p>{{user.company}}</p>
-          <ion-note item-end>3:43 pm</ion-note>
-        </ion-item>
-      </ion-item-group>
-      <ion-item-group *ngFor="let group of groups">
-        <ion-item no-padding (click)="jump()">
-          <ion-thumbnail item-start>
-            <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
-              <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]].img}} data-user-initial="J"></div>
-
-              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[1]].img}} data-user-initial="P"></div>
-
-              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="B"></div>
-              
-              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src=""
-                  data-user-initial="B"></div>
-            </div>
-          </ion-thumbnail>
-          <h2>{{users[group.userIds[0]].name}}, {{users[group.userIds[1]].name}}</h2>
-          <p>You're not turning me into a Mashed Potato.</p>
-          <ion-note item-end>5:47 am</ion-note>
-        </ion-item>
-      </ion-item-group>
-    </ng-container>
-
     <ng-container *ngSwitchCase="'users'">
       <ion-item-group *ngFor="let user of users">
-        <ion-item no-padding (click)="jump()">
-          <ion-avatar item-start>
-            <img src={{user.img}}>
-          </ion-avatar>
-          <h2>{{user.name}}</h2>
-          <p>{{user.company}}</p>
-          <ion-note item-end>3:43 pm</ion-note>
-        </ion-item>
+        <div *ngIf="user.id !== 1">
+          <ion-row no-padding (click)="jump(user.id)">
+            <ion-col col-3>
+              <ion-item>
+                <ion-avatar item-start>
+                  <img src={{user.img}}>
+                </ion-avatar>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <h2>{{user.name}}</h2>
+                <p>{{user.company}}</p>
+                <!-- <p>{{user.Id}}</p> -->
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-checkbox *ngIf="hide" item-right color="dark" [(ngModel)]="checked[user.id]"></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
       </ion-item-group>
+      <ion-row>
+        <button ion-button *ngIf="hide" (click)="saveGroup()">Save Group</button>
+      </ion-row>
+      <ion-fab bottom right edge class="addnew" (click)="createGroup()">
+        <button ion-fab mini side="top">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
     </ng-container>
 
     <ng-container *ngSwitchCase="'groups'">
@@ -72,39 +60,21 @@
         <ion-item no-padding (click)="jump()">
           <ion-thumbnail item-start>
             <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
-              <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]].img}} data-user-initial="J"></div>
+              <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]-1].img}} data-user-initial="J"></div>
 
-              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[1]].img}} data-user-initial="P"></div>
+              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[1]-1].img}} data-user-initial="P"></div>
 
               <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="B"></div>
-              
+
               <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src=""
-                  data-user-initial="B"></div>
-            </div>
-          </ion-thumbnail>
-          <h2>{{users[group.userIds[0]].name}}, {{users[group.userIds[1]].name}}</h2>
-          <p>You're not turning me into a Mashed Potato.</p>
-          <ion-note item-end>5:47 am</ion-note>
-        </ion-item>
-      </ion-item-group>
-    </ng-container>
-  </div>
+                data-user-initial="B"></div>
+              </div>
+            </ion-thumbnail>
+            <h2>{{users[group.userIds[0]].name}}, {{users[group.userIds[1]].name}}</h2>
+            <p>You're not turning me into a Mashed Potato.</p>
+          </ion-item>
+        </ion-item-group>
+      </ng-container>
+    </div>
 
-  <ion-fab bottom right edge class="addnew" (click)=createGroup()>
-    <button ion-fab mini side="top">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
-
-  <ion-list *ngIf="hide">
-    <ng-container *ngFor="let user of users">
-      <ion-item>
-        <ion-label>{{user.name}}</ion-label>
-        <ion-checkbox color="dark" checked="true"></ion-checkbox>
-      </ion-item>
-    </ng-container>
-  </ion-list>
-
-  <button ion-button>Save Group</button>
-
-</ion-content>
+  </ion-content>

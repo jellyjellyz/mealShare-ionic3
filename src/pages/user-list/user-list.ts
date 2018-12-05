@@ -21,9 +21,10 @@ import { UserDataServiceProvider } from '../../providers/user-data-service/user-
 export class UserListPage {
   private users: User[] = [];
   private groups: Group[] = [];
-  private segment: string;
-  private hide: boolean;
-  constructor(public navCtrl: NavController, 
+  private segment: string = "users";
+  private hide: boolean = false;
+  private checked = {};
+  constructor(public navCtrl: NavController,
   			  public navParams: NavParams,
   			  private userService: UserDataServiceProvider) {
   	// this.loadFakeEntries();
@@ -33,13 +34,35 @@ export class UserListPage {
     })
     this.users = userService.getUsers();
     this.groups = userService.getGroups();
-    console.log(this.groups);
-  	this.segment = "all";
-  	this.hide = true;
+    // console.log(this.groups);
+
+    // initialize checked object
+    for (var i = 1; i < this.users.length; i++) {
+      this.checked[this.users[i].id]=false;
+    }
+    console.log(this.checked);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserListPage');
+  }
+
+  private saveGroup() {
+    this.hide = !this.hide;
+    console.log(this.checked);
+    let userIds: string[] = [];
+    for (var key in this.checked) {
+      if (this.checked[key] === true) {
+        userIds.push(key);
+      }
+    }
+    console.log(userIds);
+    let new_group: Group = {
+      groupId: 5,
+      groupName: "Eating Out Group",
+      userIds: userIds
+    };
+    this.userService.addGroup(new_group);
   }
 
   // private loadFakeEntries() {
