@@ -8,6 +8,7 @@ import { UserDataServiceProvider } from '../../providers/user-data-service/user-
 import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
 import { OrderByPipe } from '../../pipes/order-by/order-by';
 import { EventDetailPage } from '../event-detail/event-detail';
+import { AuthProvider } from '../../providers/auth/auth';
 
 
 @IonicPage()
@@ -16,7 +17,7 @@ import { EventDetailPage } from '../event-detail/event-detail';
   templateUrl: 'my-events.html',
 })
 export class MyEventsPage {
-  private myId: string = "1";
+  private myId;
   private events: Event[];
   private schedules: any[];
   private event_type: string;
@@ -27,7 +28,8 @@ export class MyEventsPage {
     public navParams: NavParams,
     public eventService: EventDataServiceProvider,
     public userService: UserDataServiceProvider,
-    public messageService: MessageDataServiceProvider) {
+    public messageService: MessageDataServiceProvider,
+    private authService: AuthProvider) {
     this.eventService.getObservable().subscribe(update => {
       // this.events = this.eventService.getEvents();
       this.schedules = this.eventService.getSchedule();
@@ -46,6 +48,11 @@ export class MyEventsPage {
     // this.events = this.eventService.getEvents();
     this.schedules = this.eventService.getSchedule();
     this.event_type = "all";
+
+    // this.myId = "1";
+    this.getLoginUserId().then(id => {
+      this.myId = id;
+    })
   }
 
   ionViewWillEnter() {
@@ -79,14 +86,22 @@ export class MyEventsPage {
   }
 
   public checkEventRelationshipToMe(event: Event): string {
-    if (event.host_id == "1") { // if I(1) am the host
+    if (event.host_id == this.myId) { // if I(1) am the host
       return "host";
-    } else if (event.coming_people_ids.indexOf("1") > -1) { // if I(1) am in the list of going people
+    } else if (event.coming_people_ids.indexOf(this.myId) > -1) { // if I(1) am in the list of going people
       return "going";
 
-    } else if (event.saved_people_ids.indexOf("1") > -1) { // if I(1) am in the list of  people who saved the event
+    } else if (event.saved_people_ids.indexOf(this.myId) > -1) { // if I(1) am in the list of  people who saved the event
       return "saved";
     }
+
+
+
+  }
+  private getLoginUserId(): Promise<string> {
+    return new Promise((resolve) => {
+      this.authService.getCurrentUser().then((user) => { resolve(user.id) });
+    })
 
   }
 

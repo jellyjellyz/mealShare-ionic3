@@ -30,6 +30,7 @@ export class UserListPage {
   	// this.loadFakeEntries();
   	this.userService.getObservable().subscribe(update => {
       this.users = userService.getUsers();
+      // console.log(JSON.stringify(this.users));
       this.groups = userService.getGroups();
     })
     this.users = userService.getUsers();

@@ -7,6 +7,7 @@ import { EventDataServiceProvider } from '../../providers/event-data-service/eve
 import { Message } from '../../models/message';
 import { User } from '../../models/user';
 import { Event } from '../../models/event';
+import { AuthProvider } from '../../providers/auth/auth';
 
 /**
  * Generated class for the MessagePage page.
@@ -24,26 +25,34 @@ export class MessagePage {
   private messages: Message[] = [];
   private users: User[] = [];
   private events: Event[] = [];
+  private myId: string;
   constructor(public navCtrl: NavController,
-  			  private messageService: MessageDataServiceProvider,
-  			  private userService: UserDataServiceProvider,
-  			  private eventService: EventDataServiceProvider
-        ) {
+    private messageService: MessageDataServiceProvider,
+    private userService: UserDataServiceProvider,
+    private eventService: EventDataServiceProvider,
+    private authService: AuthProvider
+  ) {
 
     this.messageService.getObservable().subscribe(update => {
       this.messages = messageService.getMessages();
-  	});
-  	this.userService.getObservable().subscribe(update => {
+    });
+    this.userService.getObservable().subscribe(update => {
       this.users = userService.getUsers();
-  	});
-  	this.eventService.getObservable().subscribe(update => {
+    });
+    this.eventService.getObservable().subscribe(update => {
       this.events = eventService.getEvents();
-  	});
-  	this.messages = messageService.getMessages();
-  	this.users = userService.getUsers();
-  	this.events = eventService.getEvents();
+    });
+    this.messages = messageService.getMessages();
+    this.users = userService.getUsers();
+    this.events = eventService.getEvents();
     console.log(this.events);
     console.log(this.messages);
+
+    // this.myId = "1";
+    this.getLoginUserId().then(id => {
+      this.myId = id;
+      // console.log(this.myId);
+    })
 
   }
 
@@ -52,8 +61,8 @@ export class MessagePage {
   }
 
   private findSender(message: Message): User {
-  	let user = this.users.find(user => user.id == message.senderId);
-  	return user;
+    let user = this.users.find(user => user.id == message.senderId);
+    return user;
   }
   private findSenderName(message: Message) {
     return this.findSender(message).name;
@@ -62,8 +71,8 @@ export class MessagePage {
     return this.findSender(message).img;
   }
   private findEvent(message: Message): Event {
-  	let event = this.events.find(event => event.key == message.eventId);
-  	return event;
+    let event = this.events.find(event => event.key == message.eventId);
+    return event;
   }
   private findEventTitle(message: Message) {
     return this.findEvent(message).title;
@@ -71,23 +80,27 @@ export class MessagePage {
   private accept_invite(message: Message) {
     let invite_userId = message.senderId;
     let invite_event = this.findEvent(message);
-    if (invite_event.coming_people_ids.indexOf("1") === -1) {
-      invite_event.coming_people_ids.push("1");
+    if (invite_event.coming_people_ids.indexOf(this.myId) === -1) {
+      invite_event.coming_people_ids.push(this.myId);
       // console.log(invite_event.pending_people_ids);
-      this.messageService.sendMessage(invite_event.key, "1", invite_userId, 4);
+      this.messageService.sendMessage(invite_event.key, this.myId, invite_userId, 4);
       this.messageService.updateEvent(invite_event.key, "coming_people_ids", invite_event.coming_people_ids);
     }
     console.log("join");
+
   }
   private accept_request(message: Message) {
     let request_userId = message.senderId;
     let request_event = this.findEvent(message);
+
     if (request_event.coming_people_ids.indexOf(request_userId) === -1) {
       request_event.coming_people_ids.push(request_userId);
       // console.log(request_event.coming_people_ids);
-      this.messageService.sendMessage(request_event.key, "1", request_userId, 2);
+      this.messageService.sendMessage(request_event.key, this.myId, request_userId, 2);
       this.messageService.updateEvent(request_event.key, "coming_people_ids", request_event.coming_people_ids);
     }
+
+
     console.log("accept");
   }
   private checkGoingOrNot(message: Message) {
@@ -97,6 +110,13 @@ export class MessagePage {
       return true;
     }
     return false;
+
+  }
+
+  private getLoginUserId(): Promise<string> {
+    return new Promise((resolve) => {
+      this.authService.getCurrentUser().then((user) => { resolve(user.id) });
+    })
 
   }
 }

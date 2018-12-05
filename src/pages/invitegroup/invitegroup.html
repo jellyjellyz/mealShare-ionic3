@@ -28,28 +28,17 @@
         <ion-label for="res-title">{{group.groupName}}</ion-label>
         <ion-radio id="res-title" class="radio-btn" item-start color="primary" value="{{ group.groupId }}"></ion-radio>
       </ion-item>
-      <!-- <ion-thumbnail item-start>
-          <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
-            <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]].img}}
-                data-user-initial="J"></div>
-  
-            <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial"
-                src={{users[group.userIds[1]].img}} data-user-initial="P"></div>
-  
-            <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial"
-                src="" data-user-initial="B"></div>
-  
-            <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial"
-                src="" data-user-initial="B"></div>
-          </div>
-        </ion-thumbnail> -->
+
       <ion-item no-lines>
-        <p>{{users[group.userIds[0]].name}}, {{users[group.userIds[1]].name}}</p>
+        <span *ngFor="let pId of group.userIds; let isLast=last">
+          {{ getUserNameById(pId) }} {{isLast ? '' : ', '}}
+        </span>
+                      
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
 
         <ion-avatar item-start>
-          <!-- will have *ngfor="let participantId of schedule.event.coming_people_ids" -->
+          
           <img src="assets/imgs/avatar-ts-jessie.png" class="participant_img">
         </ion-avatar>
 
@@ -62,7 +51,14 @@
         </ion-avatar>
 
         <p class="moreNum">+5</p>
-      </ion-item>
+      </ion-item> -->
+      <ion-item no-lines>
+          <ion-avatar item-start *ngFor="let id of group.userIds.slice(0,3)">
+            <img src={{getUserImgById(id)}} class="participant_img">
+          </ion-avatar>
+          <p class="moreNum" *ngIf="group.userIds.length > 3">+{{group.userIds.length - 3}}</p>
+
+        </ion-item>
     </ion-card>
 
 

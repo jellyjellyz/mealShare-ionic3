@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 import { Message } from '../../models/message';
+
 // import { User } from '../../models/user';
 // import { Event } from '../../models/event';
 // import { UserDataServiceProvider } from '../user-data-service/user-data-service';
@@ -23,6 +24,8 @@ export class MessageDataServiceProvider {
 	// private events: Event[] = [];
 	private serviceObserver: Observer<any[]>;
 	private clientObservable: Observable<any[]>;
+	private myId: string;
+
 	// private nextID: number = 0;
 	constructor() {
 		this.db = firebase.database();
@@ -39,6 +42,12 @@ export class MessageDataServiceProvider {
 		ref.on('value', snapshot => {
 			this.nextMessageID = snapshot.val();
 		});
+
+		// this.myId = "1";
+		this.getLoginUserId().then(id => {
+			this.myId = id;
+		})
+
 	}
 
 	// 1: request to join (host)
@@ -86,7 +95,7 @@ export class MessageDataServiceProvider {
 		ref.on('value', snapshot => {
 			this.messages = []; //start with a blank list
 			snapshot.forEach(childSnapshot => {
-				if (childSnapshot.val().receiverId === 1) {
+				if (childSnapshot.val().receiverId == this.myId) {
 					let message: Message = {
 						messageId: childSnapshot.val().messageId,
 						eventId: childSnapshot.val().eventId,
@@ -106,7 +115,6 @@ export class MessageDataServiceProvider {
 		//  	console.log(3);
 		// console.log(this.messages);
 
-<<<<<<< HEAD
 	}
 	public updateEvent(eventId: string, attribute: string, value: any) {
 		let ref = this.db.ref('/events').child(eventId);
@@ -116,11 +124,36 @@ export class MessageDataServiceProvider {
 	// when user clicks a message, it will redirect to event detail page
 	// private clickMessage() {
 	// }
-=======
-  	}
-    public updateEvent(eventId: string, attribute: string, value: any) {
-      let ref = this.db.ref('/events').child(eventId);
-      ref.update({[attribute]: value});
-    }
->>>>>>> 6ca62ae69354be7518f4cf1f76932525a49f2319
+
+	private getLoginUserId(): Promise<string> {
+		return new Promise((resolve) => {
+			this.getCurrentUser().then((user) => { resolve(user.id) });
+		})
+	}
+	getCurrentUser() {
+		return new Promise<any>((resolve, reject) => {
+			firebase.auth().onAuthStateChanged(function (user) {
+				let userModel = {
+					id: "",
+					name: "",
+					email: "",
+				};
+				if (user) {
+					userModel.name = user.displayName;
+					userModel.email = user.email;
+					if (user.uid == "IleDWkpCJ6ZcQjgokdi8mS689W92") {
+						userModel.id = "1";
+						return resolve(userModel);
+					} else {
+						userModel.id = user.uid;
+						return resolve(userModel);
+					}
+
+				} else {
+					reject('No user logged in');
+				}
+			})
+		})
+	}
+
 }

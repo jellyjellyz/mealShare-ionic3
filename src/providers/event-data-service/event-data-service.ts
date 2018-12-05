@@ -16,6 +16,7 @@ import { Event } from '../../models/event';
 export class EventDataServiceProvider {
   private db: any;
   private events: Event[] = [];
+  private myId: string;
 
   private serviceObserver: Observer<Event[]>;
   private clientObservable: Observable<Event[]>;
@@ -64,7 +65,13 @@ export class EventDataServiceProvider {
 
       this.notifySubscribers();
 
+
+
     });
+
+    this.getLoginUserId().then(id => {
+      this.myId = id;
+    })
   }
 
   public getEvents(): Event[] {
@@ -153,7 +160,7 @@ export class EventDataServiceProvider {
         let newSchedule = {};
         newSchedule['date'] = dateNum;
         newSchedule['relationships'] = [];
-        newSchedule['relationships'].push(this.checkEventRelationshipToMe(events[i]));
+        newSchedule['relationships'].push(this.checkEventRelationshipToMe(events[i], this.myId));
         newSchedule['events'] = [];
         newSchedule['events'].push(events[i]);
 
@@ -161,7 +168,7 @@ export class EventDataServiceProvider {
       } else if (dateNums.indexOf(dateNum) > -1) { // if the sate exists, then push the event into the array
         for (let j = 0; j < scheduleItems.length; j++) {
           if (scheduleItems[j].date == dateNum) {
-            let relationship = this.checkEventRelationshipToMe(events[i]);
+            let relationship = this.checkEventRelationshipToMe(events[i], this.myId);
             if (scheduleItems[j].relationships.indexOf(relationship) == -1) { // if there's no such relationship before, now add it
               scheduleItems[j].relationships.push(relationship)
             }
@@ -194,6 +201,37 @@ export class EventDataServiceProvider {
     let childRef = parentRef.child(eventKey);
     childRef.remove();
     return;
+  }
+
+  private getLoginUserId(): Promise<string> {
+    return new Promise((resolve) => {
+      this.getCurrentUser().then((user) => { resolve(user.id) });
+    })
+  }
+  getCurrentUser() {
+    return new Promise<any>((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(function (user) {
+        let userModel = {
+          id: "",
+          name: "",
+          email: "",
+        };
+        if (user) {
+          userModel.name = user.displayName;
+          userModel.email = user.email;
+          if (user.uid == "IleDWkpCJ6ZcQjgokdi8mS689W92") {
+            userModel.id = "1";
+            return resolve(userModel);
+          } else {
+            userModel.id = user.uid;
+            return resolve(userModel);
+          }
+
+        } else {
+          reject('No user logged in');
+        }
+      })
+    })
   }
 
 

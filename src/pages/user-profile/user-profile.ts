@@ -38,10 +38,10 @@ export class UserProfilePage {
 
         this.userService.getUserById2(data.id).then((user) => {
           if (user != null) {
-            console.log("get user");
+            // console.log("get user");
             this.user = user;
           } else {
-            console.log("here");
+            // console.log("here");
             this.user = this.userService.createUserById(userId, useremail);
           }
         })
@@ -67,7 +67,7 @@ export class UserProfilePage {
     this.users = userService.getUsers();
     this.showProfile = true;
     this.editProfile = false
-    console.log(this.users)
+    // console.log(this.users)
   }
 
   edit() {
@@ -95,7 +95,7 @@ export class UserProfilePage {
   }
 
   chooseImg(img: string) {
-    console.log("cilck");
+    // console.log("click");
     this.user.img = img;
   }
 
