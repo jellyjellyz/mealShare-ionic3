@@ -61,23 +61,37 @@
           <ion-thumbnail item-start>
             <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
               <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]-1].img}} data-user-initial="J"></div>
-
-              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[1]-1].img}} data-user-initial="P"></div>
-
-              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="B"></div>
-
-              <div class="conversation-summary-avatar-group-member-wrapper"><img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src=""
-                data-user-initial="B"></div>
+              <div class="conversation-summary-avatar-group-member-wrapper">
+                <img *ngIf="group.userIds.length>1; else that" class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[1]].img}} data-user-initial="P">
+                <ng-template #that>
+                  <img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="P">
+                </ng-template>
               </div>
-            </ion-thumbnail>
-            <div *ngFor="let userId of group.userIds" class="userName">
-              {{users[userId].name}}
-              <!-- {{users[group.userIds[0]].name}}, {{users[group.userIds[1]].name}} -->
-            </div>
-            <p>You're not turning me into a Mashed Potato.</p>
-          </ion-item>
-        </ion-item-group>
-      </ng-container>
-    </div>
 
-  </ion-content>
+              <div class="conversation-summary-avatar-group-member-wrapper">
+                <img *ngIf="group.userIds.length>2; else that" class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[2]].img}} data-user-initial="B">
+                <ng-template #that>
+                  <img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="P">
+                </ng-template>
+              </div>
+
+              <div class="conversation-summary-avatar-group-member-wrapper">
+                <img *ngIf="group.userIds.length>3; else that" class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[3]].img}}
+                data-user-initial="B">
+                <ng-template #that>
+                  <img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="P">
+                </ng-template>
+              </div>
+            </div>
+          </ion-thumbnail>
+          <div *ngFor="let userId of group.userIds" class="userName">
+            {{users[userId].name}}
+            <!-- {{users[group.userIds[0]].name}}, {{users[group.userIds[1]].name}} -->
+          </div>
+          <p>You're not turning me into a Mashed Potato.</p>
+        </ion-item>
+      </ion-item-group>
+    </ng-container>
+  </div>
+
+</ion-content>
