@@ -48,11 +48,10 @@
 
 
 
-    <ion-item>
+    <ion-item *ngIf="user.email">
 
-      <h2>Location</h2>
-      <p>2353, Main Street, Ann Arbor, Michigan</p>
-
+      <h2>Email</h2>
+      <p>{{user.email}}</p>
 
     </ion-item>
 
@@ -79,7 +78,37 @@
           <img src={{user.img}}>
         </ion-avatar>
 
+
         <button ion-button clear (click)="save()">Save Change</button>
+      </ion-row>
+    </ion-item>
+
+    <ion-item *ngIf="showAvatarChoice">
+      <p class="change-avatar-title">Change avatar</p>
+    </ion-item>
+
+    <ion-item *ngIf="showAvatarChoice">
+      <ion-row>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-bullseye.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-bullseye.png'" 
+           src="../assets/imgs/avatar-ts-bullseye.png">
+        </ion-avatar>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-buzz.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-buzz.png'" src="../assets/imgs/avatar-ts-buzz.png">
+        </ion-avatar>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-hamm.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-hamm.png'" src="../assets/imgs/avatar-ts-hamm.png">
+        </ion-avatar>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-jessie.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-jessie.png'" src="../assets/imgs/avatar-ts-jessie.png">
+        </ion-avatar>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-potatohead.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-potatohead.png'" src="../assets/imgs/avatar-ts-potatohead.png">
+        </ion-avatar>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-woody.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-woody.png'" src="../assets/imgs/avatar-ts-woody.png">
+        </ion-avatar>
+
       </ion-row>
     </ion-item>
 
@@ -97,8 +126,8 @@
 
     <ion-item>
 
-      <h2>Location</h2>
-      <p>2353, Main Street, Ann Arbor, Michigan</p>
+      <h2>Email</h2>
+      <p>{{user.email}}</p>
 
     </ion-item>
 
@@ -111,6 +140,9 @@
 
 
   </ion-card>
+  <ion-item no-lines>
+    <button item-end ion-button (click)="logout()">Log out</button>
+  </ion-item>
 
 
 </ion-content>

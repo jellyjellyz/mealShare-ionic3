@@ -27,7 +27,10 @@ export class EventDataServiceProvider {
     })
 
     // initiate firebase
-    firebase.initializeApp(environment.firebase);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(environment.firebase);
+    }
+
     this.db = firebase.database();
 
     // retrieve data from firebase
@@ -172,7 +175,7 @@ export class EventDataServiceProvider {
   }
 
 
-  private checkEventRelationshipToMe(event: Event, myId = 1): string {
+  private checkEventRelationshipToMe(event: Event, myId = "1"): string {
     if (event.host_id == myId) { // if I am the host
       return "host";
     } else if (event.coming_people_ids.indexOf(myId) > -1) { // if I am in the list of going people

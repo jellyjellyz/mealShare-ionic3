@@ -95,7 +95,7 @@ export class UserListPage {
   //     }];
 
   // }
-  public jump(userId: number) {
+  public jump(userId: string) {
   	this.navCtrl.push(UserProfilePage, {"userId": userId}); 
   }
   private createGroup() {

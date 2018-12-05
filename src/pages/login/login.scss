@@ -1,0 +1,40 @@
+page-login {
+    .error-message
+    {
+      color: red;
+    }
+   .login-content
+   {    
+       width: 80%;
+       margin: 100px auto;
+
+       .alt-options
+       {
+           .button
+           {
+               margin: 0px;
+               padding: 0px;
+               font-size: 1.4rem;
+           }
+
+           .signup-button
+           {
+               font-weight: 500;
+               color: map-get($colors, primary);
+
+               .button-inner
+               {
+                   justify-content: flex-end;
+               }
+           }
+       }
+       .login-button {
+           width: 95%;
+           margin: 10px auto;
+       }
+    }
+    .title {
+        padding-top: 100px;
+        text-align: center;
+    }
+}

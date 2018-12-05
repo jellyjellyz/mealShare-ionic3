@@ -56,11 +56,11 @@ export class CreateEventPage {
         start_time: new Date(1514808000000).toISOString(),
         end_time: new Date(1514808000000).toISOString(),
         restaurant: undefined,
-        coming_people_ids: [-1],
-        pending_people_ids: [-1],
-        host_id: -1,
+        coming_people_ids: ["-1"],
+        pending_people_ids: ["-1"],
+        host_id: "-1",
         image_url: "",
-        saved_people_ids: [9999999999999999999] // it seems an empty array would not be saved to Firebase
+        saved_people_ids: ["9999999999999999999"] // it seems an empty array would not be saved to Firebase
       }
     } else {
       this.loading.present();
@@ -78,7 +78,7 @@ export class CreateEventPage {
           pending_people_ids: snapshot.val().pending_people_ids,
           host_id: snapshot.val().host_id,
           image_url: snapshot.val().image_url,
-          saved_people_ids: [9999999999999999999] // it seems an empty array would not be saved to Firebase
+          saved_people_ids: ["9999999999999999999"] // it seems an empty array would not be saved to Firebase
         }
         this.res = this.event.restaurant;
         this.loading.dismiss();
@@ -167,7 +167,7 @@ export class CreateEventPage {
   }
 
   private getLoginUserId() {
-    return 1;
+    return "1";
   }
 
   private sendNotification() {

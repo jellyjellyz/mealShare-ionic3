@@ -1,0 +1,20 @@
+page-signup {
+    .error-message
+    {
+      color: red;
+    }
+   .signup-content
+   {    
+       width: 80%;
+       margin: 100px auto;
+
+       .signup-button {
+           width: 95%;
+           margin: 10px auto;
+       }
+    }
+    .title {
+        padding-top: 100px;
+        text-align: center;
+    }
+}

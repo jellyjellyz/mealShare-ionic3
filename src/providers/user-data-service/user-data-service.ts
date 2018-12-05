@@ -32,53 +32,54 @@ export class UserDataServiceProvider {
 		this.getFirebaseUserData();
 		this.getFirebaseGroupData();
 
-  	}
-  	public getFirebaseUserData() {
-	  	let usersRef = this.db.ref('/users2');
-	  	usersRef.on('value', snapshot => {
-    		this.users = []; //start with a blank list
-    		snapshot.forEach(childSnapshot => {
-	          	let user: User = {
-	  	          id: childSnapshot.val().id,
-	  	          name: childSnapshot.val().name,
-	  	          company: childSnapshot.val().company,
-	  	          availability: childSnapshot.val().availability,
-	  	          img: childSnapshot.val().img,
-	  	          bio: childSnapshot.val().bio
-	  	        };
-	      		this.users.push(user);
-      		});
-      		this.notifySubscribers();
-	    });
-  	}
-  	public getFirebaseGroupData() {
-  		let groupsRef = this.db.ref('/groups');
-	  	groupsRef.on('value', snapshot => {
-    		this.groups = []; //start with a blank list
-    		snapshot.forEach(childSnapshot => {
-	          	let group: Group = {
-	  	          groupId: childSnapshot.val().groupId,
-	  	          groupName: childSnapshot.val().groupName,
-	  	          userIds: childSnapshot.val().userIds
-	  	        };
-	      		this.groups.push(group);
-	      	});
-	        // notify subscriber in home page to sync the update
-	    	this.notifySubscribers();
-	 	});
-  	}
-  	public getObservable(): Observable<any[]> {
-    	return this.clientObservable;
-  	}
-  	private notifySubscribers(): void {
-    	this.serviceObserver.next(undefined);
-  	}
+	}
+	public getFirebaseUserData() {
+		let usersRef = this.db.ref('/users2');
+		usersRef.on('value', snapshot => {
+			this.users = []; //start with a blank list
+			snapshot.forEach(childSnapshot => {
+				let user: User = {
+					id: childSnapshot.key,
+					name: childSnapshot.val().name,
+					company: childSnapshot.val().company,
+					availability: childSnapshot.val().availability,
+					img: childSnapshot.val().img,
+					bio: childSnapshot.val().bio,
+					email: childSnapshot.val().email
+				};
+				this.users.push(user);
+			});
+			this.notifySubscribers();
+		});
+	}
+	public getFirebaseGroupData() {
+		let groupsRef = this.db.ref('/groups');
+		groupsRef.on('value', snapshot => {
+			this.groups = []; //start with a blank list
+			snapshot.forEach(childSnapshot => {
+				let group: Group = {
+					groupId: childSnapshot.val().groupId,
+					groupName: childSnapshot.val().groupName,
+					userIds: childSnapshot.val().userIds
+				};
+				this.groups.push(group);
+			});
+			// notify subscriber in home page to sync the update
+			this.notifySubscribers();
+		});
+	}
+	public getObservable(): Observable<any[]> {
+		return this.clientObservable;
+	}
+	private notifySubscribers(): void {
+		this.serviceObserver.next(undefined);
+	}
 	public getUsers(): User[] {
-	    let usersClone = JSON.parse(JSON.stringify(this.users)); // clone another entries to entriesClone
-	    return usersClone;
-		}
+		let usersClone = JSON.parse(JSON.stringify(this.users)); // clone another entries to entriesClone
+		return usersClone;
+	}
 
-	public getUserById(userId: number): User {
+	public getUserById(userId): User {
 		for (let i = 0; i < this.users.length; i++) {
 			if (this.users[i].id == userId) {
 				let userClone: User = JSON.parse(JSON.stringify(this.users[i]));
@@ -86,6 +87,52 @@ export class UserDataServiceProvider {
 			}
 		}
 
+	}
+
+	public getUserById2(userId: string): Promise<User> {
+		return new Promise((resolve) => {
+			// console.log(JSON.stringify(this.users));
+			for (let i = 0; i < this.users.length; i++) {
+				if (this.users[i].id == userId) {
+					let userClone: User = JSON.parse(JSON.stringify(this.users[i]));
+					resolve(userClone);
+				}
+			}
+			resolve(undefined);
+		});
+	}
+
+	public createUserById(id: string, email: string): User {
+		console.log("in create user");
+		let user = {
+			id: id,
+			name: "",
+			company: "",
+			bio: "",
+			img: "../assets/imgs/no-avatar.png",
+			email: email,
+			availability: false
+		}
+		let parentRef = this.db.ref('/users2');
+		let childRef = parentRef.child(user.id);
+		childRef.set(user);
+		return user;
+	}
+
+
+	public updateUser(user: User) {
+		let parentRef = this.db.ref(`/users2`);
+		let childRef = parentRef.child(user.id);
+		let cloneUser = {
+			name: user.name,
+			company: user.company,
+			availability: user.availability,
+			img: user.img,
+			bio: user.bio,
+			email: user.email
+		}
+		console.log(JSON.stringify(user));
+		childRef.set(cloneUser);
 	}
 
 	public getGroups(): Group[] {

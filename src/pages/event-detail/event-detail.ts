@@ -52,10 +52,10 @@ export class EventDetailPage {
         pending_people_ids: snapshot.val().pending_people_ids,
         host_id: snapshot.val().host_id,
         image_url: snapshot.val().image_url,
-        saved_people_ids:[9999999999999999999] // it seems an empty array would not be saved to Firebase
+        saved_people_ids:["9999999999999999999"] // it seems an empty array would not be saved to Firebase
 
       }
-      console.log(JSON.stringify(this.event));
+      // console.log(JSON.stringify(this.event));
     });
   }
 

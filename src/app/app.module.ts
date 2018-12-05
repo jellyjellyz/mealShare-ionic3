@@ -6,9 +6,6 @@ import { HttpModule } from '@angular/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { TabsPage } from '../pages/tabs/tabs';
-
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyEventsPage } from '../pages/my-events/my-events';
 import { AllEventsPage } from '../pages/all-events/all-events';
 import { UserListPage } from '../pages/user-list/user-list';
@@ -17,19 +14,31 @@ import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { EventDetailPage } from '../pages/event-detail/event-detail';
 import { CreateEventPage } from '../pages/create-event/create-event';
 import { RestaurantDetailPage } from '../pages/restaurant-detail/restaurant-detail';
-import { EventDataServiceProvider } from '../providers/event-data-service/event-data-service';
-import { OrderByPipe } from '../pipes/order-by/order-by';
-import { UserDataServiceProvider } from '../providers/user-data-service/user-data-service';
 import { RestaurantSelectionPage } from '../pages/restaurant-selection/restaurant-selection';
+import { InvitegroupPage } from '../pages/invitegroup/invitegroup';
+import { SignupPage } from '../pages/signup/signup';
+import { LoginPage } from '../pages/login/login';
+import { HomePage } from '../pages/home/home';
+
+
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
+import { EventDataServiceProvider } from '../providers/event-data-service/event-data-service';
+import { MessageDataServiceProvider } from '../providers/message-data-service/message-data-service';
+import { UserDataServiceProvider } from '../providers/user-data-service/user-data-service';
 
 import { Geolocation } from '@ionic-native/geolocation';
-import { MessageDataServiceProvider } from '../providers/message-data-service/message-data-service';
 
-import { InvitegroupPage } from '../pages/invitegroup/invitegroup';
+import { AuthProvider } from '../providers/auth/auth';
+import { OrderByPipe } from '../pipes/order-by/order-by';
+
+
 
 @NgModule({
   declarations: [
     MyApp,
+    HomePage,
     MyEventsPage,
     AllEventsPage,
     UserListPage,
@@ -40,8 +49,10 @@ import { InvitegroupPage } from '../pages/invitegroup/invitegroup';
     RestaurantDetailPage,
     RestaurantSelectionPage,
     TabsPage,
-    OrderByPipe,
-    InvitegroupPage
+    InvitegroupPage,
+    SignupPage,
+    LoginPage,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
@@ -57,6 +68,7 @@ import { InvitegroupPage } from '../pages/invitegroup/invitegroup';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    HomePage,
     MyEventsPage,
     AllEventsPage,
     UserListPage,
@@ -67,7 +79,9 @@ import { InvitegroupPage } from '../pages/invitegroup/invitegroup';
     RestaurantDetailPage,
     RestaurantSelectionPage,
     TabsPage,
-    InvitegroupPage
+    InvitegroupPage,
+    SignupPage,
+    LoginPage
   ],
   providers: [
     Geolocation,
@@ -77,7 +91,8 @@ import { InvitegroupPage } from '../pages/invitegroup/invitegroup';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     EventDataServiceProvider,
     UserDataServiceProvider,
-    MessageDataServiceProvider
+    MessageDataServiceProvider,
+    AuthProvider
   ]
 })
 export class AppModule { }

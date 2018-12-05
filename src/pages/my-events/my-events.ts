@@ -16,7 +16,7 @@ import { EventDetailPage } from '../event-detail/event-detail';
   templateUrl: 'my-events.html',
 })
 export class MyEventsPage {
-  private myId: number = 1;
+  private myId: string = "1";
   private events: Event[];
   private schedules: any[];
   private event_type: string;
@@ -69,7 +69,7 @@ export class MyEventsPage {
   }
 
   public getUserImgById(userId) {
-    if (userId !== -1 && this.userService.getUserById(userId) != undefined) {
+    if (userId !== "-1" && this.userService.getUserById(userId) != undefined) {
       let userImg = this.userService.getUserById(userId).img;
       // console.log(userImg);
       return userImg;
@@ -79,12 +79,12 @@ export class MyEventsPage {
   }
 
   public checkEventRelationshipToMe(event: Event): string {
-    if (event.host_id == 1) { // if I(1) am the host
+    if (event.host_id == "1") { // if I(1) am the host
       return "host";
-    } else if (event.coming_people_ids.indexOf(1) > -1) { // if I(1) am in the list of going people
+    } else if (event.coming_people_ids.indexOf("1") > -1) { // if I(1) am in the list of going people
       return "going";
 
-    } else if (event.saved_people_ids.indexOf(1) > -1) { // if I(1) am in the list of  people who saved the event
+    } else if (event.saved_people_ids.indexOf("1") > -1) { // if I(1) am in the list of  people who saved the event
       return "saved";
     }
 

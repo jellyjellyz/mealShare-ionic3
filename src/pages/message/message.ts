@@ -52,7 +52,7 @@ export class MessagePage {
   }
 
   private findSender(message: Message): User {
-  	let user = this.users.find(user => user.id === message.senderId);
+  	let user = this.users.find(user => user.id == message.senderId);
   	return user;
   }
   private findSenderName(message: Message) {
@@ -71,10 +71,10 @@ export class MessagePage {
   private accept_invite(message: Message) {
     let invite_userId = message.senderId;
     let invite_event = this.findEvent(message);
-    if (invite_event.coming_people_ids.indexOf(1) === -1) {
-      invite_event.coming_people_ids.push(1);
+    if (invite_event.coming_people_ids.indexOf("1") === -1) {
+      invite_event.coming_people_ids.push("1");
       // console.log(invite_event.pending_people_ids);
-      this.messageService.sendMessage(invite_event.key, 1, invite_userId, 4);
+      this.messageService.sendMessage(invite_event.key, "1", invite_userId, 4);
       this.messageService.updateEvent(invite_event.key, "coming_people_ids", invite_event.coming_people_ids);
     }
     console.log("join");
@@ -85,7 +85,7 @@ export class MessagePage {
     if (request_event.coming_people_ids.indexOf(request_userId) === -1) {
       request_event.coming_people_ids.push(request_userId);
       // console.log(request_event.coming_people_ids);
-      this.messageService.sendMessage(request_event.key, 1, request_userId, 2);
+      this.messageService.sendMessage(request_event.key, "1", request_userId, 2);
       this.messageService.updateEvent(request_event.key, "coming_people_ids", request_event.coming_people_ids);
     }
     console.log("accept");
