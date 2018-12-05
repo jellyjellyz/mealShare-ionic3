@@ -58,9 +58,9 @@ export class UserListPage {
     this.hide = !this.hide;
     console.log(this.checked);
     let userIds: number[] = [];
-    for (let entry of Object.entries(this.checked)) {
-      if (entry[1] === true) {
-        userIds.push(Number(entry[0]));
+    for (var key in this.checked) {
+      if (this.checked[key] === true) {
+        userIds.push(Number(key));
       }
     }
     console.log(userIds);
