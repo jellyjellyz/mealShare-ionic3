@@ -21,27 +21,38 @@
   <div [ngSwitch]="segment">
     <ng-container *ngSwitchCase="'users'">
       <ion-item-group *ngFor="let user of users">
-        <ion-row no-padding (click)="jump(user.id)">
-          <ion-col col-3>
-            <ion-item>
-              <ion-avatar item-start>
-                <img src={{user.img}}>
-              </ion-avatar>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <h2>{{user.name}}</h2>
-              <p>{{user.company}}</p>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-checkbox class="checkbox" item-right color="dark" checked="true"></ion-checkbox>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+        <div *ngIf="user.id !== 1">
+          <ion-row no-padding (click)="jump(user.id)">
+            <ion-col col-3>
+              <ion-item>
+                <ion-avatar item-start>
+                  <img src={{user.img}}>
+                </ion-avatar>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <h2>{{user.name}}</h2>
+                <p>{{user.company}}</p>
+                <!-- <p>{{user.Id}}</p> -->
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-checkbox *ngIf="hide" item-right color="dark" [(ngModel)]="checked[user.id]"></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
       </ion-item-group>
+      <ion-row>
+        <button ion-button *ngIf="hide" (click)="saveGroup()">Save Group</button>
+      </ion-row>
+      <ion-fab bottom right edge class="addnew" (click)="createGroup()">
+        <button ion-fab mini side="top">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
     </ng-container>
 
     <ng-container *ngSwitchCase="'groups'">
@@ -64,22 +75,6 @@
             <ion-note item-end>5:47 am</ion-note>
           </ion-item>
         </ion-item-group>
-        <ion-fab bottom right edge class="addnew" (click)=createGroup()>
-          <button ion-fab mini side="top">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-fab>
-
-        <ion-list *ngIf="hide">
-          <ng-container *ngFor="let user of users">
-            <ion-item>
-              <ion-label>{{user.name}}</ion-label>
-              <ion-checkbox color="dark" checked="true"></ion-checkbox>
-            </ion-item>
-          </ng-container>
-        </ion-list>
-
-        <button ion-button>Save Group</button>
       </ng-container>
     </div>
 

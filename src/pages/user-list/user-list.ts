@@ -21,8 +21,9 @@ import { UserDataServiceProvider } from '../../providers/user-data-service/user-
 export class UserListPage {
   private users: User[] = [];
   private groups: Group[] = [];
-  private segment: string;
-  private hide: boolean;
+  private segment: string = "users";
+  private hide: boolean = false;
+  private checked = {};
   constructor(public navCtrl: NavController,
   			  public navParams: NavParams,
   			  private userService: UserDataServiceProvider) {
@@ -33,13 +34,42 @@ export class UserListPage {
     })
     this.users = userService.getUsers();
     this.groups = userService.getGroups();
-    console.log(this.groups);
-  	this.segment = "users";
-  	this.hide = true;
+    // console.log(this.groups);
+
+    // initialize checked object
+    for (var i = 1; i < this.users.length; i++) {
+      this.checked[this.users[i].id]=false;
+    }
+    console.log(this.checked);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserListPage');
+  }
+
+  public jump(userId: number) {
+    this.navCtrl.push(UserProfilePage, {"userId": userId});
+  }
+  private createGroup() {
+    this.hide = !this.hide;
+
+  }
+  private saveGroup() {
+    this.hide = !this.hide;
+    console.log(this.checked);
+    let userIds: number[] = [];
+    for (let entry of Object.entries(this.checked)) {
+      if (entry[1] === true) {
+        userIds.push(Number(entry[0]));
+      }
+    }
+    console.log(userIds);
+    let new_group: Group = {
+      groupId: 5,
+      groupName: "Eating Out Group",
+      userIds: userIds
+    };
+    this.userService.addGroup(new_group);
   }
 
   // private loadFakeEntries() {
@@ -95,11 +125,5 @@ export class UserListPage {
   //     }];
 
   // }
-  public jump(userId: number) {
-  	this.navCtrl.push(UserProfilePage, {"userId": userId});
-  }
-  private createGroup() {
-    this.hide = !this.hide;
-  }
 
 }
