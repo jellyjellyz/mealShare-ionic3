@@ -10,6 +10,7 @@ import { InvitegroupPage } from '../invitegroup/invitegroup';
 import { User } from '../../models/user';
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
 import { MyEventsPage } from '../my-events/my-events';
+import { AuthProvider } from '../../providers/auth/auth';
 
 /**
  * Generated class for the CreateEventPage page.
@@ -29,12 +30,14 @@ export class CreateEventPage {
   private res: Restaurant;
   private checkedGroup: Group;
   private loading: any;
+  private myId: string;
 
   constructor(private navCtrl: NavController, private navParams: NavParams,
     private eventDataService: EventDataServiceProvider,
     private userService: UserDataServiceProvider,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private authService: AuthProvider) {
     this.loading = this.loadingCtrl.create();
 
     // observer only creates when someone subscribe to it,
@@ -43,6 +46,11 @@ export class CreateEventPage {
     // at this time, if call notify subscribers, it will break annoyingly. 
     this.eventDataService.getObservable().subscribe(update => {
       // this.event = eventDataService.getEventById(eventKey);
+    })
+
+    this.getLoginUserId().then(id => {
+      this.myId = id;
+      console.log(this.myId);
     })
 
     let eventKey = this.navParams.get("eventKey");
@@ -56,11 +64,11 @@ export class CreateEventPage {
         start_time: new Date(1514808000000).toISOString(),
         end_time: new Date(1514808000000).toISOString(),
         restaurant: undefined,
-        coming_people_ids: [-1],
-        pending_people_ids: [-1],
-        host_id: -1,
+        coming_people_ids: ["-1"],
+        pending_people_ids: ["-1"],
+        host_id: "-1",
         image_url: "",
-        saved_people_ids: [9999999999999999999] // it seems an empty array would not be saved to Firebase
+        saved_people_ids: ["9999999999999999999"] // it seems an empty array would not be saved to Firebase
       }
     } else {
       this.loading.present();
@@ -78,7 +86,7 @@ export class CreateEventPage {
           pending_people_ids: snapshot.val().pending_people_ids,
           host_id: snapshot.val().host_id,
           image_url: snapshot.val().image_url,
-          saved_people_ids: [9999999999999999999] // it seems an empty array would not be saved to Firebase
+          saved_people_ids: ["9999999999999999999"] // it seems an empty array would not be saved to Firebase
         }
         this.res = this.event.restaurant;
         this.loading.dismiss();
@@ -106,11 +114,11 @@ export class CreateEventPage {
 
   private addEvent() {
     let emptyField = this.checkValidEvent(this.event);
-    console.log(emptyField);
+    // console.log(emptyField);
     if (emptyField) {
       this.presentAlert(emptyField);
     } else {
-      this.event.host_id = this.getLoginUserId();
+      this.event.host_id = this.myId;
       this.event.restaurant = this.res;
       this.event.image_url = this.res.image_url;
       this.event.pending_people_ids = this.checkedGroup.userIds;
@@ -162,12 +170,15 @@ export class CreateEventPage {
     this.navCtrl.push(InvitegroupPage);
   }
 
-  private getUserById(userId: number): User {
+  private getUserById(userId: string): User {
     return this.userService.getUserById(userId);
   }
 
-  private getLoginUserId() {
-    return 1;
+  private getLoginUserId(): Promise<string> {
+    return new Promise((resolve) => {
+      this.authService.getCurrentUser().then((user) => { resolve(user.id) });
+    })
+
   }
 
   private sendNotification() {
@@ -205,7 +216,7 @@ export class CreateEventPage {
       return "title";
     } else if (event.description == "") {
       return "description";
-    } else if (event.restaurant == undefined) {
+    } else if (this.res == undefined) {
       return "restaurant";
     } else {
       return undefined;

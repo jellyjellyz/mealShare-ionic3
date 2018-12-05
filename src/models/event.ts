@@ -9,9 +9,9 @@ export class Event {
     start_time: string;
     end_time: string;
     restaurant: Restaurant;
-    coming_people_ids: number[];
-    pending_people_ids: number[];
-    host_id: number;
+    coming_people_ids: string[];
+    pending_people_ids: string[];
+    host_id: string;
     image_url: string;
-    saved_people_ids: number[];
+    saved_people_ids: string[];
 }

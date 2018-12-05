@@ -9,6 +9,13 @@ page-user-profile {
 			margin-top: 10px;
 		}
 	}
+	.change-avatar-title {
+		color: map-get($colors, "primary");
+	}
+
+	.chooseimg {
+		opacity: 0.5;
+	}
 
 
 

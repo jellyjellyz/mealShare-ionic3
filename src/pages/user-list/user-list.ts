@@ -30,6 +30,7 @@ export class UserListPage {
   	// this.loadFakeEntries();
   	this.userService.getObservable().subscribe(update => {
       this.users = userService.getUsers();
+      // console.log(JSON.stringify(this.users));
       this.groups = userService.getGroups();
     })
     this.users = userService.getUsers();
@@ -47,20 +48,13 @@ export class UserListPage {
     console.log('ionViewDidLoad UserListPage');
   }
 
-  public jump(userId: number) {
-    this.navCtrl.push(UserProfilePage, {"userId": userId});
-  }
-  private createGroup() {
-    this.hide = !this.hide;
-
-  }
   private saveGroup() {
     this.hide = !this.hide;
     console.log(this.checked);
-    let userIds: number[] = [];
+    let userIds: string[] = [];
     for (var key in this.checked) {
       if (this.checked[key] === true) {
-        userIds.push(Number(key));
+        userIds.push(key);
       }
     }
     console.log(userIds);
@@ -125,5 +119,11 @@ export class UserListPage {
   //     }];
 
   // }
+  public jump(userId: string) {
+  	this.navCtrl.push(UserProfilePage, {"userId": userId}); 
+  }
+  private createGroup() {
+    this.hide = !this.hide;
+  }
 
 }

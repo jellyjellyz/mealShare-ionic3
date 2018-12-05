@@ -1,8 +1,8 @@
 export class Message {
 	messageId: number;
 	eventId: string;
-	senderId: number;
-	receiverId: number;
+	senderId: string;
+	receiverId: string;
 	// 1: request to join (host)
 	// 2: accept invite (host)
 	// 3: reject invite (host)

@@ -28,9 +28,14 @@ Ionic pages and navigation.
       <h2>Company</h2>
       <p>{{user.company}}</p>
     </ion-item>
-    <ion-item>
-      <h2>Location</h2>
-      <p>2353, Main Street, Ann Arbor, Michigan</p>
+
+
+
+    <ion-item *ngIf="user.email">
+
+      <h2>Email</h2>
+      <p>{{user.email}}</p>
+
     </ion-item>
     <ion-item>
       <h2>Bio </h2>
@@ -39,11 +44,45 @@ Ionic pages and navigation.
   </ion-card>
   <ion-card *ngIf="editProfile" class="inner-card">
     <ion-item>
-      <ion-avatar>
-        <img src={{user.img}}>
-      </ion-avatar>
-      <button ion-button clear (click)="save()">Save Change</button>
+      <ion-row>
+        <ion-avatar>
+          <img src={{user.img}}>
+        </ion-avatar>
+
+
+        <button ion-button clear (click)="save()">Save Change</button>
+      </ion-row>
     </ion-item>
+
+    <ion-item *ngIf="showAvatarChoice">
+      <p class="change-avatar-title">Change avatar</p>
+    </ion-item>
+
+    <ion-item *ngIf="showAvatarChoice">
+      <ion-row>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-bullseye.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-bullseye.png'" 
+           src="../assets/imgs/avatar-ts-bullseye.png">
+        </ion-avatar>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-buzz.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-buzz.png'" src="../assets/imgs/avatar-ts-buzz.png">
+        </ion-avatar>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-hamm.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-hamm.png'" src="../assets/imgs/avatar-ts-hamm.png">
+        </ion-avatar>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-jessie.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-jessie.png'" src="../assets/imgs/avatar-ts-jessie.png">
+        </ion-avatar>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-potatohead.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-potatohead.png'" src="../assets/imgs/avatar-ts-potatohead.png">
+        </ion-avatar>
+        <ion-avatar (click)="chooseImg('../assets/imgs/avatar-ts-woody.png')">
+          <img [class.chooseimg]="user.img!='../assets/imgs/avatar-ts-woody.png'" src="../assets/imgs/avatar-ts-woody.png">
+        </ion-avatar>
+
+      </ion-row>
+    </ion-item>
+
     <ion-item>
       <ion-label color="primary" stacked>Enter Name</ion-label>
       <ion-input [(ngModel)]="user.name" type="email" placeholder="{{user.name}}"></ion-input>
@@ -53,12 +92,19 @@ Ionic pages and navigation.
       <ion-input [(ngModel)]="user.company" type="email" placeholder="{{user.company}}"></ion-input>
     </ion-item>
     <ion-item>
-      <h2>Location</h2>
-      <p>2353, Main Street, Ann Arbor, Michigan</p>
+
+      <h2>Email</h2>
+      <p>{{user.email}}</p>
+
     </ion-item>
     <ion-item>
       <ion-label color="primary" stacked>Enter Bio</ion-label>
       <ion-input [(ngModel)]="user.bio" type="email" placeholder="{{user.bio}}"></ion-input>
     </ion-item>
   </ion-card>
+  <ion-item no-lines>
+    <button item-end ion-button (click)="logout()">Log out</button>
+  </ion-item>
+
+
 </ion-content>

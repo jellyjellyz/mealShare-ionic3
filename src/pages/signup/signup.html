@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>MealShare</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2 class="title">Create an Account</h2>
+  <div class="signup-content">
+
+    <form class="signup-form" [formGroup]="signup" (ngSubmit)="doSignup(signup.value)">
+      <ion-item no-lines>
+        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item no-lines>
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      </ion-item>
+      <button ion-button block class="signup-button" type="submit" [disabled]="!signup.valid">Sign
+        up</button>
+    </form>
+    <label class="error-message">{{errorMessage}}</label>
+  </div>
+</ion-content>

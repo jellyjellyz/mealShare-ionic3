@@ -53,13 +53,19 @@ export class AllEventsPage {
   }
 
   // TODO: use service to get data
-  private getUserImg(host_id: number) {
-    return this.userService.getUserById(host_id).img;
+  public getUserImg(userId) {
+    if (userId !== "-1" && this.userService.getUserById(userId) != undefined) {
+      let userImg = this.userService.getUserById(userId).img;
+      // console.log(userImg);
+      return userImg;
+    } else {
+      return "assets/imgs/no-avatar.png";
+    }
   }
 
   // TODO
-  private getUserName(host_id: number) {
-    return this.userService.getUserById(host_id).name;
+  private getUserName(host_id: string) {
+    return this.userService.getUserNameById(host_id);
   }
 
   private getEvents(ev) {
