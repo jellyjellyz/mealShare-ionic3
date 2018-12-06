@@ -101,6 +101,7 @@ export class EventDataServiceProvider {
     }
     // console.log(JSON.stringify(event));
     childRef.set(cloneEvent);
+    this.notifySubscribers();
   }
 
   public addEvent(event: Event) {

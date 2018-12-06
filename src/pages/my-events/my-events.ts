@@ -91,17 +91,14 @@ export class MyEventsPage {
   public checkEventRelationshipToMe(event: Event): string {
     if (event.host_id == this.myId) { // if I(1) am the host
       return "host";
-    } else if (event.coming_people_ids.indexOf(this.myId) > -1) { // if I(1) am in the list of going people
+    } else if (event.coming_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I(1) am in the list of going people
       return "going";
 
-    } else if (event.saved_people_ids.indexOf(this.myId) > -1) { // if I(1) am in the list of  people who saved the event
+    } else if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I(1) am in the list of  people who saved the event
       return "saved";
     } else {
       return "noRelation";
     }
-
-
-
   }
   private getLoginUserId(): Promise<string> {
     return new Promise((resolve) => {
