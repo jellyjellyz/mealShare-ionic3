@@ -80,6 +80,7 @@ export class UserListPage {
     this.userService.addGroup(new_group);
     this.segment = "groups";
     this.initChecked();
+    this.groupName = "";
   }
   private deleteGroup(group: Group) {
     const alert = this.alertCtrl.create({
