@@ -137,7 +137,7 @@
 
   </ion-card>
   <ng-container *ngIf="event.key == 0">
-    <button ion-button block class="form-action-button" (click)="addEvent()">Post!</button>
+    <button ion-button block class="form-action-button" (click)="addEvent()" [attr.disabled]="checkedGroup == undefined ? '' : null">Post!</button>
   </ng-container>
 
   <ion-row>
@@ -145,7 +145,7 @@
       <button color="danger" ion-button class="form-action-button-double" (click)="deleteEvent()">Delete</button>
     </ng-container>
     <ng-container *ngIf="event.key != 0">
-      <button color="warning" ion-button class="form-action-button-double" (click)="updateEvent()">Update</button>
+      <button color="warning" ion-button class="form-action-button-double" (click)="updateEvent()" [attr.disabled]="checkedGroup == undefined ? '' : null">Update</button>
     </ng-container>
   </ion-row>
 
