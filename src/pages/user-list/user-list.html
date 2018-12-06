@@ -61,13 +61,8 @@
         <button ion-button *ngIf="hide" (click)="saveGroup()">Save Group</button>
       </ion-row>
 
-      <!-- Create group button -->
-      <ion-fab bottom right edge class="addnew" (click)="createGroup()">
-        <button ion-fab mini side="top">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-fab>
     </ng-container>
+
     <!-- Users segment ends here -->
 
     <!-- Groups segment -->
@@ -109,6 +104,14 @@
 
     </ng-container>
     <!-- Groups segment ends here -->
+
+    <!-- Create group button -->
+    <ion-fab right bottom edge class="addnew" >
+      <button ion-fab mini (click)="createGroup()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+
   </div>
 
 </ion-content>

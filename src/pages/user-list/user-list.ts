@@ -110,6 +110,7 @@ export class UserListPage {
   }
   private createGroup() {
     this.hide = !this.hide;
+    this.segment ="users";
   }
 
 }

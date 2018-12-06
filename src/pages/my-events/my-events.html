@@ -60,7 +60,7 @@
                   <ion-icon name="ice-cream" *ngIf="checkEventRelationshipToMe(event) == 'going'"></ion-icon>
                   <div>JOIN</div>
                 </button>
-  
+
                 <button ion-button clear small class="eventCardButton" (click)="saveButtonClicked(event)">
                   <ion-icon [name]="checkEventRelationshipToMe(event) !== 'saved' ? 'star-outline' : 'star'"></ion-icon>
                   <div>SAVE</div>
@@ -102,7 +102,7 @@
 
                 </ion-item>
               </ng-container>
-            
+
           </ion-card>
         </ng-container>
 
@@ -115,13 +115,13 @@
         <ion-list *ngFor="let schedule of schedules | orderBy: 'schedule_date'">
           <!-- if a day has this type of event -->
           <ng-container *ngIf="schedule.relationships.indexOf('going') > -1 ">
-  
+
             <ion-list-header no-lines class="list_header"> {{schedule.date | date: 'fullDate'}} </ion-list-header>
-  
+
             <!-- for each event happening in one day -->
-  
+
             <ion-card *ngFor="let event of schedule.events | orderBy: 'start_time'">
-              
+
                 <!-- if a event is of this type -->
                 <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('going') > -1">
                   <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)" class="eventCardClickablePart">
@@ -133,29 +133,29 @@
                       <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
                     </ion-item>
                   </div>
-  
+
                   <ion-item no-lines>
                     <ion-avatar item-start *ngFor="let participantId of event.pending_people_ids.slice(0,3)">
                       <img src={{getUserImgById(participantId)}} class="participant_img">
                     </ion-avatar>
                     <p class="moreNum" *ngIf="event.pending_people_ids.length > 3">+{{event.pending_people_ids.length - 3}}</p>
-  
+
                     <!-- if the event's host is not me, then has the two buttons -->
                         <button ion-button clear small class="eventCardButton" (click)="joinButtonClicked(event)">
                           <ion-icon [name]="checkEventRelationshipsToMe(event).indexOf('going') == -1 ? 'ice-cream-outline' : 'ice-cream'"></ion-icon>
                           <div>JOIN</div>
                         </button>
-          
+
                         <!-- <button ion-button clear small class="eventCardButton" (click)="saveButtonClicked(event)">
                           <ion-icon [name]="checkEventRelationshipsToMe(event).indexOf('saved') == -1 ? 'star-outline' : 'star'"></ion-icon>
                           <div>SAVE</div>
                         </button> -->
                   </ion-item>
                 </ng-container>
-              
+
             </ion-card>
           </ng-container>
-  
+
         </ion-list>
     </ng-container>
 
@@ -164,11 +164,11 @@
         <ion-list *ngFor="let schedule of schedules | orderBy: 'schedule_date'">
           <!-- if a day has this type of event -->
           <ng-container *ngIf="schedule.relationships.indexOf('saved') > -1 ">
-  
+
             <ion-list-header no-lines class="list_header"> {{schedule.date | date: 'fullDate'}} </ion-list-header>
-  
+
             <!-- for each event happening in one day -->
-  
+
             <ion-card *ngFor="let event of schedule.events | orderBy: 'start_time'">
                 <!-- if a event is of this type -->
                 <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('saved') > -1">
@@ -181,42 +181,42 @@
                       <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
                     </ion-item>
                   </div>
-  
+
                   <ion-item no-lines>
                     <ion-avatar item-start *ngFor="let participantId of event.pending_people_ids.slice(0,3)">
                       <img src={{getUserImgById(participantId)}} class="participant_img">
                     </ion-avatar>
                     <p class="moreNum" *ngIf="event.pending_people_ids.length > 3">+{{event.pending_people_ids.length - 3}}</p>
-  
+
                     <!-- if the event's host is not me, then has the two buttons -->
                         <button ion-button clear small class="eventCardButton" (click)="joinButtonClicked(event)">
                           <ion-icon [name]="checkEventRelationshipsToMe(event).indexOf('going') == -1 ? 'ice-cream-outline' : 'ice-cream'"></ion-icon>
                           <div>JOIN</div>
                         </button>
-          
+
                         <button ion-button clear small class="eventCardButton" (click)="saveButtonClicked(event)">
                           <ion-icon [name]="checkEventRelationshipsToMe(event).indexOf('saved') == -1 ? 'star-outline' : 'star'"></ion-icon>
                           <div>SAVE</div>
                         </button>
                   </ion-item>
                 </ng-container>
-              
+
             </ion-card>
           </ng-container>
-  
+
         </ion-list>
     </ng-container>
-    
+
     <ng-container *ngSwitchCase="'pending'">
         <!-- for each day there's a list -->
         <ion-list *ngFor="let schedule of schedules | orderBy: 'schedule_date'">
           <!-- if a day has this type of event -->
           <ng-container *ngIf="schedule.relationships.indexOf('pending') > -1 ">
-  
+
             <ion-list-header no-lines class="list_header"> {{schedule.date | date: 'fullDate'}} </ion-list-header>
-  
+
             <!-- for each event happening in one day -->
-  
+
             <ion-card *ngFor="let event of schedule.events | orderBy: 'start_time'">
                 <!-- if a event is of this type -->
                 <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('pending') > -1">
@@ -229,13 +229,13 @@
                       <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
                     </ion-item>
                   </div>
-  
+
                   <ion-item no-lines>
                     <ion-avatar item-start *ngFor="let participantId of event.pending_people_ids.slice(0,3)">
                       <img src={{getUserImgById(participantId)}} class="participant_img">
                     </ion-avatar>
                     <p class="moreNum" *ngIf="event.pending_people_ids.length > 3">+{{event.pending_people_ids.length - 3}}</p>
-  
+
                     <!-- if the event's host is not me, then has the two buttons -->
                         <button ion-button clear small class="eventCardButton" (click)="joinPendingClicked(event)">
                           <ion-icon name="ice-cream" class="isPending"></ion-icon>
@@ -243,17 +243,17 @@
                         </button>
                   </ion-item>
                 </ng-container>
-              
+
             </ion-card>
           </ng-container>
-  
+
         </ion-list>
     </ng-container>
 
   </div>
 
   <ion-fab bottom right edge class="addnew" (click)="createEvent()">
-    <button ion-fab mini side="top">
+    <button ion-fab mini>
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
