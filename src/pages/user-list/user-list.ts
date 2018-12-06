@@ -120,7 +120,7 @@ export class UserListPage {
 
   // }
   public jump(userId: string) {
-  	this.navCtrl.push(UserProfilePage, {"userId": userId}); 
+  	this.navCtrl.push(UserProfilePage, {"userId": userId});
   }
   private createGroup() {
     this.hide = !this.hide;

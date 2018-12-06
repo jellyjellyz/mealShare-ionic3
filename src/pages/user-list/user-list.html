@@ -84,11 +84,12 @@
               </div>
             </div>
           </ion-thumbnail>
+          <h2>{{group.groupName}}</h2>
           <div *ngFor="let userId of group.userIds" class="userName">
             {{users[userId].name}}
-            <!-- {{users[group.userIds[0]].name}}, {{users[group.userIds[1]].name}} -->
+            <div *ngIf="userId !== group.userIds[group.userIds.length-1]" class="userName">,</div>
           </div>
-          <p>You're not turning me into a Mashed Potato.</p>
+
         </ion-item>
       </ion-item-group>
     </ng-container>
