@@ -40,18 +40,17 @@
     </ion-card-content>
 
     <!-- little buttons below -->
-    <ng-container *ngIf="checkEventRelationshipToMe(event) !== 'host'">
+    <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('host') == -1">
       <ion-row no-padding>
         <ion-col text-right>
           <button ion-button clear small color="primary" class="eventCardButton" (click)="saveButtonClicked(event)">
-            <ion-icon [name]="checkEventRelationshipToMe(event) !== 'saved' ? 'star-outline' : 'star'"></ion-icon>
+            <ion-icon [name]="checkEventRelationshipsToMe(event).indexOf('saved') == -1 ? 'star-outline' : 'star'"></ion-icon>
             <div>SAVE</div>
           </button>
         </ion-col>
         <ion-col>
           <button ion-button clear small color="primary" class="eventCardButton" (click)="joinButtonClicked(event)">
-            <ion-icon name="ice-cream-outline" *ngIf="checkEventRelationshipToMe(event) !== 'going'"></ion-icon>
-            <ion-icon name="ice-cream" *ngIf="checkEventRelationshipToMe(event) == 'going'"></ion-icon>
+              <ion-icon [name]="checkEventRelationshipsToMe(event).indexOf('going') == -1 ? 'ice-cream-outline' : 'ice-cream'"></ion-icon>
             <div>JOIN</div>
           </button>
         </ion-col>

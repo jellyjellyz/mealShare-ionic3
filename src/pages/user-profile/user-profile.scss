@@ -28,4 +28,46 @@ page-user-profile {
     box-shadow: 0 10px 120px rgba(193, 193, 193, 0.7);
 }
 
+ .button-outline-ios-primary {
+    border-color: #31c6c4;
+    color: #31c6c4;
+    background-color: transparent;
+    height: 80%;
+    margin-left: 20px;
+
+}
+
+
+
+.button-ios {
+    border-radius: 4px;
+    height: 2.8em;
+    font-size: 1.2rem;}
+
+
+//   .button-ios-primary {
+//     border-color: #31c6c4;
+//     color: #31c6c4 ;
+//     background-color: transparent;
+//     width: 100%;
+//      margin: 15px ;
+//     color: white;
+//     background-color: #31c6c4;
+// }
+
+.item-ios .item-button {
+    // padding: 0 0.5em;
+    height: 40px;
+     width: 100%;
+    font-size: 1.3rem;
+}
+
+
+.toolbar-title-ios {
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #31c6c4;
+    pointer-events: auto;
+}
 }

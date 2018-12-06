@@ -53,7 +53,7 @@ export class AllEventsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AllEventsPage');
+    // console.log('ionViewDidLoad AllEventsPage');
   }
 
 
@@ -103,27 +103,31 @@ export class AllEventsPage {
     })
   }
 
-  public checkEventRelationshipToMe(event: Event): string {
+  public checkEventRelationshipsToMe(event: Event): string[] {
+
+    let relations: string[] = [];
 
     if (event.host_id == this.myId) { // if I am the host
-      return "host";
-    } else if (event.coming_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of going people
-      return "going";
-    } else if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
-      return "saved";
-    } else {
-      return "noRelation";
+      relations.push("host");
     }
+    if (event.coming_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of going people
+      relations.push("going");
+    }
+    if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
+      relations.push("saved");
+    } 
+
+    return relations;
   }
 
   
   // some functions that are the same with in my-events.ts WITH MODIFICATION
   public joinButtonClicked(event:Event){
-    let relationship = this.checkEventRelationshipToMe(event);
-    // console.log(this.checkEventRelationshipToMe(event))
+    let relationships = this.checkEventRelationshipsToMe(event);
+    // console.log(this.checkEventRelationshipsToMe(event))
     let myIndex = event.coming_people_ids.indexOf(this.myId);
     // console.log(event.coming_people_ids);
-    if (relationship == 'going'){
+    if (relationships.indexOf('going') > -1){
       event.coming_people_ids.splice(myIndex,1);
     } else{
       event.coming_people_ids.push(parseInt(this.myId));
@@ -133,9 +137,9 @@ export class AllEventsPage {
   }
 
   public saveButtonClicked(event:Event){
-    let relationship = this.checkEventRelationshipToMe(event);
+    let relationships = this.checkEventRelationshipsToMe(event);
     let myIndex = event.coming_people_ids.indexOf(this.myId);
-    if (relationship == 'saved'){
+    if (relationships.indexOf('saved') > -1){
       event.saved_people_ids.splice(myIndex,1);
     } else{
       event.saved_people_ids.push(parseInt(this.myId));

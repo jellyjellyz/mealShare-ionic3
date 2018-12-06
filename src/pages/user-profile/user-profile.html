@@ -15,10 +15,12 @@ Ionic pages and navigation.
 <ion-content padding>
   <ion-card *ngIf="showProfile">
     <ion-item>
+       <ion-row>
       <ion-avatar>
         <img src={{user.img}}>
       </ion-avatar>
-      <button ion-button clear (click)="edit()">Edit Profile</button>
+       <button ion-button outline color="primary"  (click)="edit()">Edit Profile</button>
+        </ion-row>
     </ion-item>
     <ion-item>
       <h2>Full Name</h2>
@@ -50,7 +52,8 @@ Ionic pages and navigation.
         </ion-avatar>
 
 
-        <button ion-button clear (click)="save()">Save Change</button>
+   <!--      <button ion-button clear (click)="save()">Save Change</button> -->
+        <button ion-button outline color="primary"  (click)="save()">Save Change</button>
       </ion-row>
     </ion-item>
 
@@ -104,7 +107,7 @@ Ionic pages and navigation.
   </ion-card>
   <ion-item no-lines>
 
-     <button ion-button block clear class="signup-button" (click)="logout()">LOG OUT</button>
+     <button ion-button class="signup-button" (click)="logout()">LOG OUT</button>
   <!--   <button item-end ion-button (click)="logout()">Log out</button> -->
   </ion-item>
 
