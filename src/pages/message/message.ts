@@ -45,8 +45,8 @@ export class MessagePage {
     this.messages = this.messageService.getMessages();
     this.users = this.userService.getUsers();
     this.events = this.eventService.getEvents();
-    console.log(this.events);
-    console.log(this.messages);
+    // console.log(this.events);
+    // console.log(this.messages);
 
     this.getLoginUserId().then(id => {
       this.myId = id;
@@ -79,13 +79,22 @@ export class MessagePage {
   private accept_invite(message: Message) {
     let invite_userId = message.senderId;
     let invite_event = this.findEvent(message);
+    console.log(invite_userId);
+    console.log(invite_event);
+    console.log(invite_event.coming_people_ids.indexOf(this.myId));
     if (invite_event.coming_people_ids.indexOf(this.myId) === -1) {
+      console.log("join");
       invite_event.coming_people_ids.push(this.myId);
-      // console.log(invite_event.pending_people_ids);
+      let idx = invite_event.pending_people_ids.indexOf(this.myId)
+      if (idx > -1) {
+        invite_event.pending_people_ids.splice(idx, 1);
+      }
+
       this.messageService.sendMessage(invite_event.key, this.myId, invite_userId, 2);
+      this.messageService.updateEvent(invite_event.key, "pending_people_ids", invite_event.pending_people_ids);
       this.messageService.updateEvent(invite_event.key, "coming_people_ids", invite_event.coming_people_ids);
     }
-    console.log("join");
+
 
   }
   private accept_request(message: Message) {
