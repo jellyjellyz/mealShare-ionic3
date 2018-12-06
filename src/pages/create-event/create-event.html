@@ -112,7 +112,7 @@
         <div>
           <h2>
             <span *ngFor="let pId of event.coming_people_ids; let isLast=last">
-              {{ getUserById(pId).name }} {{isLast ? '' : ', '}}
+              {{ getUserNameById(pId) }} {{isLast ? '' : ', '}}
             </span>
           </h2>
         </div>
