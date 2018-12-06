@@ -153,48 +153,59 @@ export class EventDataServiceProvider {
     let events: Event[] = this.getEvents();
 
     for (let i = 0; i < events.length; i++) {
+      console.log(i)
       let dateNum = events[i].meet_date;
-
+      console.log(dateNum)
       if (dateNums.indexOf(dateNum) == -1) { // if the date is not in schedule, then create a new array under the date with this event
+        console.log('create new scheduleList at', dateNum )
         dateNums.push(dateNum);
 
         let newSchedule = {};
         newSchedule['date'] = dateNum;
         newSchedule['relationships'] = [];
-        newSchedule['relationships'].push(this.checkEventRelationshipToMe(events[i], this.myId));
+          let thisRelationships = this.checkEventRelationshipsToMe(events[i], this.myId);
+          if (thisRelationships.length > 0) thisRelationships.forEach((r) => newSchedule['relationships'].push(r));
         newSchedule['events'] = [];
-        newSchedule['events'].push(events[i]);
+          newSchedule['events'].push(events[i]);
 
         scheduleItems.push(newSchedule);
-      } else if (dateNums.indexOf(dateNum) > -1) { // if the sate exists, then push the event into the array
+      } else if (dateNums.indexOf(dateNum) > -1) { // if the date exists, then push the event into the array
+        console.log("update an existing scheduleItem at", dateNum)
         for (let j = 0; j < scheduleItems.length; j++) {
-          if (scheduleItems[j].date == dateNum) {
-            let relationship = this.checkEventRelationshipToMe(events[i], this.myId);
-            if (scheduleItems[j].relationships.indexOf(relationship) == -1) { // if there's no such relationship before, now add it
-              scheduleItems[j].relationships.push(relationship)
+          if (scheduleItems[j].date == dateNum) { // zoom into this date's events list
+            let thisRelationships = this.checkEventRelationshipsToMe(events[i], this.myId);
+            console.log(thisRelationships)
+            if (thisRelationships.length > 0){ // if it has some relationship with me
+              thisRelationships.forEach((r) => {
+                if (scheduleItems[j].relationships.indexOf(r) == -1) { // if there's no such relationship before, now add it
+                  scheduleItems[j].relationships.push(r);
+                }
+              }) 
+              scheduleItems[j].events.push(events[i])
             }
-            scheduleItems[j].events.push(events[i])
-          }
-        };
+          };
+        }
       }
+      // console.log("in devide schedual",JSON.stringify(scheduleItems));\
     }
-    // console.log("in devide schedual",JSON.stringify(scheduleItems));
     return scheduleItems;
   }
 
 
-  private checkEventRelationshipToMe(event: Event, myId = "1"): string {
+  private checkEventRelationshipsToMe(event: Event, myId = "1"): string[] {
+    let relationships = [];
     if (event.host_id == myId) { // if I am the host
-      return "host";
-    } else if (event.coming_people_ids.indexOf(myId) > -1) { // if I am in the list of going people
-      return "going";
-    } else if (event.saved_people_ids != undefined) {
-      if (event.saved_people_ids.indexOf(myId) > -1) { // if I am in the list of  people who saved the event
-        return "saved";
-      }
-    } else {
-      return "else";
+      relationships.push("host");
     }
+    if (event.coming_people_ids.indexOf(parseInt(myId)) > -1) { // if I am in the list of going people
+      relationships.push("going");
+    }
+    if (event.saved_people_ids != undefined) {
+      if (event.saved_people_ids.indexOf(parseInt(myId)) > -1) { // if I am in the list of  people who saved the event
+        relationships.push("saved");
+      }
+    }
+    return relationships;
   }
 
   public deleteEvent(eventKey: string) {

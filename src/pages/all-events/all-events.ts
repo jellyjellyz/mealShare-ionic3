@@ -21,6 +21,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class AllEventsPage {
   private myId;
+  private myIdNum;
 
   // events: Array<Event> ;
   private events: any = [];
@@ -44,6 +45,7 @@ export class AllEventsPage {
     // this.myId = "1";
     this.getLoginUserId().then(id => {
       this.myId = id;
+      this.myIdNum = parseInt(this.myId);
     })
   }
 
@@ -124,13 +126,11 @@ export class AllEventsPage {
   // some functions that are the same with in my-events.ts WITH MODIFICATION
   public joinButtonClicked(event:Event){
     let relationships = this.checkEventRelationshipsToMe(event);
-    // console.log(this.checkEventRelationshipsToMe(event))
-    let myIndex = event.coming_people_ids.indexOf(this.myId);
-    // console.log(event.coming_people_ids);
+
     if (relationships.indexOf('going') > -1){
-      event.coming_people_ids.splice(myIndex,1);
+      event.coming_people_ids.splice(event.coming_people_ids.indexOf(this.myIdNum),1);
     } else{
-      event.coming_people_ids.push(parseInt(this.myId));
+      event.coming_people_ids.push(this.myIdNum);
     }
     // console.log(event.coming_people_ids);
     this.eventService.updateEvent(event);
@@ -138,11 +138,10 @@ export class AllEventsPage {
 
   public saveButtonClicked(event:Event){
     let relationships = this.checkEventRelationshipsToMe(event);
-    let myIndex = event.coming_people_ids.indexOf(this.myId);
     if (relationships.indexOf('saved') > -1){
-      event.saved_people_ids.splice(myIndex,1);
+      event.saved_people_ids.splice(event.saved_people_ids.indexOf(this.myIdNum),1);
     } else{
-      event.saved_people_ids.push(parseInt(this.myId));
+      event.saved_people_ids.push(this.myIdNum);
     }
     this.eventService.updateEvent(event);
   }
