@@ -56,6 +56,12 @@
         </div>
       </ion-item-group>
 
+      <ion-row>
+        <ion-item *ngIf="hide">
+          <ion-label color="primary" stacked>Add Group Name</ion-label>
+          <ion-input [(ngModel)]="groupName" placeholder="Eating Out"></ion-input>
+          </ion-item>
+      </ion-row>
       <!-- Save group button -->
       <ion-row>
         <button ion-button *ngIf="hide" (click)="saveGroup()">Save Group</button>

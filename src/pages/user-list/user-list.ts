@@ -23,6 +23,7 @@ export class UserListPage {
   private segment: string = "users";
   private hide: boolean = false;
   private checked: any;
+  private groupName: string;
   constructor(public navCtrl: NavController,
   			  public navParams: NavParams,
           private alertCtrl: AlertController,
@@ -73,7 +74,7 @@ export class UserListPage {
     console.log(userIds);
     let new_group: Group = {
       groupId: 5,
-      groupName: "Eating Out Group",
+      groupName: this.groupName,
       userIds: userIds
     };
     this.userService.addGroup(new_group);
