@@ -7,7 +7,7 @@
 <ion-header>
 
 	<ion-navbar>
-		<ion-title>Message</ion-title>
+		<ion-title>Notification</ion-title>
 	</ion-navbar>
 
 </ion-header>
@@ -15,8 +15,10 @@
 
 <ion-content padding>
 	<ion-item-group no-padding>
+	
 		<ion-item-divider class="notifications-divider">11/26/18</ion-item-divider>
 			<ion-list *ngFor="let message of messages">
+				 <ion-card>
 				<ion-item no-padding class="notification-item">
 					<ion-avatar item-left>
 						<ion-img src={{findSenderImg(message)}}> </ion-img>
@@ -40,6 +42,7 @@
 						</div>
 					<ion-note class="item-time" item-right>10:10am</ion-note>
 				</ion-item>
+				 </ion-card>
 			</ion-list>
 		<ion-item-divider no-padding class="notifications-divider">11/25/18</ion-item-divider>
 
