@@ -75,9 +75,9 @@ export class UserListPage {
 				handler: () => {
 					this.userService.deleteGroup(group);
 
-					alert.onDidDismiss(() => {
-						this.navCtrl.pop();
-					});
+					// alert.onDidDismiss(() => {
+					// 	this.navCtrl.pop();
+					// });
 				}
 			},
 			{

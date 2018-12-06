@@ -57,7 +57,7 @@
 
     <ng-container *ngSwitchCase="'groups'">
       <ion-item-group *ngFor="let group of groups">
-        <ion-item no-padding (click)="jump()">
+        <ion-item no-padding>
           <ion-thumbnail item-start>
             <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
               <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]].img}} data-user-initial="J"></div>

@@ -6,6 +6,7 @@ import { Restaurant } from '../../models/restaurtant';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
 import { OrderByPipe } from '../../pipes/order-by/order-by';
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
+import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the AllEventsPage page.
  *
@@ -19,6 +20,7 @@ import { UserDataServiceProvider } from '../../providers/user-data-service/user-
   templateUrl: 'all-events.html',
 })
 export class AllEventsPage {
+  private myId;
 
   // events: Array<Event> ;
   private events: any = [];
@@ -26,7 +28,8 @@ export class AllEventsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private eventService: EventDataServiceProvider,
-    private userService: UserDataServiceProvider) {
+    private userService: UserDataServiceProvider,
+    private authService: AuthProvider) {
 
     this.eventService.getObservable().subscribe(update => {
       this.events = eventService.getEvents();
@@ -36,6 +39,12 @@ export class AllEventsPage {
     this.events = eventService.getEvents();
     this.showEvents = eventService.getEvents();
     // console.log(JSON.stringify(this.showEvents));
+
+
+    // this.myId = "1";
+    this.getLoginUserId().then(id => {
+      this.myId = id;
+    })
   }
 
   ionViewWillEnter() {
@@ -84,6 +93,57 @@ export class AllEventsPage {
       })
     }
   }
+
+
+  // some functions that are the same with in my-events.ts
+
+  private getLoginUserId(): Promise<string> {
+    return new Promise((resolve) => {
+      this.authService.getCurrentUser().then((user) => { resolve(user.id) });
+    })
+  }
+
+  public checkEventRelationshipToMe(event: Event): string {
+
+    if (event.host_id == this.myId) { // if I am the host
+      return "host";
+    } else if (event.coming_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of going people
+      return "going";
+    } else if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
+      return "saved";
+    } else {
+      return "noRelation";
+    }
+  }
+
+  
+  // some functions that are the same with in my-events.ts WITH MODIFICATION
+  public joinButtonClicked(event:Event){
+    let relationship = this.checkEventRelationshipToMe(event);
+    // console.log(this.checkEventRelationshipToMe(event))
+    let myIndex = event.coming_people_ids.indexOf(this.myId);
+    // console.log(event.coming_people_ids);
+    if (relationship == 'going'){
+      event.coming_people_ids.splice(myIndex,1);
+    } else{
+      event.coming_people_ids.push(parseInt(this.myId));
+    }
+    // console.log(event.coming_people_ids);
+    this.eventService.updateEvent(event);
+  }
+
+  public saveButtonClicked(event:Event){
+    let relationship = this.checkEventRelationshipToMe(event);
+    let myIndex = event.coming_people_ids.indexOf(this.myId);
+    if (relationship == 'saved'){
+      event.saved_people_ids.splice(myIndex,1);
+    } else{
+      event.saved_people_ids.push(parseInt(this.myId));
+    }
+    this.eventService.updateEvent(event);
+  }
+
+  
 
   // // TO BE Deleted
   // private getFakeEvents(): Event[] {
