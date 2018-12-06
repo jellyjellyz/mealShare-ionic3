@@ -8,7 +8,7 @@ page-message {
 
 		&:not(:first-child)
 		{
-			padding-top: 30px;
+			padding-top: 0px;
 		}
 	}
 
@@ -16,7 +16,7 @@ page-message {
 	{
 		padding: 12px;
 		border: none;
-		box-shadow: inset 0 -0.5px 0 0 $black-d;
+		// box-shadow: inset 0 -0.5px 0 0 $black-d;
 		align-items: flex-start;
 
 		ion-avatar {
@@ -95,7 +95,14 @@ page-message {
     margin:20px auto;
     background: #fff;
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 10px 120px rgba(193, 193, 193, 0.7);
+    box-shadow: 0 10px 120px rgba(193, 193, 193, 0.5);
 }
 
+
+}
+
+
+page-message .notification-item ion-avatar {
+  
+    margin: 0 0px 0 0 !important;
 }
