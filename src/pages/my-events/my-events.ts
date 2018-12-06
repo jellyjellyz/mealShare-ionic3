@@ -11,6 +11,7 @@ import { EventDetailPage } from '../event-detail/event-detail';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Message } from '../../models/message';
 import { User } from '../../models/user';
+import { AlertController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -38,13 +39,12 @@ export class MyEventsPage {
     public eventService: EventDataServiceProvider,
     public userService: UserDataServiceProvider,
     public messageService: MessageDataServiceProvider,
+    private alertCtrl: AlertController,
     private authService: AuthProvider) {
     this.eventService.getObservable().subscribe(update => {
       // this.events = this.eventService.getEvents();
       this.schedules = this.eventService.getSchedule();
-      // console.log(this.events);
-      console.log(this.schedules);
-      // console.log(this.events);
+      
 
       // console.log("get schedule", JSON.stringify(this.schedules));
     });
@@ -129,7 +129,7 @@ export class MyEventsPage {
     let relationships = this.checkEventRelationshipsToMe(event);
 
     if (relationships.indexOf('going') > -1 ){ //if already going, then retrieve
-      event.coming_people_ids.splice(event.coming_people_ids.indexOf(this.myIdNum),1);
+      this.presentConfirmNoGoing(relationships, event, this.myIdNum);
     } else{ // the user ask to join, then get pending, and send message to the host
       event.pending_people_ids.push(this.myIdNum);
       this.messageService.sendMessage(event.key, this.myId, event.host_id,1);
@@ -147,7 +147,7 @@ export class MyEventsPage {
   public joinPendingClicked(event:Event){
     let relationships = this.checkEventRelationshipsToMe(event);
     if (relationships.indexOf('pending') > -1){ // if already pending, then retrieve
-      event.pending_people_ids.splice(event.pending_people_ids.indexOf(this.myIdNum),1);
+      event.pending_people_ids.splice(event.pending_people_ids.indexOf(this.myIdNum),1)
     }
     this.eventService.updateEvent(event);
   } 
@@ -162,6 +162,34 @@ export class MyEventsPage {
       event.saved_people_ids.push(this.myIdNum);
     }
     this.eventService.updateEvent(event);
+  }
+
+
+  private presentConfirmNoGoing(relationships:string[], event:Event, idNum:number) {
+    let alert = this.alertCtrl.create({
+      title: 'Not Going',
+      message: 'Do you decide not to go?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: "Don't go",
+          handler: () => {
+            event.coming_people_ids.splice(event.coming_people_ids.indexOf(idNum),1);
+            if(relationships.indexOf('pending') > -1 ){//in case the data is not clean enough (a user is both going and pending)
+              event.pending_people_ids.splice(event.pending_people_ids.indexOf(idNum),1);
+            }
+            this.eventService.updateEvent(event);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 
