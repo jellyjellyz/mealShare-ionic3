@@ -22,7 +22,7 @@ export class UserListPage {
   private groups: Group[] = [];
   private segment: string = "users";
   private hide: boolean = false;
-  private checked = {};
+  private checked: any;
   constructor(public navCtrl: NavController,
   			  public navParams: NavParams,
           private alertCtrl: AlertController,
@@ -38,16 +38,29 @@ export class UserListPage {
     // console.log(this.groups);
 
     // initialize checked object
+    this.initChecked();
+  }
+
+  private initChecked() {
+    this.checked = {};
     for (var i = 1; i < this.users.length; i++) {
-      this.checked[this.users[i].id]=false;
+      // if (this.users[i].id !== 1) {
+        this.checked[this.users[i].id]=false;
+      // }
     }
-    console.log(this.checked);
+    // console.log(this.checked);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserListPage');
   }
-
+  private findUser(userId: string): User {
+    let user = this.users.find(user => user.id == userId);
+    return user;
+  }
+  private findUserImg(userId: string) {
+    return this.findUser(userId).img;
+  }
   private saveGroup() {
     this.hide = !this.hide;
     console.log(this.checked);
@@ -65,6 +78,7 @@ export class UserListPage {
     };
     this.userService.addGroup(new_group);
     this.segment = "groups";
+    this.initChecked();
   }
   private deleteGroup(group: Group) {
     const alert = this.alertCtrl.create({
@@ -91,60 +105,6 @@ export class UserListPage {
 		alert.present();
   }
 
-
-  // private loadFakeEntries() {
-  // 	this.users = [
-  //     {
-  //       id: 1,
-	//     name: "Woody",
-	//     company: "Google",
-	//     availability: true,
-	//     img: "assets/imgs/avatar-ts-woody.png",
-	//     bio: "How are you?"
-  //     },
-  //     {
-  //       id: 2,
-	//     name: "Buzz Lightyear",
-	//     company: "Amazon",
-	//     availability: false,
-	//     img: "assets/imgs/avatar-ts-buzz.png",
-	//     bio: "Bonjour!"
-  //     },
-  //     {
-  //       id: 3,
-	//     name: "Jessie",
-	//     company: "Microsoft",
-	//     availability: true,
-	//     img: "assets/imgs/avatar-ts-jessie.png",
-	//     bio: "Hello"
-  //     },
-  //     {
-  //       id: 4,
-	//     name: "Mr. Potato Head",
-	//     company: "Uber",
-	//     availability: false,
-	//     img: "assets/imgs/avatar-ts-potatohead.png",
-	//     bio: "Have you had a meal today?"
-  //     },
-  //     {
-  //       id: 5,
-	//     name: "Ariel",
-	//     company: "Waymo",
-	//     availability: true,
-	//     img: "https://2380ie25r0n01w5tt7mvyi81-wpengine.netdna-ssl.com/wp-content/uploads/2015/12/LA_SIRENITA_SERA%CC%81_RUBIA_joya_life.jpg",
-	//     bio: "Ariel has a distinctive appearance, with her long, flowing, bright red hair, blue eyes, green mermaid tail and purple seashell bikini top. In the films and television series, she is the seventh-born daughter of King Triton and Queen Athena of an underwater kingdom of Merfolk called Atlantica.[4][5] She is often rebellious, and in the first film, she longs to be a part of the human world. She marries Prince Eric, whom she rescued from a shipwreck, and together they have a daughter, Melody."
-  //     }];
-  //     this.groups = [
-  //     {
-  //     	groupId: 1,
-  //     	userIds: [1, 2]
-  //     },
-  //     {
-  //     	groupId: 2,
-  //     	userIds: [3, 4]
-  //     }];
-
-  // }
   public jump(userId: string) {
   	this.navCtrl.push(UserProfilePage, {"userId": userId});
   }
