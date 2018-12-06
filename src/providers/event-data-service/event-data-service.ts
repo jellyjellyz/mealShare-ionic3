@@ -180,7 +180,7 @@ export class EventDataServiceProvider {
                 if (scheduleItems[j].relationships.indexOf(r) == -1) { // if there's no such relationship before, now add it
                   scheduleItems[j].relationships.push(r);
                 }
-              }) 
+              })
               scheduleItems[j].events.push(events[i])
             }
           };

@@ -152,20 +152,22 @@ export class UserDataServiceProvider {
 	public updateUserProfile(user: User) {
 		let ref = this.db.ref('/users2').child(0);
 		ref.set(user);
-		// this.notifySubscribers();
+		this.notifySubscribers();
 		console.log(user);
 	}
 	public addGroup(group: Group) {
 		let listRef = this.db.ref('/groups');
 		let prefRef = listRef.push();
 		prefRef.set(group);
-		// this.notifySubscribers();
+		this.notifySubscribers();
 		console.log(group);
 	}
 	public deleteGroup(group: Group) {
 		let parentRef = this.db.ref('/groups');
 		let childRef = parentRef.child(group.groupId);
 		childRef.remove();
+		this.notifySubscribers();
+		console.log("delete");
 	}
 
 	public addUsers() {

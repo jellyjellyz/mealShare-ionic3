@@ -44,7 +44,7 @@ export class MyEventsPage {
     this.eventService.getObservable().subscribe(update => {
       // this.events = this.eventService.getEvents();
       this.schedules = this.eventService.getSchedule();
-      
+
 
       // console.log("get schedule", JSON.stringify(this.schedules));
     });
@@ -110,10 +110,10 @@ export class MyEventsPage {
     }
     if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
       relations.push("saved");
-    } 
+    }
     if (event.pending_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
       relations.push("pending");
-    } 
+    }
     // console.log(event.coming_people_ids)
     return relations;
   }
@@ -124,7 +124,7 @@ export class MyEventsPage {
     })
   }
 
-  
+
   public joinButtonClicked(event:Event){
     let relationships = this.checkEventRelationshipsToMe(event);
 
@@ -150,7 +150,7 @@ export class MyEventsPage {
       event.pending_people_ids.splice(event.pending_people_ids.indexOf(this.myIdNum),1)
     }
     this.eventService.updateEvent(event);
-  } 
+  }
 
 
 
