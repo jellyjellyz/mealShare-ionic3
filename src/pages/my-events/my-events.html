@@ -81,7 +81,7 @@
           <ion-card *ngFor="let event of schedule.events | orderBy: 'start_time'">
               <!-- if a event is of this type -->
               <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('host') > -1">
-                <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)">
+                <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)" class="eventCardClickablePart">
                   <!-- for text info per event -->
                   <ion-item no-lines>
                     <h2 class="event_title">
@@ -121,7 +121,7 @@
               
                 <!-- if a event is of this type -->
                 <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('going') > -1">
-                  <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)">
+                  <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)" class="eventCardClickablePart">
                     <!-- for text info per event -->
                     <ion-item no-lines>
                       <h2 class="event_title">
@@ -169,7 +169,7 @@
             <ion-card *ngFor="let event of schedule.events | orderBy: 'start_time'">
                 <!-- if a event is of this type -->
                 <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('saved') > -1">
-                  <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)">
+                  <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)" class="eventCardClickablePart">
                     <!-- for text info per event -->
                     <ion-item no-lines>
                       <h2 class="event_title">

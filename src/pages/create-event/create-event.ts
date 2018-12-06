@@ -100,6 +100,7 @@ export class CreateEventPage {
     this.res = this.navParams.get('restaurant') || undefined;
     this.checkedGroup = this.navParams.get('group') || undefined;
     console.log(this.checkedGroup);
+    
 
     // after click edit as a host.
     if (!this.res) {
