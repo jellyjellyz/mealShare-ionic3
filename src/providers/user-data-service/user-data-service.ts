@@ -68,7 +68,7 @@ export class UserDataServiceProvider {
 			});
 			// notify subscriber in home page to sync the update
 			this.notifySubscribers();
-			console.log(this.groups);
+			// console.log(this.groups);
 		});
 	}
 	public getObservable(): Observable<any[]> {

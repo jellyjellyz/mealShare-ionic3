@@ -8,7 +8,9 @@ import { EventDataServiceProvider } from '../../providers/event-data-service/eve
 import { RestaurantSelectionPage } from '../restaurant-selection/restaurant-selection';
 import { InvitegroupPage } from '../invitegroup/invitegroup';
 import { User } from '../../models/user';
+import { Message } from '../../models/message';
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
+import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
 import { MyEventsPage } from '../my-events/my-events';
 import { AuthProvider } from '../../providers/auth/auth';
 
@@ -35,6 +37,7 @@ export class CreateEventPage {
   constructor(private navCtrl: NavController, private navParams: NavParams,
     private eventDataService: EventDataServiceProvider,
     private userService: UserDataServiceProvider,
+    private messageService: MessageDataServiceProvider,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private authService: AuthProvider) {
@@ -42,8 +45,8 @@ export class CreateEventPage {
 
     // observer only creates when someone subscribe to it,
     // i.e. if not subscribe it here, if no one subscribe to it before
-    // there will be no observer, 
-    // at this time, if call notify subscribers, it will break annoyingly. 
+    // there will be no observer,
+    // at this time, if call notify subscribers, it will break annoyingly.
     this.eventDataService.getObservable().subscribe(update => {
       // this.event = eventDataService.getEventById(eventKey);
     })
@@ -130,6 +133,7 @@ export class CreateEventPage {
       this.event.meet_date = new Date(year, month, date).toISOString();
 
       this.eventDataService.addEvent(this.event);
+      this.sendMessage();
       this.navCtrl.pop();
     }
 
@@ -183,9 +187,11 @@ export class CreateEventPage {
 
   }
 
-  private sendNotification() {
-    // TODO
-
+  private sendMessage() {
+    console.log("send message");
+    for (var receiverId in this.event.pending_people_ids) {
+      this.messageService.sendMessage(this.event.key, this.event.host_id, this.event.pending_people_ids[receiverId], 4);
+    }
   }
 
   private deleteEvent() {

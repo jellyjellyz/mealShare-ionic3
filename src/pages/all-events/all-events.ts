@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EventDetailPage } from '../event-detail/event-detail';
 import { Event } from '../../models/event';
+import { Message } from '../../models/message';
 import { Restaurant } from '../../models/restaurtant';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
 import { OrderByPipe } from '../../pipes/order-by/order-by';
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
+import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
 import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the AllEventsPage page.
@@ -29,6 +31,7 @@ export class AllEventsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private eventService: EventDataServiceProvider,
     private userService: UserDataServiceProvider,
+    private messageService: MessageDataServiceProvider,
     private authService: AuthProvider) {
 
     this.eventService.getObservable().subscribe(update => {
@@ -87,7 +90,7 @@ export class AllEventsPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.showEvents = this.showEvents.filter((item) => {
-        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1 
+        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1
              || item.description .toLowerCase().indexOf(val.toLowerCase()) > -1
         );
       })
@@ -115,12 +118,12 @@ export class AllEventsPage {
     }
     if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
       relations.push("saved");
-    } 
+    }
 
     return relations;
   }
 
-  
+
   // some functions that are the same with in my-events.ts WITH MODIFICATION
   public joinButtonClicked(event:Event){
     let relationships = this.checkEventRelationshipsToMe(event);
@@ -134,6 +137,7 @@ export class AllEventsPage {
     }
     // console.log(event.coming_people_ids);
     this.eventService.updateEvent(event);
+    this.messageService.sendMessage(event.key, this.myId, event.host_id, 1);
   }
 
   public saveButtonClicked(event:Event){
@@ -147,7 +151,7 @@ export class AllEventsPage {
     this.eventService.updateEvent(event);
   }
 
-  
+
 
   // // TO BE Deleted
   // private getFakeEvents(): Event[] {
@@ -193,7 +197,7 @@ export class AllEventsPage {
   //       pending_people_ids: [],
   //       host_id: 1,
   //       image_url: "assets/imgs/ramen.jpg"
-  //     }, 
+  //     },
   //     {
   //       key: 3,
   //       title: "Salad Group",

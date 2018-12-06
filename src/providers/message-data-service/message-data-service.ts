@@ -78,15 +78,15 @@ export class MessageDataServiceProvider {
 	public sendMessage(eventId: string, senderId: string, receiverId: string, messageType: number) {
 		let listRef = this.db.ref('/messages');
 		let prefRef = listRef.push();
-		let dataRecord = {
-			messageId: this.getNextMessageId(),
+		let message = {
+			messageId: 1,
 			eventId: eventId,
 			senderId: senderId,
 			receiverId: receiverId,
 			messageType: messageType
 		}
-		prefRef.set(dataRecord);
-		this.notifySubscribers();
+		prefRef.set(message);
+		console.log(message);
 	}
 
 	// receive message
@@ -108,7 +108,7 @@ export class MessageDataServiceProvider {
 					this.messages.push(message);
 				}
 			});
-			// this.notifySubscribers();
+			this.notifySubscribers();
 			// console.log(2);
 			// console.log(this.messages);
 		});

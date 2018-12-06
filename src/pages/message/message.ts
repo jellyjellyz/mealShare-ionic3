@@ -34,24 +34,23 @@ export class MessagePage {
   ) {
 
     this.messageService.getObservable().subscribe(update => {
-      this.messages = messageService.getMessages();
+      this.messages = this.messageService.getMessages();
     });
     this.userService.getObservable().subscribe(update => {
-      this.users = userService.getUsers();
+      this.users = this.userService.getUsers();
     });
     this.eventService.getObservable().subscribe(update => {
-      this.events = eventService.getEvents();
+      this.events = this.eventService.getEvents();
     });
-    this.messages = messageService.getMessages();
-    this.users = userService.getUsers();
-    this.events = eventService.getEvents();
+    this.messages = this.messageService.getMessages();
+    this.users = this.userService.getUsers();
+    this.events = this.eventService.getEvents();
     console.log(this.events);
     console.log(this.messages);
 
-    // this.myId = "1";
     this.getLoginUserId().then(id => {
       this.myId = id;
-      // console.log(this.myId);
+      console.log(this.myId);
     })
 
   }
@@ -83,7 +82,7 @@ export class MessagePage {
     if (invite_event.coming_people_ids.indexOf(this.myId) === -1) {
       invite_event.coming_people_ids.push(this.myId);
       // console.log(invite_event.pending_people_ids);
-      this.messageService.sendMessage(invite_event.key, this.myId, invite_userId, 4);
+      this.messageService.sendMessage(invite_event.key, this.myId, invite_userId, 2);
       this.messageService.updateEvent(invite_event.key, "coming_people_ids", invite_event.coming_people_ids);
     }
     console.log("join");
