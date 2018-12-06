@@ -9,6 +9,10 @@ import { OrderByPipe } from '../../pipes/order-by/order-by';
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
 import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
 import { AuthProvider } from '../../providers/auth/auth';
+import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
+import { Message } from '../../models/message';
+
+
 /**
  * Generated class for the AllEventsPage page.
  *
@@ -28,12 +32,18 @@ export class AllEventsPage {
   // events: Array<Event> ;
   private events: any = [];
   private showEvents: Event[] = [];
+  private messages: Message[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private eventService: EventDataServiceProvider,
     private userService: UserDataServiceProvider,
-    private messageService: MessageDataServiceProvider,
-    private authService: AuthProvider) {
+    private authService: AuthProvider,
+    private messageService: MessageDataServiceProvider
+    ) {
+
+      this.messageService.getObservable().subscribe(update => {
+        this.messages = messageService.getMessages();
+      });
 
     this.eventService.getObservable().subscribe(update => {
       this.events = eventService.getEvents();
@@ -120,7 +130,14 @@ export class AllEventsPage {
     }
     if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
       relations.push("saved");
+<<<<<<< HEAD
     }
+=======
+    }
+    if (event.pending_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who pended the event
+      relations.push("pending");
+    }
+>>>>>>> bb7ec7b35b2ee280ce4ada8273b7f55be9765cfc
 
     return relations;
   }
@@ -128,14 +145,25 @@ export class AllEventsPage {
 
   // some functions that are the same with in my-events.ts WITH MODIFICATION
   public joinButtonClicked(event:Event){
+
     let relationships = this.checkEventRelationshipsToMe(event);
 
-    if (relationships.indexOf('going') > -1){
+    if (relationships.indexOf('going') > -1 ){ //if already going, then retrieve
       event.coming_people_ids.splice(event.coming_people_ids.indexOf(this.myIdNum),1);
-    } else{
-      event.coming_people_ids.push(this.myIdNum);
+      if(relationships.indexOf('pending') > -1 ){//in case the data is not clean enough (a user is both going and pending)
+        event.pending_people_ids.splice(event.pending_people_ids.indexOf(this.myIdNum),1);
+      }
+    } else if (relationships.indexOf('pending') > -1 ) { // if pending, then retrieve
+      event.pending_people_ids.splice(event.pending_people_ids.indexOf(this.myIdNum),1);
+    }else{ // the user ask to join, then get pending, and send message to the host
+      event.pending_people_ids.push(this.myIdNum);
+      this.messageService.sendMessage(event.key, this.myId, event.host_id,1);
     }
-    // console.log(event.coming_people_ids);
+
+    if (relationships.indexOf('saved') > -1){ // if the user has saved the event, then delete from the saved list
+      event.saved_people_ids.splice(event.saved_people_ids.indexOf(this.myIdNum),1)
+    }
+
     this.eventService.updateEvent(event);
     this.messageService.sendMessage(event.key, this.myId, event.host_id, 1);
   }

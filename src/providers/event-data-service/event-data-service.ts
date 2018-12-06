@@ -101,7 +101,7 @@ export class EventDataServiceProvider {
     }
     // console.log(JSON.stringify(event));
     childRef.set(cloneEvent);
-    // this.notifySubscribers();
+    this.notifySubscribers();
   }
 
   public addEvent(event: Event) {
@@ -199,6 +199,9 @@ export class EventDataServiceProvider {
     }
     if (event.coming_people_ids.indexOf(parseInt(myId)) > -1) { // if I am in the list of going people
       relationships.push("going");
+    }
+    if (event.pending_people_ids.indexOf(parseInt(myId)) > -1) { // if I am in the list of going people
+      relationships.push("pending");
     }
     if (event.saved_people_ids != undefined) {
       if (event.saved_people_ids.indexOf(parseInt(myId)) > -1) { // if I am in the list of  people who saved the event
