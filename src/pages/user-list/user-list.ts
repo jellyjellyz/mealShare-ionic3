@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { UserProfilePage } from '../user-profile/user-profile';
 import { User } from '../../models/user';
 import { Group } from '../../models/group';
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
-
 
 /**
  * Generated class for the UserListPage page.
@@ -26,6 +25,7 @@ export class UserListPage {
   private checked = {};
   constructor(public navCtrl: NavController,
   			  public navParams: NavParams,
+          private alertCtrl: AlertController,
   			  private userService: UserDataServiceProvider) {
   	// this.loadFakeEntries();
   	this.userService.getObservable().subscribe(update => {
@@ -64,7 +64,33 @@ export class UserListPage {
       userIds: userIds
     };
     this.userService.addGroup(new_group);
+    this.segment = "groups";
   }
+  private deleteGroup(group: Group) {
+    const alert = this.alertCtrl.create({
+			title: 'Delete this group',
+			subTitle: 'are you sure?',
+			buttons: [{
+				text: 'Confirm',
+				handler: () => {
+					this.userService.deleteGroup(group);
+
+					alert.onDidDismiss(() => {
+						this.navCtrl.pop();
+					});
+				}
+			},
+			{
+				text: 'Cancel',
+				role: 'cancel',
+				handler: () => {
+					console.log('Buy clicked');
+				}
+			}]
+		});
+		alert.present();
+  }
+
 
   // private loadFakeEntries() {
   // 	this.users = [

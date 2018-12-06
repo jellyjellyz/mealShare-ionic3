@@ -60,7 +60,7 @@
         <ion-item no-padding (click)="jump()">
           <ion-thumbnail item-start>
             <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
-              <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]-1].img}} data-user-initial="J"></div>
+              <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]].img}} data-user-initial="J"></div>
               <div class="conversation-summary-avatar-group-member-wrapper">
                 <img *ngIf="group.userIds.length>1; else that" class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[1]].img}} data-user-initial="P">
                 <ng-template #that>
@@ -89,10 +89,13 @@
             {{users[userId].name}}
             <div *ngIf="userId !== group.userIds[group.userIds.length-1]" class="userName">,</div>
           </div>
+          <button class="button-color" ion-button clear icon-only float-right (click)="deleteGroup(group)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
 
-        </ion-item>
-      </ion-item-group>
-    </ng-container>
-  </div>
+      </ion-item>
+    </ion-item-group>
+  </ng-container>
+</div>
 
 </ion-content>
