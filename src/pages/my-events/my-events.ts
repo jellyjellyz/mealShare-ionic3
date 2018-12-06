@@ -23,6 +23,9 @@ export class MyEventsPage {
   private event_type: string;
   private segment: string = "all";
 
+  public joined: boolean = false;
+  public saved: boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -102,7 +105,16 @@ export class MyEventsPage {
     return new Promise((resolve) => {
       this.authService.getCurrentUser().then((user) => { resolve(user.id) });
     })
+  }
 
+
+  public joinButtonClicked(){
+    this.joined = !this.joined;
+    console.log(this.joined);
+  }
+
+  public saveButtonClicked(){
+    this.saved = !this.saved;
   }
 
 }
