@@ -55,13 +55,14 @@
             <p class="moreNum" *ngIf="event.coming_people_ids.length > 3">+{{event.coming_people_ids.length - 3}}</p>
 
             <ng-container *ngIf="checkEventRelationshipToMe(event) !== 'host'">
-              <button ion-button clear small class="eventCardButton">
-                <ion-icon name="ice-cream-outline"></ion-icon>
+              <button ion-button clear small class="eventCardButton" (click)="joinButtonClicked()">
+                <ion-icon name="ice-cream-outline" *ngIf='!joined'></ion-icon>
+                <ion-icon name="ice-cream" *ngIf='joined'></ion-icon>
                 <div>JOIN</div>
               </button>
 
-              <button ion-button clear small class="eventCardButton">
-                <ion-icon name="star-outline"></ion-icon>
+              <button ion-button clear small class="eventCardButton" (click)="saveButtonClicked()">
+                <ion-icon [name]="!saved ? 'star-outline' : 'star'"></ion-icon>
                 <div>SAVE</div>
               </button>
             </ng-container>

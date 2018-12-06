@@ -33,7 +33,7 @@
         <span *ngFor="let pId of group.userIds; let isLast=last">
           {{ getUserNameById(pId) }} {{isLast ? '' : ', '}}
         </span>
-                      
+
       </ion-item>
       <!-- <ion-item>
 
@@ -52,13 +52,17 @@
 
         <p class="moreNum">+5</p>
       </ion-item> -->
-      <ion-item no-lines>
-          <ion-avatar item-start *ngFor="let id of group.userIds.slice(0,3)">
-            <img src={{getUserImgById(id)}} class="participant_img">
-          </ion-avatar>
-          <p class="moreNum" *ngIf="group.userIds.length > 3">+{{group.userIds.length - 3}}</p>
-
-        </ion-item>
+      <ion-item no-lines *ngIf="group.userIds">
+        <ion-avatar item-start *ngFor="let id of group.userIds.slice(0,3)">
+          <img src={{getUserImgById(id)}} class="participant_img">
+        </ion-avatar>
+        <p class="moreNum" *ngIf="group.userIds.length > 3">+{{group.userIds.length - 3}}</p>
+      </ion-item>
+      <ion-item *ngIf="!group.userIds">
+        <ion-avatar item-start>
+          <img src="assets/imgs/no-avatar.png" class="participant_img">
+        </ion-avatar>
+      </ion-item>
     </ion-card>
 
 
