@@ -74,9 +74,13 @@
 
 
 
-    <button ion-item (click)="toInviteGroup()">
-      Invite Friends
+    <button *ngIf="event.pending_people_ids && event.pending_people_ids != '-1'" ion-item (click)="toInviteGroup()">
+      Reinvite Friends
       <!--    <ion-badge item-end>0</ion-badge> -->
+    </button>
+
+    <button *ngIf="!event.pending_people_ids || event.pending_people_ids == '-1'" ion-item (click)="toInviteGroup()">
+      Invite Friends
     </button>
 
     <ion-card *ngIf="checkedGroup" class="inner-card">
@@ -145,7 +149,7 @@
       <button color="danger" ion-button class="form-action-button-double" (click)="deleteEvent()">Delete</button>
     </ng-container>
     <ng-container *ngIf="event.key != 0">
-      <button color="warning" ion-button class="form-action-button-double" (click)="updateEvent()" [attr.disabled]="checkedGroup == undefined ? '' : null">Update</button>
+      <button color="warning" ion-button class="form-action-button-double" (click)="updateEvent()">Update</button>
     </ng-container>
   </ion-row>
 

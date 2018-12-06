@@ -103,7 +103,7 @@ export class RestaurantSelectionPage {
             res.categories = temp["categories"][0]["title"];
             res.image_url = temp["image_url"];
             res.location = temp["location"]["display_address"];
-            res.price = temp["price"];
+            res.price = temp["price"] ? temp["price"]: "no price data";
             res.url = temp["url"];
             res.coordinates = { latitude: 0, longitude: 0 };
             res.coordinates.latitude = temp["coordinates"]["latitude"];

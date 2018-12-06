@@ -157,7 +157,7 @@ export class CreateEventPage {
       let date = temp.getUTCDate();
       let year = temp.getUTCFullYear();
       this.event.meet_date = new Date(year, month, date).toISOString();
-      this.event.pending_people_ids = this.checkedGroup.userIds;
+      this.event.pending_people_ids = this.checkedGroup ? this.checkedGroup.userIds : this.event.pending_people_ids;
 
       // console.log(this.event.end_time);
       this.eventDataService.updateEvent(this.event);
