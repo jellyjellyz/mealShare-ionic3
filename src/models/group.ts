@@ -1,5 +1,5 @@
 export class Group {
-	groupId: number;
+	groupId: any;
 	groupName: string;
 	userIds: string[];
 }

@@ -99,6 +99,7 @@ export class CreateEventPage {
     // after choose restaurant in select restaurant page
     this.res = this.navParams.get('restaurant') || undefined;
     this.checkedGroup = this.navParams.get('group') || undefined;
+    console.log(this.checkedGroup);
 
     // after click edit as a host.
     if (!this.res) {
@@ -151,6 +152,7 @@ export class CreateEventPage {
       let date = temp.getUTCDate();
       let year = temp.getUTCFullYear();
       this.event.meet_date = new Date(year, month, date).toISOString();
+      this.event.pending_people_ids = this.checkedGroup.userIds;
 
       // console.log(this.event.end_time);
       this.eventDataService.updateEvent(this.event);
