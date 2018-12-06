@@ -9,9 +9,6 @@ import { OrderByPipe } from '../../pipes/order-by/order-by';
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
 import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
 import { AuthProvider } from '../../providers/auth/auth';
-import { MessageDataServiceProvider } from '../../providers/message-data-service/message-data-service';
-import { Message } from '../../models/message';
-
 
 /**
  * Generated class for the AllEventsPage page.
@@ -130,14 +127,10 @@ export class AllEventsPage {
     }
     if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
       relations.push("saved");
-<<<<<<< HEAD
-    }
-=======
     }
     if (event.pending_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who pended the event
       relations.push("pending");
     }
->>>>>>> bb7ec7b35b2ee280ce4ada8273b7f55be9765cfc
 
     return relations;
   }
