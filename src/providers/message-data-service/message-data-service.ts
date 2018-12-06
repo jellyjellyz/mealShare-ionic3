@@ -40,6 +40,12 @@ export class MessageDataServiceProvider {
 	}
 
 	private notifySubscribers(): void {
+		if (this.serviceObserver === undefined) {
+			// create observer and observable
+			this.clientObservable = Observable.create(observerThatWasCreated => {
+				this.serviceObserver = observerThatWasCreated;
+			});
+		}
 		this.serviceObserver.next(undefined);
 	}
 
@@ -82,7 +88,7 @@ export class MessageDataServiceProvider {
 					this.messages.push(message);
 				}
 			});
-			// this.notifySubscribers();
+			this.notifySubscribers();
 			// console.log(2);
 			// console.log(this.messages);
 		});
