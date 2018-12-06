@@ -5,6 +5,8 @@ import * as firebase from 'firebase/app';
 import 'firebase/database';
 import { User } from '../../models/user';
 import { Group } from '../../models/group';
+// import { NavController } from 'ionic-angular';
+
 /*
   Generated class for the UserDataServiceProvider provider.
 
@@ -66,6 +68,7 @@ export class UserDataServiceProvider {
 			});
 			// notify subscriber in home page to sync the update
 			this.notifySubscribers();
+			console.log(this.groups);
 		});
 	}
 	public getObservable(): Observable<any[]> {
@@ -149,6 +152,7 @@ export class UserDataServiceProvider {
 	public updateUserProfile(user: User) {
 		let ref = this.db.ref('/users2').child(0);
 		ref.set(user);
+		this.notifySubscribers();
 		console.log(user);
 	}
 	public addGroup(group: Group) {
@@ -156,6 +160,11 @@ export class UserDataServiceProvider {
 		let prefRef = listRef.push();
 		prefRef.set(group);
 		console.log(group);
+	}
+	public deleteGroup(group: Group) {
+		let parentRef = this.db.ref('/groups');
+		let childRef = parentRef.child(group.groupId);
+		childRef.remove();
 	}
 
 	public addUsers() {

@@ -11,13 +11,15 @@
 
 
 <ion-content padding class="main">
-  <h2 class="title">Start Meal Share!</h2>
+
+   <img src="../../assets/imgs/logo.png">
+  <h4 class="title">Start Meal Share!</h4>
   <ion-row class="button-bar">
     <ion-col width-50>
-      <button class="action-btn" ion-button primary (click)="goToLogin()">Log in</button>
+        <button ion-button outline color="primary"   (click)="goToLogin()">Login</button>
     </ion-col>
     <ion-col width-50>
-      <button class="action-btn" ion-button primary (click)="goToSignup()">Sign up</button>
+      <button ion-button color="primary"   (click)="goToSignup()">Sign Up</button>
     </ion-col>
   </ion-row>
 </ion-content>
