@@ -79,18 +79,18 @@
           <!-- for each event happening in one day -->
 
           <ion-card *ngFor="let event of schedule.events | orderBy: 'start_time'">
-            <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)">
               <!-- if a event is of this type -->
               <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('host') > -1">
-                <!-- for text info per event -->
-                <ion-item no-lines>
-                  <h2 class="event_title">
-                    <ion-icon name="contact" *ngIf="checkEventRelationshipsToMe(event).indexOf('host')" class="hostIcon"></ion-icon>
-                    {{event.title}}
-                  </h2>
-                  <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
-                </ion-item>
-
+                <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)">
+                  <!-- for text info per event -->
+                  <ion-item no-lines>
+                    <h2 class="event_title">
+                      <ion-icon name="contact" *ngIf="checkEventRelationshipsToMe(event).indexOf('host')" class="hostIcon"></ion-icon>
+                      {{event.title}}
+                    </h2>
+                    <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
+                  </ion-item>
+                </div>
                 <ion-item no-lines>
                   <ion-avatar item-start *ngFor="let participantId of event.pending_people_ids.slice(0,3)">
                     <img src={{getUserImgById(participantId)}} class="participant_img">
@@ -99,7 +99,7 @@
 
                 </ion-item>
               </ng-container>
-            </div>
+            
           </ion-card>
         </ng-container>
 
@@ -118,16 +118,18 @@
             <!-- for each event happening in one day -->
   
             <ion-card *ngFor="let event of schedule.events | orderBy: 'start_time'">
-              <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)">
+              
                 <!-- if a event is of this type -->
                 <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('going') > -1">
-                  <!-- for text info per event -->
-                  <ion-item no-lines>
-                    <h2 class="event_title">
-                      {{event.title}}
-                    </h2>
-                    <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
-                  </ion-item>
+                  <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)">
+                    <!-- for text info per event -->
+                    <ion-item no-lines>
+                      <h2 class="event_title">
+                        {{event.title}}
+                      </h2>
+                      <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
+                    </ion-item>
+                  </div>
   
                   <ion-item no-lines>
                     <ion-avatar item-start *ngFor="let participantId of event.pending_people_ids.slice(0,3)">
@@ -147,7 +149,7 @@
                         </button>
                   </ion-item>
                 </ng-container>
-              </div>
+              
             </ion-card>
           </ng-container>
   
@@ -165,16 +167,17 @@
             <!-- for each event happening in one day -->
   
             <ion-card *ngFor="let event of schedule.events | orderBy: 'start_time'">
-              <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)">
                 <!-- if a event is of this type -->
                 <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('saved') > -1">
-                  <!-- for text info per event -->
-                  <ion-item no-lines>
-                    <h2 class="event_title">
-                      {{event.title}}
-                    </h2>
-                    <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
-                  </ion-item>
+                  <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)">
+                    <!-- for text info per event -->
+                    <ion-item no-lines>
+                      <h2 class="event_title">
+                        {{event.title}}
+                      </h2>
+                      <p>{{event.start_time | date: 'shortTime'}}, {{event.restaurant.location}}</p>
+                    </ion-item>
+                  </div>
   
                   <ion-item no-lines>
                     <ion-avatar item-start *ngFor="let participantId of event.pending_people_ids.slice(0,3)">
@@ -194,7 +197,7 @@
                         </button>
                   </ion-item>
                 </ng-container>
-              </div>
+              
             </ion-card>
           </ng-container>
   

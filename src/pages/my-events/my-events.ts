@@ -105,7 +105,7 @@ export class MyEventsPage {
     if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
       relations.push("saved");
     } 
-    console.log(event.coming_people_ids)
+    // console.log(event.coming_people_ids)
     return relations;
   }
 

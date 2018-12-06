@@ -153,11 +153,11 @@ export class EventDataServiceProvider {
     let events: Event[] = this.getEvents();
 
     for (let i = 0; i < events.length; i++) {
-      console.log(i)
+      // console.log(i)
       let dateNum = events[i].meet_date;
-      console.log(dateNum)
+      // console.log(dateNum)
       if (dateNums.indexOf(dateNum) == -1) { // if the date is not in schedule, then create a new array under the date with this event
-        console.log('create new scheduleList at', dateNum )
+        // console.log('create new scheduleList at', dateNum )
         dateNums.push(dateNum);
 
         let newSchedule = {};
@@ -170,11 +170,11 @@ export class EventDataServiceProvider {
 
         scheduleItems.push(newSchedule);
       } else if (dateNums.indexOf(dateNum) > -1) { // if the date exists, then push the event into the array
-        console.log("update an existing scheduleItem at", dateNum)
+        // console.log("update an existing scheduleItem at", dateNum)
         for (let j = 0; j < scheduleItems.length; j++) {
           if (scheduleItems[j].date == dateNum) { // zoom into this date's events list
             let thisRelationships = this.checkEventRelationshipsToMe(events[i], this.myId);
-            console.log(thisRelationships)
+            // console.log(thisRelationships)
             if (thisRelationships.length > 0){ // if it has some relationship with me
               thisRelationships.forEach((r) => {
                 if (scheduleItems[j].relationships.indexOf(r) == -1) { // if there's no such relationship before, now add it
