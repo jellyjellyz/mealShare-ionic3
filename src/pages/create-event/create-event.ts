@@ -103,7 +103,7 @@ export class CreateEventPage {
     this.res = this.navParams.get('restaurant') || undefined;
     this.checkedGroup = this.navParams.get('group') || undefined;
     console.log(this.checkedGroup);
-    
+
 
     // after click edit as a host.
     if (!this.res) {
@@ -179,6 +179,11 @@ export class CreateEventPage {
 
   private getUserById(userId: string): User {
     return this.userService.getUserById(userId);
+  }
+
+  private getUserNameById(userId: string) {
+    // console.log(JSON.stringify(this.userService.getUserById(userId)));
+    return this.userService.getUserNameById(userId);
   }
 
   private getLoginUserId(): Promise<string> {
