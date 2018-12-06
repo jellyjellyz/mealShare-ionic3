@@ -1,4 +1,7 @@
 page-user-list {
+	.group {
+		padding-left: 0;
+	}
 	.avatar {
 		display: inline;
 	}
@@ -11,7 +14,7 @@ page-user-list {
 	.userName {
 		display: inline;
 		font-family: auto;
-		color: cornflowerblue;
+		color: 	#808080;
 	}
 	.addnew {
         margin-bottom: 30px;

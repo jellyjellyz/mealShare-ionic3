@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EventDetailPage } from '../event-detail/event-detail';
 import { Event } from '../../models/event';
 import { Message } from '../../models/message';
-import { Restaurant } from '../../models/restaurtant';
+// import { Restaurant } from '../../models/restaurtant';
 import { EventDataServiceProvider } from '../../providers/event-data-service/event-data-service';
 import { OrderByPipe } from '../../pipes/order-by/order-by';
 import { UserDataServiceProvider } from '../../providers/user-data-service/user-data-service';
