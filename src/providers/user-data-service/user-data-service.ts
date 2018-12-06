@@ -159,6 +159,7 @@ export class UserDataServiceProvider {
 		let listRef = this.db.ref('/groups');
 		let prefRef = listRef.push();
 		prefRef.set(group);
+		// this.notifySubscribers();
 		console.log(group);
 	}
 	public deleteGroup(group: Group) {

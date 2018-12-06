@@ -18,11 +18,17 @@
     </ion-segment-button>
   </ion-segment>
 
+
   <div [ngSwitch]="segment">
+    <!-- Users segment -->
     <ng-container *ngSwitchCase="'users'">
+
+      <!-- Iterate over each user -->
       <ion-item-group *ngFor="let user of users">
         <div *ngIf="user.id !== 1">
           <ion-row no-padding (click)="jump(user.id)">
+
+            <!-- First column: Avatar -->
             <ion-col col-3>
               <ion-item>
                 <ion-avatar item-start>
@@ -30,72 +36,76 @@
                 </ion-avatar>
               </ion-item>
             </ion-col>
+
+            <!-- Second column: User name and company -->
             <ion-col>
               <ion-item>
                 <h2>{{user.name}}</h2>
                 <p>{{user.company}}</p>
-                <!-- <p>{{user.Id}}</p> -->
               </ion-item>
             </ion-col>
+
+            <!-- Third column: Checkbox -->
             <ion-col>
               <ion-item>
                 <ion-checkbox *ngIf="hide" item-right color="dark" [(ngModel)]="checked[user.id]"></ion-checkbox>
               </ion-item>
             </ion-col>
+
           </ion-row>
         </div>
       </ion-item-group>
+
+      <!-- Save group button -->
       <ion-row>
         <button ion-button *ngIf="hide" (click)="saveGroup()">Save Group</button>
       </ion-row>
+
+      <!-- Create group button -->
       <ion-fab bottom right edge class="addnew" (click)="createGroup()">
         <button ion-fab mini side="top">
           <ion-icon name="add"></ion-icon>
         </button>
       </ion-fab>
     </ng-container>
+    <!-- Users segment ends here -->
 
+    <!-- Groups segment -->
     <ng-container *ngSwitchCase="'groups'">
+
+      <!-- Iterate over each group -->
       <ion-item-group *ngFor="let group of groups">
-        <ion-item no-padding>
-          <ion-thumbnail item-start>
-            <div class="conversation-summary-avatar conversation-summary-avatar-group" data-number-of-thumbnails="4">
-              <div class="conversation-summary-avatar-group-member-wrapper"><img src={{users[group.userIds[0]].img}} data-user-initial="J"></div>
-              <div class="conversation-summary-avatar-group-member-wrapper">
-                <img *ngIf="group.userIds.length>1; else that" class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[1]].img}} data-user-initial="P">
-                <ng-template #that>
-                  <img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="P">
-                </ng-template>
-              </div>
+        <ion-row>
 
-              <div class="conversation-summary-avatar-group-member-wrapper">
-                <img *ngIf="group.userIds.length>2; else that" class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[2]].img}} data-user-initial="B">
-                <ng-template #that>
-                  <img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="P">
-                </ng-template>
-              </div>
+          <!-- First column: Avatar -->
+          <ion-col>
+            <ion-item>
+              <ion-avatar item-start *ngFor="let userId of group.userIds.slice(0,3)">
+                <img src={{findUserImg(userId)}} class="participant_img">
+              </ion-avatar>
+            </ion-item>
 
-              <div class="conversation-summary-avatar-group-member-wrapper">
-                <img *ngIf="group.userIds.length>3; else that" class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src={{users[group.userIds[3]].img}}
-                data-user-initial="B">
-                <ng-template #that>
-                  <img class="conversation-summary-avatar-group-member avatar--should-fall-back-to-initial" src="" data-user-initial="P">
-                </ng-template>
-              </div>
+          <!-- Second column: Group name and User names -->
+          </ion-col>
+          <ion-col col-6>
+            <h4>{{group.groupName}}</h4>
+            <div *ngFor="let userId of group.userIds" class="userName">{{findUser(userId).name}}
+              <div *ngIf="userId !== group.userIds[group.userIds.length-1]" class="userName">,</div>
             </div>
-          </ion-thumbnail>
-          <h2>{{group.groupName}}</h2>
-          <div *ngFor="let userId of group.userIds" class="userName">
-            {{users[userId].name}}
-            <div *ngIf="userId !== group.userIds[group.userIds.length-1]" class="userName">,</div>
-          </div>
-          <button class="button-color" ion-button clear icon-only float-right (click)="deleteGroup(group)">
-            <ion-icon name="trash"></ion-icon>
-          </button>
+          </ion-col>
 
-      </ion-item>
-    </ion-item-group>
-  </ng-container>
-</div>
+          <!-- Third column: Trash icon -->
+          <ion-col col-2>
+            <button class="button-color" ion-button clear icon-only float-right (click)="deleteGroup(group)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+      <!-- Iterating over each group ends here-->
+
+    </ng-container>
+    <!-- Groups segment ends here -->
+  </div>
 
 </ion-content>
