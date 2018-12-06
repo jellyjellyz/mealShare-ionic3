@@ -9,6 +9,10 @@ page-all-events {
         padding-top: 6px;
     }
 
+    ion-icon.isPending{
+        opacity: 0.2;
+    }
+
     .card-ios {
     margin: 12px;
     border-radius: 8px;

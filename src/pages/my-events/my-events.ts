@@ -9,6 +9,8 @@ import { MessageDataServiceProvider } from '../../providers/message-data-service
 import { OrderByPipe } from '../../pipes/order-by/order-by';
 import { EventDetailPage } from '../event-detail/event-detail';
 import { AuthProvider } from '../../providers/auth/auth';
+import { Message } from '../../models/message';
+import { User } from '../../models/user';
 
 
 @IonicPage()
@@ -23,6 +25,9 @@ export class MyEventsPage {
   private schedules: any[];
   private event_type: string;
   private segment: string = "host";
+  private messages: Message[] = [];
+  private users: User[] = [];
+
 
   // public joined: boolean = false;
   // public saved: boolean = false;
@@ -45,10 +50,11 @@ export class MyEventsPage {
     });
 
     this.userService.getObservable().subscribe(update => {
-      // this.events = this.eventService.getEvents();
-      // this.schedules = this.eventService.getSchedule();
-      // console.log(this.events);
-      // console.log(this.schedules);
+      this.users = userService.getUsers();
+    });
+
+    this.messageService.getObservable().subscribe(update => {
+      this.messages = messageService.getMessages();
     });
 
     // this.events = this.eventService.getEvents();
@@ -105,6 +111,9 @@ export class MyEventsPage {
     if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
       relations.push("saved");
     } 
+    if (event.pending_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
+      relations.push("pending");
+    } 
     // console.log(event.coming_people_ids)
     return relations;
   }
@@ -115,26 +124,48 @@ export class MyEventsPage {
     })
   }
 
-
+  
   public joinButtonClicked(event:Event){
     let relationships = this.checkEventRelationshipsToMe(event);
 
-    if (relationships.indexOf('going') > -1 ){
-      event.coming_people_ids.splice(event.coming_people_ids.indexOf(this.myIdNum),1)
-    }else{
-      event.coming_people_ids.push(this.myIdNum);
+    if (relationships.indexOf('going') > -1 ){ //if already going, then retrieve
+      event.coming_people_ids.splice(event.coming_people_ids.indexOf(this.myIdNum),1);
+    } else{ // the user ask to join, then get pending, and send message to the host
+      event.pending_people_ids.push(this.myIdNum);
+      this.messageService.sendMessage(event.key, this.myId, event.host_id,1);
     }
+
+    if (relationships.indexOf('saved') > -1){ // if the user has saved the event, then delete from the saved list
+      event.saved_people_ids.splice(event.saved_people_ids.indexOf(this.myIdNum),1)
+    }
+
     this.eventService.updateEvent(event);
   }
 
+
+
+  public joinPendingClicked(event:Event){
+    let relationships = this.checkEventRelationshipsToMe(event);
+    if (relationships.indexOf('pending') > -1){ // if already pending, then retrieve
+      event.pending_people_ids.splice(event.pending_people_ids.indexOf(this.myIdNum),1);
+    }
+    this.eventService.updateEvent(event);
+  } 
+
+
+
   public saveButtonClicked(event:Event){
     let relationships = this.checkEventRelationshipsToMe(event);
-    if (relationships.indexOf('saved') > -1 ){
+    if (relationships.indexOf('saved') > -1 ){ // if the user has saved the event, then delete from the saved list
       event.saved_people_ids.splice(event.saved_people_ids.indexOf(this.myIdNum),1)
-    }else{
+    }else{ // if the user has not saved the event, then add to the saved list
       event.saved_people_ids.push(this.myIdNum);
     }
     this.eventService.updateEvent(event);
   }
+
+
+
+
 
 }

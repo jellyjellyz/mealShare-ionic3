@@ -43,16 +43,23 @@
     <ng-container *ngIf="checkEventRelationshipsToMe(event).indexOf('host') == -1">
       <ion-row no-padding>
         <ion-col text-right>
-          <button ion-button clear small color="primary" class="eventCardButton" (click)="saveButtonClicked(event)">
-            <ion-icon [name]="checkEventRelationshipsToMe(event).indexOf('saved') == -1 ? 'star-outline' : 'star'"></ion-icon>
-            <div>SAVE</div>
-          </button>
+          <ng-container 
+            *ngIf="checkEventRelationshipsToMe(event).indexOf('pending') == -1 && checkEventRelationshipsToMe(event).indexOf('going') == -1 "
+          >
+            <button ion-button clear small color="primary" class="eventCardButton" (click)="saveButtonClicked(event)">
+              <ion-icon [name]="checkEventRelationshipsToMe(event).indexOf('saved') == -1 ? 'star-outline' : 'star'"></ion-icon>
+              <div>SAVE</div>
+            </button>
+          </ng-container>
         </ion-col>
         <ion-col>
-          <button ion-button clear small color="primary" class="eventCardButton" (click)="joinButtonClicked(event)">
-              <ion-icon [name]="checkEventRelationshipsToMe(event).indexOf('going') == -1 ? 'ice-cream-outline' : 'ice-cream'"></ion-icon>
-            <div>JOIN</div>
-          </button>
+            <button ion-button clear small color="primary" class="eventCardButton" (click)="joinButtonClicked(event)">
+                <ion-icon 
+                      [name]="checkEventRelationshipsToMe(event).indexOf('going') == -1 && checkEventRelationshipsToMe(event).indexOf('pending') == -1 ? 'ice-cream-outline' : 'ice-cream'"
+                      [class.isPending] = "checkEventRelationshipsToMe(event).indexOf('pending') > -1"
+                ></ion-icon>
+              <div>JOIN</div>
+            </button>
         </ion-col>
       </ion-row>
     </ng-container>
