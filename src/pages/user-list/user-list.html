@@ -75,31 +75,34 @@
 
       <!-- Iterate over each group -->
       <ion-item-group *ngFor="let group of groups">
-        <ion-item class="group">
+        <ion-card>
+          <ion-row>
 
-          <!-- First column: Avatar -->
-          <!-- <ion-col> -->
+            <!-- First column: Avatar -->
+            <ion-col>
+              <ion-item>
+                <ion-avatar item-start *ngFor="let userId of group.userIds.slice(0,2)">
+                  <img src={{findUserImg(userId)}} class="participant_img">
+                </ion-avatar>
+              </ion-item>
+            </ion-col>
 
-              <ion-avatar item-start *ngFor="let userId of group.userIds.slice(0,2)">
-                <img src={{findUserImg(userId)}} class="participant_img">
-              </ion-avatar>
+            <!-- Second column: Group name and User names -->
+            <ion-col col-4>
+              <p><b>{{group.groupName}}</b></p>
+              <div *ngFor="let userId of group.userIds" class="userName">{{findUser(userId).name}}
+                <div *ngIf="userId !== group.userIds[group.userIds.length-1]" class="userName">,</div>
+              </div>
+            </ion-col>
 
-          <!-- </ion-col> -->
-
-          <!-- Second column: Group name and User names -->
-          <!-- <ion-col col-4> -->
-            <p><b>{{group.groupName}}</b></p>
-            <div *ngFor="let userId of group.userIds.slice(0,2)" class="userName">{{findUser(userId).name}}<span *ngIf="userId !== group.userIds[group.userIds.slice(0,2).length-1]" class="userName">,</span>
-            </div>
-          <!-- </ion-col> -->
-
-          <!-- Third column: Trash icon -->
-
-            <button class="button-color" ion-button clear icon-only float-right (click)="deleteGroup(group)">
-              <ion-icon name="trash"></ion-icon>
-            </button>
-
-        </ion-item>
+            <!-- Third column: Trash icon -->
+            <ion-col col-1>
+              <button class="button-color" ion-button clear icon-only float-right (click)="deleteGroup(group)">
+                <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
       </ion-item-group>
       <!-- Iterating over each group ends here-->
 
