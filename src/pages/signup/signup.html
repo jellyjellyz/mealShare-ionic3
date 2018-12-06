@@ -16,8 +16,10 @@
       <ion-item no-lines>
         <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
       </ion-item>
-      <button ion-button block class="signup-button" type="submit" [disabled]="!signup.valid">Sign
-        up</button>
+
+        <button ion-button color="primary"   type="submit"  [disabled]="!signup.valid">Sign Up</button>
+  <!--     <button ion-button block class="signup-button" type="submit" [disabled]="!signup.valid">Sign
+        up</button> -->
     </form>
     <label class="error-message">{{errorMessage}}</label>
   </div>
