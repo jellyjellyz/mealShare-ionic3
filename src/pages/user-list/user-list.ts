@@ -43,10 +43,10 @@ export class UserListPage {
 
   private initChecked() {
     this.checked = {};
-    for (var i = 0; i < this.users.length; i++) {
-      if (this.users[i].id !== 1) {
+    for (var i = 1; i < this.users.length; i++) {
+      // if (this.users[i].id !== 1) {
         this.checked[this.users[i].id]=false;
-      }
+      // }
     }
     // console.log(this.checked);
   }

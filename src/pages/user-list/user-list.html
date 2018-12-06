@@ -80,22 +80,22 @@
           <!-- First column: Avatar -->
           <ion-col>
             <ion-item>
-              <ion-avatar item-start *ngFor="let userId of group.userIds.slice(0,3)">
+              <ion-avatar item-start *ngFor="let userId of group.userIds.slice(0,2)">
                 <img src={{findUserImg(userId)}} class="participant_img">
               </ion-avatar>
             </ion-item>
+          </ion-col>
 
           <!-- Second column: Group name and User names -->
-          </ion-col>
-          <ion-col col-6>
-            <h4>{{group.groupName}}</h4>
+          <ion-col col-4>
+            <p><b>{{group.groupName}}</b></p>
             <div *ngFor="let userId of group.userIds" class="userName">{{findUser(userId).name}}
               <div *ngIf="userId !== group.userIds[group.userIds.length-1]" class="userName">,</div>
             </div>
           </ion-col>
 
           <!-- Third column: Trash icon -->
-          <ion-col col-2>
+          <ion-col col-1>
             <button class="button-color" ion-button clear icon-only float-right (click)="deleteGroup(group)">
               <ion-icon name="trash"></ion-icon>
             </button>
