@@ -38,7 +38,7 @@ export class InvitegroupPage {
     })
     this.users = userService.getUsers();
     this.groups = userService.getGroups();
-    // console.log(JSON.stringify(this.groups));
+    console.log(JSON.stringify(this.groups));
     this.segment = "all";
     this.hide = true;
     this.loading = this.loadingCtrl.create();

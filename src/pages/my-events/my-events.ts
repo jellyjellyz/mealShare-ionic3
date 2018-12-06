@@ -21,7 +21,10 @@ export class MyEventsPage {
   private events: Event[];
   private schedules: any[];
   private event_type: string;
-  private segment: string = "all";
+  private segment: string = "host";
+
+  // public joined: boolean = false;
+  // public saved: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -93,6 +96,8 @@ export class MyEventsPage {
 
     } else if (event.saved_people_ids.indexOf(this.myId) > -1) { // if I(1) am in the list of  people who saved the event
       return "saved";
+    } else {
+      return "noRelation";
     }
 
 
@@ -102,7 +107,23 @@ export class MyEventsPage {
     return new Promise((resolve) => {
       this.authService.getCurrentUser().then((user) => { resolve(user.id) });
     })
+  }
 
+
+  public joinButtonClicked(event:Event){
+    let relationship = this.checkEventRelationshipToMe(event);
+    if (relationship == 'going'){
+      event.coming_people_ids.splice(event.coming_people_ids.indexOf(this.myId),1)
+    }
+    this.eventService.updateEvent(event);
+  }
+
+  public saveButtonClicked(event:Event){
+    let relationship = this.checkEventRelationshipToMe(event);
+    if (relationship == 'saved'){
+      event.saved_people_ids.splice(event.saved_people_ids.indexOf(this.myId),1)
+    }
+    this.eventService.updateEvent(event);
   }
 
 }

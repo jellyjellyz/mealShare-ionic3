@@ -58,7 +58,7 @@ export class UserDataServiceProvider {
 			this.groups = []; //start with a blank list
 			snapshot.forEach(childSnapshot => {
 				let group: Group = {
-					groupId: childSnapshot.val().groupId,
+					groupId: childSnapshot.key,
 					groupName: childSnapshot.val().groupName,
 					userIds: childSnapshot.val().userIds
 				};

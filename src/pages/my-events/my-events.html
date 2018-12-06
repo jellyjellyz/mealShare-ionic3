@@ -16,9 +16,9 @@
 <ion-content padding>
 
   <ion-segment [(ngModel)]="segment" color="primary">
-    <ion-segment-button value="all">
+    <!-- <ion-segment-button value="all">
       ALL
-    </ion-segment-button>
+    </ion-segment-button> -->
     <ion-segment-button value="host">
       HOST
     </ion-segment-button>
@@ -31,15 +31,12 @@
   </ion-segment>
 
   <div [ngSwitch]="segment" class="eventDiv">
-    <ng-container *ngSwitchCase="'all'">
-      <!-- for each day there's a list -->
+    <!-- <ng-container *ngSwitchCase="'all'">
       <ion-list *ngFor="let schedule of schedules | orderBy: 'schedule_date'">
         <ion-list-header no-lines class="list_header"> {{schedule.date | date: 'fullDate'}} </ion-list-header>
 
-        <!-- for each event happening in one day -->
         <ion-card *ngFor="let event of schedule.events | orderBy: 'start_time'">
           <div (click)="event.host_id == myId ? todetail(event.key) : toViewdetail(event.key)">
-            <!-- for text info per event -->
             <ion-item no-lines>
               <h2 class="event_title">
                 <ion-icon name="contact" *ngIf="checkEventRelationshipToMe(event) == 'host'" class="hostIcon"></ion-icon>
@@ -55,22 +52,21 @@
             <p class="moreNum" *ngIf="event.coming_people_ids.length > 3">+{{event.coming_people_ids.length - 3}}</p>
 
             <ng-container *ngIf="checkEventRelationshipToMe(event) !== 'host'">
-              <button ion-button clear small class="eventCardButton">
-                <ion-icon name="ice-cream-outline"></ion-icon>
-                <div>JOIN</div>
-              </button>
-
-              <button ion-button clear small class="eventCardButton">
-                <ion-icon name="star-outline"></ion-icon>
-                <div>SAVE</div>
-              </button>
+                <button ion-button clear small class="eventCardButton" (click)="joinButtonClicked(event)">
+                  <ion-icon name="ice-cream-outline" *ngIf="checkEventRelationshipToMe(event) !== 'going'"></ion-icon>
+                  <ion-icon name="ice-cream" *ngIf="checkEventRelationshipToMe(event) == 'going'"></ion-icon>
+                  <div>JOIN</div>
+                </button>
+  
+                <button ion-button clear small class="eventCardButton" (click)="saveButtonClicked(event)">
+                  <ion-icon [name]="checkEventRelationshipToMe(event) !== 'saved' ? 'star-outline' : 'star'"></ion-icon>
+                  <div>SAVE</div>
+                </button>
             </ng-container>
           </ion-item>
-
-
         </ion-card>
       </ion-list>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container *ngSwitchCase="'host'">
       <!-- for each day there's a list -->
@@ -100,17 +96,6 @@
                   </ion-avatar>
                   <p class="moreNum" *ngIf="event.coming_people_ids.length > 3">+{{event.coming_people_ids.length - 3}}</p>
 
-                  <ng-container *ngIf="checkEventRelationshipToMe(event) !== 'host'">
-                    <button ion-button clear small class="eventCardButton">
-                      <ion-icon name="ice-cream-outline"></ion-icon>
-                      <div>JOIN</div>
-                    </button>
-
-                    <button ion-button clear small class="eventCardButton">
-                      <ion-icon name="star-outline"></ion-icon>
-                      <div>SAVE</div>
-                    </button>
-                  </ng-container>
                 </ion-item>
               </ng-container>
             </div>
@@ -146,15 +131,16 @@
                 <p class="moreNum" *ngIf="event.coming_people_ids.length > 3">+{{event.coming_people_ids.length - 3}}</p>
 
                 <ng-container *ngIf="checkEventRelationshipToMe(event) !== 'host'">
-                  <button ion-button clear small class="eventCardButton">
-                    <ion-icon name="ice-cream-outline"></ion-icon>
-                    <div>JOIN</div>
-                  </button>
-
-                  <button ion-button clear small class="eventCardButton">
-                    <ion-icon name="star-outline"></ion-icon>
-                    <div>SAVE</div>
-                  </button>
+                    <button ion-button clear small class="eventCardButton" (click)="joinButtonClicked(event)">
+                      <ion-icon name="ice-cream-outline" *ngIf="checkEventRelationshipToMe(event) !== 'going'"></ion-icon>
+                      <ion-icon name="ice-cream" *ngIf="checkEventRelationshipToMe(event) == 'going'"></ion-icon>
+                      <div>JOIN</div>
+                    </button>
+      
+                    <button ion-button clear small class="eventCardButton" (click)="saveButtonClicked(event)">
+                      <ion-icon [name]="checkEventRelationshipToMe(event) !== 'saved' ? 'star-outline' : 'star'"></ion-icon>
+                      <div>SAVE</div>
+                    </button>
                 </ng-container>
               </ion-item>
             </ng-container>
@@ -189,15 +175,16 @@
                 <p class="moreNum" *ngIf="event.coming_people_ids.length > 3">+{{event.coming_people_ids.length - 3}}</p>
 
                 <ng-container *ngIf="checkEventRelationshipToMe(event) !== 'host'">
-                  <button ion-button clear small class="eventCardButton" (click)="joinEvent(event)">
-                    <ion-icon name="ice-cream-outline"></ion-icon>
-                    <div>JOIN</div>
-                  </button>
-
-                  <button ion-button clear small class="eventCardButton">
-                    <ion-icon name="star-outline"></ion-icon>
-                    <div>SAVE</div>
-                  </button>
+                    <button ion-button clear small class="eventCardButton" (click)="joinButtonClicked(event)">
+                        <ion-icon name="ice-cream-outline" *ngIf="checkEventRelationshipToMe(event) !== 'going'"></ion-icon>
+                        <ion-icon name="ice-cream" *ngIf="checkEventRelationshipToMe(event) == 'going'"></ion-icon>
+                        <div>JOIN</div>
+                      </button>
+        
+                      <button ion-button clear small class="eventCardButton" (click)="saveButtonClicked(event)">
+                        <ion-icon [name]="checkEventRelationshipToMe(event) !== 'saved' ? 'star-outline' : 'star'"></ion-icon>
+                        <div>SAVE</div>
+                      </button>
                 </ng-container>
               </ion-item>
             </ng-container>
