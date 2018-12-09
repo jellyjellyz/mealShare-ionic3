@@ -18,32 +18,41 @@
 
 		<ion-item-divider class="notifications-divider">11/26/18</ion-item-divider>
 			<ion-list *ngFor="let message of messages">
-				<div *ngIf="message.receiverId === this.myId">
-				 <ion-card>
-				<ion-item no-padding class="notification-item">
-					<ion-avatar item-left>
-						<ion-img src={{findSenderImg(message)}}> </ion-img>
-					</ion-avatar>
-					<h2 class="item-title">{{findSenderName(message)}}</h2>
-						<div [ngSwitch]="message.messageType">
-							<div *ngSwitchCase=1>
-								<p class="item-description">requested to join the event {{findEventTitle(message)}}</p>
-								<button class="accept-request" ion-button outline round outline small (click)="accept_request(message)">Accept</button>
-							</div>
-							<div *ngSwitchCase=2>
-								<p class="item-description">accepted to join the event {{findEventTitle(message)}}</p>
-							</div>
-							<div *ngSwitchCase=3>
-								<p class="item-description">rejected to join the event {{findEventTitle(message)}}</p>
-							</div>
-							<div *ngSwitchCase=4>
-								<p class="item-description">invited to join the event {{findEventTitle(message)}}</p>
-								<button ion-button round outline small (click)="accept_invite(message)">Join</button>
-							</div>
-						</div>
-					<ion-note class="item-time" item-right>10:10am</ion-note>
-				</ion-item>
-				 </ion-card>
+				<div *ngIf="message.receiverId == this.myId">
+					<ion-card>
+						<ion-item no-padding class="notification-item">
+							<ion-avatar item-left>
+								<ion-img src={{findSenderImg(message)}}> </ion-img>
+							</ion-avatar>
+							<h2 class="item-title">{{findSenderName(message)}}</h2>
+								<div [ngSwitch]="message.messageType">
+									<div *ngSwitchCase=1>
+										<p class="item-description">requested to join "{{findEventTitle(message)}}"</p>
+										<button [outline]="checkSenderPendingOrNot(message)||!checkSenderGoingOrNot(message)" ion-button round small (click)="accept_request(message)">Accept</button>
+										<button [outline]="checkSenderPendingOrNot(message)|| checkSenderGoingOrNot(message)" ion-button round small (click)="reject_request(message)">Sorry</button>
+
+									</div>
+									<div *ngSwitchCase=2>
+										<p class="item-description">is going to join "{{findEventTitle(message)}}"</p>
+									</div>
+									<div *ngSwitchCase=3>
+										<p class="item-description">cannot come to join "{{findEventTitle(message)}}"</p>
+									</div>
+									<div *ngSwitchCase=4>
+										<p class="item-description">invits you to join {{findEventTitle(message)}}</p>
+										<button [outline]="checkMePendingOrNot(message)||!checkMeGoingOrNot(message)" ion-button round small (click)="accept_invite(message)">Join</button>
+										<button [outline]="checkMePendingOrNot(message)|| checkMeGoingOrNot(message)" ion-button round small (click)="reject_invite(message)">Sorry</button>
+									</div>
+									<div *ngSwitchCase=5>
+										<p class="item-description">is sorry for not being able to welcome you to "{{findEventTitle(message)}}"</p>
+									</div>
+									<div *ngSwitchCase=6>
+										<p class="item-description">welcomes you to join "{{findEventTitle(message)}}"</p>
+									</div>
+								</div>
+							<ion-note class="item-time" item-right>10:10am</ion-note>
+						</ion-item>
+					</ion-card>
 				 </div>
 			</ion-list>
 		<ion-item-divider no-padding class="notifications-divider">11/25/18</ion-item-divider>

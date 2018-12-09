@@ -26,6 +26,7 @@ export class MessagePage {
   private users: User[] = [];
   private events: Event[] = [];
   private myId: string;
+
   constructor(public navCtrl: NavController,
     private messageService: MessageDataServiceProvider,
     private userService: UserDataServiceProvider,
@@ -76,16 +77,18 @@ export class MessagePage {
   private findEventTitle(message: Message) {
     return this.findEvent(message).title;
   }
+
+
   private accept_invite(message: Message) {
     let invite_userId = message.senderId;
     let invite_event = this.findEvent(message);
-    console.log(invite_userId);
-    console.log(invite_event);
-    console.log(invite_event.coming_people_ids.indexOf(this.myId));
-    if (invite_event.coming_people_ids.indexOf(this.myId) === -1) {
-      console.log("join");
+    // console.log(invite_userId);
+    // console.log(invite_event);
+    // console.log(invite_event.coming_people_ids.indexOf(this.myId));
+    if (invite_event.coming_people_ids.indexOf(this.myId) == -1) {
+      // console.log("join");
       invite_event.coming_people_ids.push(this.myId);
-      let idx = invite_event.pending_people_ids.indexOf(this.myId)
+      let idx = invite_event.pending_people_ids.indexOf(this.myId);
       if (idx > -1) {
         invite_event.pending_people_ids.splice(idx, 1);
       }
@@ -94,31 +97,104 @@ export class MessagePage {
       this.messageService.updateEvent(invite_event.key, "pending_people_ids", invite_event.pending_people_ids);
       this.messageService.updateEvent(invite_event.key, "coming_people_ids", invite_event.coming_people_ids);
     }
-
-
   }
+
+  private reject_invite(message: Message) {
+    let invite_userId = message.senderId;
+    let invite_event = this.findEvent(message);
+
+    let idx_coming = invite_event.coming_people_ids.indexOf(this.myId); //should be -1, but just to double check
+    if (idx_coming > -1) {
+      invite_event.coming_people_ids.splice(idx_coming, 1);
+      this.messageService.updateEvent(invite_event.key, "coming_people_ids", invite_event.coming_people_ids);
+    }
+
+    let idx = invite_event.pending_people_ids.indexOf(this.myId);
+    if (idx > -1) {
+      invite_event.pending_people_ids.splice(idx, 1);
+      this.messageService.updateEvent(invite_event.key, "pending_people_ids", invite_event.pending_people_ids);
+    }
+
+    this.messageService.sendMessage(invite_event.key, this.myId, invite_userId, 3);
+  }
+
+
   private accept_request(message: Message) {
     let request_userId = message.senderId;
     let request_event = this.findEvent(message);
 
-    if (request_event.coming_people_ids.indexOf(request_userId) === -1) {
+    if (request_event.coming_people_ids.indexOf(request_userId) == -1) {
       request_event.coming_people_ids.push(request_userId);
       // console.log(request_event.coming_people_ids);
-      this.messageService.sendMessage(request_event.key, this.myId, request_userId, 2);
+      let idx = request_event.pending_people_ids.indexOf(this.senderId);
+      if (idx > -1) {
+        request_event.pending_people_ids.splice(idx, 1);
+      }
+      this.messageService.sendMessage(request_event.key, this.myId, request_userId, 6);
+      this.messageService.updateEvent(request_event.key, "pending_people_ids", request_event.pending_people_ids);
+      this.messageService.updateEvent(request_event.key, "coming_people_ids", request_event.coming_people_ids);
+
+    }
+    console.log("accept");
+  }
+
+
+  private reject_request(message: Message) {
+    let request_userId = message.senderId;
+    let request_event = this.findEvent(message);
+
+    let idx_coming = request_event.coming_people_ids.indexOf(request_userId); //should be -1, but just to double check
+    if (idx_coming > -1) {
+      request_event.coming_people_ids.splice(idx_coming, 1);
       this.messageService.updateEvent(request_event.key, "coming_people_ids", request_event.coming_people_ids);
     }
 
+    let idx = request_event.pending_people_ids.indexOf(request_userId);
+    if (idx > -1) {
+      request_event.pending_people_ids.splice(idx, 1);
+      this.messageService.updateEvent(request_event.key, "pending_people_ids", request_event.pending_people_ids);
+    }
 
-    console.log("accept");
+    this.messageService.sendMessage(request_event.key, this.myId, request_userId, 5);
   }
-  private checkGoingOrNot(message: Message) {
+
+
+
+
+
+
+  private checkSenderGoingOrNot(message: Message) {
     let request_userId = message.senderId;
     let request_event = this.findEvent(message);
     if (request_event.coming_people_ids.indexOf(request_userId) > -1) {
       return true;
     }
     return false;
+  }
 
+  private checkSenderPendingOrNot(message: Message) {
+    let request_userId = message.senderId;
+    let request_event = this.findEvent(message);
+    if (request_event.pending_people_ids.indexOf(request_userId) > -1) {
+      return true;
+    }
+    return false;
+  }
+
+  private checkMeGoingOrNot(message: Message) {
+    let invite_event = this.findEvent(message);
+    if (invite_event.coming_people_ids.indexOf(this.myId) > -1) {
+      return true;
+    }
+    return false;
+  }
+
+  private checkMePendingOrNot(message: Message) {
+    let invite_event = this.findEvent(message);
+    if (invite_event.pending_people_ids.indexOf(this.myId) > -1) {
+      return true;
+    }
+    return false;
   }
 
   private getLoginUserId(): Promise<string> {
