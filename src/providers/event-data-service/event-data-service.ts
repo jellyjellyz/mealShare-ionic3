@@ -107,7 +107,10 @@ export class EventDataServiceProvider {
   public addEvent(event: Event) {
     if (event != undefined) {
       let listRef = this.db.ref(`/events`);
+      let newKey;
       let itemRef = listRef.push();
+      newKey = itemRef.key;
+      // console.log(itemRef.key);
       let itemRecord = {
         title: event.title,
         description: event.description,
@@ -124,9 +127,7 @@ export class EventDataServiceProvider {
       }
       // console.log(itemRecord);
       itemRef.set(itemRecord);
-      console.log(itemRef.key)
-
-      // let newEventKey = 
+      return newKey;
     }
   }
 
@@ -166,10 +167,10 @@ export class EventDataServiceProvider {
         let newSchedule = {};
         newSchedule['date'] = dateNum;
         newSchedule['relationships'] = [];
-          let thisRelationships = this.checkEventRelationshipsToMe(events[i], this.myId);
-          if (thisRelationships.length > 0) thisRelationships.forEach((r) => newSchedule['relationships'].push(r));
+        let thisRelationships = this.checkEventRelationshipsToMe(events[i], this.myId);
+        if (thisRelationships.length > 0) thisRelationships.forEach((r) => newSchedule['relationships'].push(r));
         newSchedule['events'] = [];
-          newSchedule['events'].push(events[i]);
+        newSchedule['events'].push(events[i]);
 
         scheduleItems.push(newSchedule);
       } else if (dateNums.indexOf(dateNum) > -1) { // if the date exists, then push the event into the array
@@ -178,7 +179,7 @@ export class EventDataServiceProvider {
           if (scheduleItems[j].date == dateNum) { // zoom into this date's events list
             let thisRelationships = this.checkEventRelationshipsToMe(events[i], this.myId);
             // console.log(thisRelationships)
-            if (thisRelationships.length > 0){ // if it has some relationship with me
+            if (thisRelationships.length > 0) { // if it has some relationship with me
               thisRelationships.forEach((r) => {
                 if (scheduleItems[j].relationships.indexOf(r) == -1) { // if there's no such relationship before, now add it
                   scheduleItems[j].relationships.push(r);

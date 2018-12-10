@@ -51,6 +51,7 @@ export class UserDataServiceProvider {
 				};
 				this.users.push(user);
 			});
+			console.log("user data changes");
 			this.notifySubscribers();
 		});
 	}
@@ -67,6 +68,7 @@ export class UserDataServiceProvider {
 				this.groups.push(group);
 			});
 			// notify subscriber in home page to sync the update
+			console.log("group data changes");
 			this.notifySubscribers();
 			// console.log(this.groups);
 		});
@@ -75,6 +77,12 @@ export class UserDataServiceProvider {
 		return this.clientObservable;
 	}
 	private notifySubscribers(): void {
+		if (this.serviceObserver === undefined) {
+			// create observer and observable
+			this.clientObservable = Observable.create(observerThatWasCreated => {
+				this.serviceObserver = observerThatWasCreated;
+			});
+		}
 		this.serviceObserver.next(undefined);
 	}
 	public getUsers(): User[] {
@@ -152,21 +160,21 @@ export class UserDataServiceProvider {
 	public updateUserProfile(user: User) {
 		let ref = this.db.ref('/users2').child(0);
 		ref.set(user);
-		this.notifySubscribers();
+		// this.notifySubscribers();
 		console.log(user);
 	}
 	public addGroup(group: Group) {
 		let listRef = this.db.ref('/groups');
 		let prefRef = listRef.push();
 		prefRef.set(group);
-		this.notifySubscribers();
+		// this.notifySubscribers();
 		console.log(group);
 	}
 	public deleteGroup(group: Group) {
 		let parentRef = this.db.ref('/groups');
 		let childRef = parentRef.child(group.groupId);
 		childRef.remove();
-		this.notifySubscribers();
+		// this.notifySubscribers();
 		console.log("delete");
 	}
 

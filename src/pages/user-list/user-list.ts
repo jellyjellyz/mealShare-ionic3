@@ -30,6 +30,7 @@ export class UserListPage {
   			  private userService: UserDataServiceProvider) {
   	// this.loadFakeEntries();
   	this.userService.getObservable().subscribe(update => {
+      console.log('updated user list page');
       this.users = userService.getUsers();
       // console.log(JSON.stringify(this.users));
       this.groups = userService.getGroups();
@@ -40,6 +41,10 @@ export class UserListPage {
 
     // initialize checked object
     this.initChecked();
+  }
+
+  ionViewWillEnter() {
+    this.groups = this.userService.getGroups();
   }
 
   private initChecked() {
@@ -64,14 +69,14 @@ export class UserListPage {
   }
   private saveGroup() {
     this.hide = !this.hide;
-    console.log(this.checked);
+    // console.log(this.checked);
     let userIds: string[] = [];
     for (var key in this.checked) {
       if (this.checked[key] === true) {
         userIds.push(key);
       }
     }
-    console.log(userIds);
+    // console.log(userIds);
     let new_group: Group = {
       groupId: 5,
       groupName: this.groupName,

@@ -135,6 +135,7 @@ export class CreateEventPage {
 
       this.event.key = this.eventDataService.addEvent(this.event);
 
+      console.log("in add event get new key", this.eventDataService.addEvent(this.event));
       this.sendMessage();
       this.navCtrl.pop();
     }
