@@ -124,6 +124,9 @@ export class EventDataServiceProvider {
       }
       // console.log(itemRecord);
       itemRef.set(itemRecord);
+      console.log(itemRef.key)
+
+      // let newEventKey = 
     }
   }
 

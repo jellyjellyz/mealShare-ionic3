@@ -133,7 +133,8 @@ export class CreateEventPage {
       let year = temp.getUTCFullYear();
       this.event.meet_date = new Date(year, month, date).toISOString();
 
-      this.eventDataService.addEvent(this.event);
+      this.event.key = this.eventDataService.addEvent(this.event);
+
       this.sendMessage();
       this.navCtrl.pop();
     }
@@ -195,7 +196,7 @@ export class CreateEventPage {
 
   private sendMessage() {
     console.log("send message");
-    this.messageService.updateEvent(this.event.key, "pending_people_ids", this.event.pending_people_ids);
+    // this.messageService.updateEvent(this.event.key, "pending_people_ids", this.event.pending_people_ids);
     for (var receiverId in this.event.pending_people_ids) {
       this.messageService.sendMessage(this.event.key, this.event.host_id, this.event.pending_people_ids[receiverId], 4);
     }
