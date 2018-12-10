@@ -201,14 +201,14 @@ export class EventDataServiceProvider {
     if (event.host_id == myId) { // if I am the host
       relationships.push("host");
     }
-    if (event.coming_people_ids.indexOf(parseInt(myId)) > -1) { // if I am in the list of going people
+    if (event.coming_people_ids.indexOf(myId) > -1) { // if I am in the list of going people
       relationships.push("going");
     }
-    if (event.pending_people_ids.indexOf(parseInt(myId)) > -1) { // if I am in the list of going people
+    if (event.pending_people_ids.indexOf(myId) > -1) { // if I am in the list of going people
       relationships.push("pending");
     }
     if (event.saved_people_ids != undefined) {
-      if (event.saved_people_ids.indexOf(parseInt(myId)) > -1) { // if I am in the list of  people who saved the event
+      if (event.saved_people_ids.indexOf(myId) > -1) { // if I am in the list of  people who saved the event
         relationships.push("saved");
       }
     }

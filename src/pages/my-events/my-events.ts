@@ -64,7 +64,6 @@ export class MyEventsPage {
     // this.myId = "1";
     this.getLoginUserId().then(id => {
       this.myId = id;
-      // this.myIdNum = parseInt(this.myId);
       this.myIdNum = id;
     })
   }
@@ -115,7 +114,7 @@ export class MyEventsPage {
     if (event.pending_people_ids.indexOf(this.myId) > -1) { // if I am in the list of  people who saved the event
       relations.push("pending");
     }
-    // console.log(event.coming_people_ids)
+    // console.log(relations)
     return relations;
   }
 
@@ -128,6 +127,7 @@ export class MyEventsPage {
 
   public joinButtonClicked(event:Event){
     let relationships = this.checkEventRelationshipsToMe(event);
+    console.log(relationships)
 
     if (relationships.indexOf('going') > -1 ){ //if already going, then retrieve
       this.presentConfirmNoGoing(relationships, event, this.myIdNum);

@@ -59,7 +59,6 @@ export class AllEventsPage {
     // this.myId = "1";
     this.getLoginUserId().then(id => {
       this.myId = id;
-      // this.myIdNum = parseInt(this.myId);
       this.myIdNum = id;
     })
   }
@@ -166,16 +165,19 @@ export class AllEventsPage {
 
   public saveButtonClicked(event:Event){
     let relationships = this.checkEventRelationshipsToMe(event);
+    console.log(relationships)
     if (relationships.indexOf('saved') > -1){
       event.saved_people_ids.splice(event.saved_people_ids.indexOf(this.myIdNum),1);
     } else{
       event.saved_people_ids.push(this.myIdNum);
     }
     this.eventService.updateEvent(event);
+    relationships = this.checkEventRelationshipsToMe(event);
+    console.log(relationships)
   }
 
 
-  private presentConfirmNoGoing(relationships:string[], event:Event, idNum:number) {
+  private presentConfirmNoGoing(relationships:string[], event:Event, idNum:any) {
     let alert = this.alertCtrl.create({
       title: 'Not Going',
       message: 'Do you decide not to go?',
