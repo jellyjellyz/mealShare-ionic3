@@ -106,13 +106,13 @@ export class MyEventsPage {
     if (event.host_id == this.myId) { // if I am the host
       relations.push("host");
     }
-    if (event.coming_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of going people
+    if (event.coming_people_ids.indexOf(this.myId) > -1) { // if I am in the list of going people
       relations.push("going");
     }
-    if (event.saved_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
+    if (event.saved_people_ids.indexOf(this.myId) > -1) { // if I am in the list of  people who saved the event
       relations.push("saved");
     }
-    if (event.pending_people_ids.indexOf(parseInt(this.myId)) > -1) { // if I am in the list of  people who saved the event
+    if (event.pending_people_ids.indexOf(this.myId) > -1) { // if I am in the list of  people who saved the event
       relations.push("pending");
     }
     // console.log(event.coming_people_ids)
