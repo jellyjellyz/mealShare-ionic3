@@ -36,7 +36,7 @@ export class EventDetailPage {
     public loadingCtrl: LoadingController,
     public eventService: EventDataServiceProvider, public userService: UserDataServiceProvider) {
 
-    this.loading = this.loadingCtrl.create();
+    
     this.eventKey = this.navParams.get("eventKey");
     eventService.getEventById(this.eventKey).then(snapshot => {
       this.event = {
@@ -52,7 +52,7 @@ export class EventDetailPage {
         pending_people_ids: snapshot.val().pending_people_ids,
         host_id: snapshot.val().host_id,
         image_url: snapshot.val().image_url,
-        saved_people_ids:["9999999999999999999"] // it seems an empty array would not be saved to Firebase
+        saved_people_ids: ["9999999999999999999"] // it seems an empty array would not be saved to Firebase
 
       }
       // console.log(JSON.stringify(this.event));
@@ -61,13 +61,19 @@ export class EventDetailPage {
 
 
   ionViewWillEnter() {
-    this.loading.present();
-    this.getData()
-      .then(data => {
-        this.res = data.restaurants[0];
-        this.loading.dismiss();
-      });
+    this.loading = this.loadingCtrl.create();
+    this.loading.present().then(() => {
+      this.getData()
+        .then(data => {
+          this.res = data.restaurants[0];
+          this.loading.dismiss();
+        });
+    });
   }
+
+
+
+
 
   private gotoRestDetail() {
     this.navCtrl.push(RestaurantDetailPage);

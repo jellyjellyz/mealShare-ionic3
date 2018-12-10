@@ -59,7 +59,8 @@ export class AllEventsPage {
     // this.myId = "1";
     this.getLoginUserId().then(id => {
       this.myId = id;
-      this.myIdNum = parseInt(this.myId);
+      // this.myIdNum = parseInt(this.myId);
+      this.myIdNum = id;
     })
   }
 
@@ -150,6 +151,7 @@ export class AllEventsPage {
     } else if (relationships.indexOf('pending') > -1 ) { // if pending, then retrieve
       event.pending_people_ids.splice(event.pending_people_ids.indexOf(this.myIdNum),1);
     }else{ // the user ask to join, then get pending, and send message to the host
+      console.log(this.myIdNum);
       event.pending_people_ids.push(this.myIdNum);
       this.messageService.sendMessage(event.key, this.myId, event.host_id,1);
     }
@@ -157,7 +159,7 @@ export class AllEventsPage {
     if (relationships.indexOf('saved') > -1){ // if the user has saved the event, then delete from the saved list
       event.saved_people_ids.splice(event.saved_people_ids.indexOf(this.myIdNum),1)
     }
-
+    console.log(JSON.stringify(event.pending_people_ids));
     this.eventService.updateEvent(event);
     this.messageService.sendMessage(event.key, this.myId, event.host_id, 1);
   }
