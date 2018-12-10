@@ -126,7 +126,7 @@ export class MessagePage {
     if (request_event.coming_people_ids.indexOf(request_userId) == -1) {
       request_event.coming_people_ids.push(request_userId);
       // console.log(request_event.coming_people_ids);
-      let idx = request_event.pending_people_ids.indexOf(this.senderId);
+      let idx = request_event.pending_people_ids.indexOf(message.senderId);
       if (idx > -1) {
         request_event.pending_people_ids.splice(idx, 1);
       }
