@@ -195,6 +195,7 @@ export class CreateEventPage {
 
   private sendMessage() {
     console.log("send message");
+    this.messageService.updateEvent(this.event.key, "pending_people_ids", this.event.pending_people_ids);
     for (var receiverId in this.event.pending_people_ids) {
       this.messageService.sendMessage(this.event.key, this.event.host_id, this.event.pending_people_ids[receiverId], 4);
     }
