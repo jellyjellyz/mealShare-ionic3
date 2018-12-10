@@ -64,7 +64,8 @@ export class MyEventsPage {
     // this.myId = "1";
     this.getLoginUserId().then(id => {
       this.myId = id;
-      this.myIdNum = parseInt(this.myId);
+      // this.myIdNum = parseInt(this.myId);
+      this.myIdNum = id;
     })
   }
 
